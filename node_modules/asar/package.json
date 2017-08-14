@@ -1,0 +1,46 @@
+{
+  "main": "./lib/asar.js",
+  "name": "asar",
+  "description": "Creating Electron app packages",
+  "version": "0.13.0",
+  "bin": {
+    "asar": "./bin/asar.js"
+  },
+  "engines": {
+    "node": ">=4.6"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/electron/asar",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electron/asar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electron/asar/issues"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec && npm run lint",
+    "lint": "standard"
+  },
+  "standard": {
+    "env": {
+      "mocha": true
+    }
+  },
+  "dependencies": {
+    "chromium-pickle-js": "^0.2.0",
+    "commander": "^2.9.0",
+    "cuint": "^0.2.1",
+    "glob": "^6.0.4",
+    "minimatch": "^3.0.3",
+    "mkdirp": "^0.5.0",
+    "mksnapshot": "^0.3.0",
+    "tmp": "0.0.28"
+  },
+  "devDependencies": {
+    "lodash": "^4.2.1",
+    "mocha": "^2.0.1",
+    "rimraf": "^2.5.1",
+    "standard": "^8.6.0"
+  }
+}

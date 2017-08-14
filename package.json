@@ -1,9 +1,22 @@
 {
   "name": "PushNotifications",
+  "productName": "PushNotifications",
   "version": "1.0.0",
   "description": "A macOS app to test push notifications",
-  "main": "index.js",
+  "main": "main.js",
   "repository": "https://github.com/onmyway133/PushNotifications",
   "author": "Khoa Pham",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "electron main.js",
+    "release": "electron-packager . --icon=Icon/Icon.icns"
+  },
+  "dependencies": {
+    "electron": "^1.7.5",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "electron-packager": "^8.7.2"
+  }
 }

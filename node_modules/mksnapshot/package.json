@@ -1,0 +1,30 @@
+{
+  "main": "./lib/main.js",
+  "name": "mksnapshot",
+  "description": "Create snapshot file for Electron",
+  "version": "0.3.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electron/node-mksnapshot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/electron/node-mksnapshot/issues"
+  },
+  "scripts": {
+    "prepublish": "grunt coffee"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-coffeelint": "0.0.6",
+    "grunt-contrib-coffee": "~0.6.6",
+    "grunt-cli": "~0.1.7",
+    "coffee-script": "~1.6.2",
+    "rimraf": "~2.1.4"
+  },
+  "dependencies": {
+    "decompress-zip": "0.3.0",
+    "fs-extra": "0.26.7",
+    "request": "^2.79.0"
+  }
+}
