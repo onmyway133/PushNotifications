@@ -21,7 +21,8 @@ class InputComponent extends React.Component {
     return React.createElement('div', {},
       React.createElement('label', {}, 
         React.createElement('input', {
-          type: 'radio'
+          type: 'radio',
+          name: 'cert'
         }),
         'Certificate'
       ),
@@ -35,7 +36,8 @@ class InputComponent extends React.Component {
     return React.createElement('div', {},
       React.createElement('label', {}, 
         React.createElement('input', {
-          type: 'radio'
+          type: 'radio',
+          name: 'cert'
         }),
         'Auth key'
       ),
@@ -65,13 +67,15 @@ class InputComponent extends React.Component {
     return React.createElement('div', {},
       React.createElement('label', {}, 
         React.createElement('input', {
-          type: 'radio'
+          type: 'radio',
+          name: 'environment'
         }),
         'Sandbox'
       ),
       React.createElement('label', {}, 
         React.createElement('input', {
-          type: 'radio'
+          type: 'radio',
+          name: 'environment'
         }),
         'Production'
       ),
