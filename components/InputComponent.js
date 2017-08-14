@@ -5,7 +5,8 @@ class InputComponent extends React.Component {
   render() {
     let style = {
       flex: 1,
-      backgroundColor: 'yellow'
+      backgroundColor: 'yellow',
+      padding: '10px'
     }
 
     return React.createElement('div', {style},
