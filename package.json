@@ -1,0 +1,9 @@
+{
+  "name": "PushNotifications",
+  "version": "1.0.0",
+  "description": "A macOS app to test push notifications",
+  "main": "index.js",
+  "repository": "https://github.com/onmyway133/PushNotifications",
+  "author": "Khoa Pham",
+  "license": "MIT"
+}
