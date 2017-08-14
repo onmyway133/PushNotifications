@@ -1,6 +1,5 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
-const Remote = require('electron').remote
 
 class OutputComponent extends React.Component {
   render() {
