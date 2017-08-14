@@ -19,10 +19,12 @@ class InputComponent extends React.Component {
 
   makeCertElement() {
     return React.createElement('div', {},
-      React.createElement('input', {
-        type: 'radio'
-      }),
-      React.createElement('p', {}, 'Certificate'),
+      React.createElement('label', {}, 
+        React.createElement('input', {
+          type: 'radio'
+        }),
+        'Certificate'
+      ),
       React.createElement('input', {
         type: 'file'
       })
@@ -31,10 +33,12 @@ class InputComponent extends React.Component {
 
   makeAuthKeyElement() {
     return React.createElement('div', {},
-      React.createElement('input', {
-        type: 'radio'
-      }),
-      React.createElement('p', {}, 'Auth key'),
+      React.createElement('label', {}, 
+        React.createElement('input', {
+          type: 'radio'
+        }),
+        'Auth key'
+      ),
       React.createElement('input', {
         type: 'text'
       })
@@ -52,22 +56,26 @@ class InputComponent extends React.Component {
 
   makeMessageElement() {
     return React.createElement('div', {},
-      React.createElement('p', {}, 'Device token'),
+      React.createElement('p', {}, 'Message'),
       React.createElement('textarea', {}, 'Message content')
     )
   }
 
   makeSendElement() {
     return React.createElement('div', {},
-      React.createElement('input', {
-        type: 'radio'
-      }),
-      React.createElement('input', {
-        type: 'radio'
-      }),
-      React.createElement('input', {
-        type: 'button'
-      })
+      React.createElement('label', {}, 
+        React.createElement('input', {
+          type: 'radio'
+        }),
+        'Sandbox'
+      ),
+      React.createElement('label', {}, 
+        React.createElement('input', {
+          type: 'radio'
+        }),
+        'Production'
+      ),
+      React.createElement('button', {}, 'Send')
     )
   }
 }
