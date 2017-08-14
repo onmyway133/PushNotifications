@@ -6,9 +6,16 @@ const url = require('url')
 let win
 
 function createWindow () {
+  const iconUrl = url.format({
+    pathname: path.join(__dirname, 'Icon/Icon.icns'),
+    protocol: 'file:',
+    slashes: true
+  })
+
   win = new BrowserWindow({
     width: 800, 
-    height: 600
+    height: 600,
+    icon: iconUrl
   })
 
   win.loadURL(url.format({

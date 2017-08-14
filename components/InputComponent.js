@@ -4,6 +4,7 @@ const Dialog = require('electron').remote.dialog
 const RaisedButton = require('material-ui').RaisedButton
 const RadioButton = require('material-ui').RadioButton
 const RadioButtonGroup = require('material-ui').RadioButtonGroup
+const TextField = require('material-ui').RadioButtonGroup
 
 class InputComponent extends React.Component {
   render() {
@@ -65,13 +66,11 @@ class InputComponent extends React.Component {
     }
 
     return React.createElement('div', {style},
-      React.createElement('label', {}, 
-        React.createElement('input', {
+      React.createElement(RadioButtonGroup, {}, 
+        React.createElement(RadioButton, {
           style: radioStyle,
-          type: 'radio',
-          name: 'cert'
-        }),
-        'Certificate'
+          label: 'Certificate',
+        })
       ),
       React.createElement('button', {
         style: buttonStyle,
@@ -87,13 +86,11 @@ class InputComponent extends React.Component {
     }
 
     return React.createElement('div', {},
-      React.createElement('label', {}, 
-        React.createElement('input', {
+      React.createElement(RadioButtonGroup, {}, 
+        React.createElement(RadioButton, {
           style: radioStyle,
-          type: 'radio',
-          name: 'cert'
-        }),
-        'Auth key'
+          label: 'Auth key',
+        })
       ),
       React.createElement('input', {
         type: 'text'
