@@ -5,13 +5,13 @@ const Remote = require('electron').remote
 class OutputComponent extends React.Component {
   render() {
     let style = {
-      display: 'flex',
-      width: '100%',
-      alignSelf: 'stretch',
+      flex: 1,
       backgroundColor: 'green'
     }
 
-    return React.createElement('div', {style})
+    return React.createElement('div', {style},
+      React.createElement('textarea', {})
+    )
   }
 }
 
