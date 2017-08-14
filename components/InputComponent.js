@@ -142,7 +142,18 @@ class InputComponent extends React.Component {
   }
 
   makeSendElement() {
-    return React.createElement(RaisedButton, {}, 'Send')
+    const style = {
+      display: 'flex',
+      justifyContent: 'center'
+    }
+
+    const buttonStyle = {
+      width: '80%'
+    }
+
+    return React.createElement('div', {style}, 
+      React.createElement(RaisedButton, {style: buttonStyle}, 'Send')
+    )
   }
 }
 
