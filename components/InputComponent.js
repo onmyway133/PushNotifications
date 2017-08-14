@@ -1,5 +1,6 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
+const Dialog = require('electron').remote.dialog
 
 class InputComponent extends React.Component {
   render() {
@@ -14,29 +15,70 @@ class InputComponent extends React.Component {
       this.makeAuthKeyElement(),
       this.makeTokenElement(),
       this.makeMessageElement(),
+      this.makeEnvironment(),
       this.makeSendElement()
     )
   }
 
+  // action
+
+  selectCert() {
+    const options = {
+      title: 'Select Apple Push Certificate',
+      properties: ['openFile'],
+      filters: [
+        {
+          name: 'PKCS #12',
+          extensions: ['p12']
+        }
+      ]
+    }
+
+    Dialog.showOpenDialog(options)
+  }
+
+  // make
+  
   makeCertElement() {
-    return React.createElement('div', {},
+    let style = {
+      marginBottom: '10px'
+    }
+
+    let buttonStyle = {
+      marginLeft: '5px',
+      marginRight: '5px'
+    }
+
+    let radioStyle = {
+      marginRight: '5px'
+    }
+
+    return React.createElement('div', {style},
       React.createElement('label', {}, 
         React.createElement('input', {
+          style: radioStyle,
           type: 'radio',
           name: 'cert'
         }),
         'Certificate'
       ),
-      React.createElement('input', {
-        type: 'file'
-      })
+      React.createElement('button', {
+        style: buttonStyle,
+        onClick: this.selectCert
+      }, 'Select'),
+      React.createElement('span', {}, 'File')
     )
   }
 
   makeAuthKeyElement() {
+    let radioStyle = {
+      marginRight: '5px'
+    }
+
     return React.createElement('div', {},
       React.createElement('label', {}, 
         React.createElement('input', {
+          style: radioStyle,
           type: 'radio',
           name: 'cert'
         }),
@@ -50,38 +92,48 @@ class InputComponent extends React.Component {
 
   makeTokenElement() {
     return React.createElement('div', {},
-      React.createElement('p', {}, 'Device token'),
-      React.createElement('input', {
-        type: 'text'
-      })
+      React.createElement('fieldset', {},
+        React.createElement('legend', {}, 'Device token'),
+        React.createElement('input', {
+          type: 'text'
+        })
+      )
     )
   }
 
   makeMessageElement() {
     return React.createElement('div', {},
-      React.createElement('p', {}, 'Message'),
-      React.createElement('textarea', {}, 'Message content')
+      React.createElement('fieldset', {},
+        React.createElement('legend', {}, 'Message'),
+        React.createElement('textarea', {}, 'Message content')
+      )
+    )
+  }
+
+  makeEnvironment() {
+    return React.createElement('div', {},
+      React.createElement('fieldset', {},
+        React.createElement('legend', {}, 'Environment'),
+        React.createElement('label', {}, 
+          React.createElement('input', {
+            type: 'radio',
+            name: 'environment'
+          }),
+          'Sandbox'
+        ),
+        React.createElement('label', {}, 
+          React.createElement('input', {
+            type: 'radio',
+            name: 'environment'
+          }),
+          'Production'
+        )
+      )
     )
   }
 
   makeSendElement() {
-    return React.createElement('div', {},
-      React.createElement('label', {}, 
-        React.createElement('input', {
-          type: 'radio',
-          name: 'environment'
-        }),
-        'Sandbox'
-      ),
-      React.createElement('label', {}, 
-        React.createElement('input', {
-          type: 'radio',
-          name: 'environment'
-        }),
-        'Production'
-      ),
-      React.createElement('button', {}, 'Send')
-    )
+    return React.createElement('button', {}, 'Send')
   }
 }
 
