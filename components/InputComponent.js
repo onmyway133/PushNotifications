@@ -2,6 +2,8 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const Dialog = require('electron').remote.dialog
 const RaisedButton = require('material-ui').RaisedButton
+const RadioButton = require('material-ui').RadioButton
+const RadioButtonGroup = require('material-ui').RadioButtonGroup
 
 class InputComponent extends React.Component {
   render() {
@@ -123,19 +125,13 @@ class InputComponent extends React.Component {
     return React.createElement('div', {},
       React.createElement('fieldset', {},
         React.createElement('legend', {}, 'Environment'),
-        React.createElement('label', {}, 
-          React.createElement('input', {
-            type: 'radio',
-            name: 'environment'
+        React.createElement(RadioButtonGroup, {}, 
+          React.createElement(RadioButton, {
+            label: 'Sandbox'
           }),
-          'Sandbox'
-        ),
-        React.createElement('label', {}, 
-          React.createElement('input', {
-            type: 'radio',
-            name: 'environment'
-          }),
-          'Production'
+          React.createElement(RadioButton, {
+            label: 'Production'
+          })
         )
       )
     )
@@ -144,7 +140,8 @@ class InputComponent extends React.Component {
   makeSendElement() {
     const style = {
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      marginTop: '10px'
     }
 
     const buttonStyle = {
