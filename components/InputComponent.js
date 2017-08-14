@@ -1,6 +1,7 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 const Dialog = require('electron').remote.dialog
+const RaisedButton = require('material-ui').RaisedButton
 
 class InputComponent extends React.Component {
   render() {
@@ -11,11 +12,10 @@ class InputComponent extends React.Component {
     }
 
     return React.createElement('div', {style},
-      this.makeCertElement(),
-      this.makeAuthKeyElement(),
+      this.makeConfigurationElement(),
       this.makeTokenElement(),
       this.makeMessageElement(),
-      this.makeEnvironment(),
+      this.makeEnvironmentElement(),
       this.makeSendElement()
     )
   }
@@ -38,6 +38,15 @@ class InputComponent extends React.Component {
   }
 
   // make
+
+  makeConfigurationElement() {
+    return React.createElement('div', {},
+      React.createElement('fieldset', {},
+        React.createElement('legend', {}, 'Message'),
+        this.makeCertElement()
+      )
+    )
+  }
   
   makeCertElement() {
     let style = {
@@ -110,7 +119,7 @@ class InputComponent extends React.Component {
     )
   }
 
-  makeEnvironment() {
+  makeEnvironmentElement() {
     return React.createElement('div', {},
       React.createElement('fieldset', {},
         React.createElement('legend', {}, 'Environment'),
@@ -133,7 +142,7 @@ class InputComponent extends React.Component {
   }
 
   makeSendElement() {
-    return React.createElement('button', {}, 'Send')
+    return React.createElement(RaisedButton, {}, 'Send')
   }
 }
 

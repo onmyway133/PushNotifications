@@ -1,0 +1,24 @@
+{
+  "name": "chain-function",
+  "version": "1.0.0",
+  "description": "chain a bunch of functions together into a single call",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jquense/chain-function.git"
+  },
+  "keywords": [
+    "chain",
+    "compose",
+    "function"
+  ],
+  "author": "jquense",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jquense/chain-function/issues"
+  },
+  "homepage": "https://github.com/jquense/chain-function#readme"
+}

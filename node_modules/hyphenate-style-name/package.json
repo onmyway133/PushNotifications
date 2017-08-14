@@ -1,0 +1,34 @@
+{
+  "name": "hyphenate-style-name",
+  "version": "1.0.2",
+  "description": "Hyphenates a camelcased CSS property name",
+  "main": "index.js",
+  "scripts": {
+    "coverage": "nyc tape -- test/**/*.test.js",
+    "lint": "eslint .",
+    "test": "tape test/**/*.test.js",
+    "pretest": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/rexxars/hyphenate-style-name.git"
+  },
+  "keywords": [
+    "hyphenate",
+    "style",
+    "css",
+    "camelcase"
+  ],
+  "author": "Espen Hovlandsdal <espen@hovlandsdal.com>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/rexxars/hyphenate-style-name/issues"
+  },
+  "homepage": "https://github.com/rexxars/hyphenate-style-name#readme",
+  "devDependencies": {
+    "eslint": "^3.8.1",
+    "eslint-config-vaffel": "^5.0.0",
+    "nyc": "^8.3.2",
+    "tape": "^4.6.2"
+  }
+}

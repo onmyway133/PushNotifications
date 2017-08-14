@@ -1,0 +1,9 @@
+{
+  "name": "simple-assign",
+  "version": "0.1.0",
+  "description": "Simple implementation of Object.assign",
+  "repository": "https://github.com/newoga/simple-assign",
+  "author": "Neil Gabbadon <neil.gabbadon@gmail.com> (http://github.com/newoga)",
+  "license": "MIT",
+  "main": "index.js"
+}

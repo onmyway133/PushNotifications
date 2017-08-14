@@ -1,0 +1,42 @@
+{
+  "name": "material-ui",
+  "author": "Material-UI Team",
+  "version": "0.18.7",
+  "description": "React Components that Implement Google's Material Design.",
+  "main": "./index.js",
+  "module": "./index.es.js",
+  "jsnext:main": "./index.es.js",
+  "keywords": [
+    "react",
+    "react-component",
+    "material design",
+    "material-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/callemall/material-ui.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/callemall/material-ui/issues"
+  },
+  "homepage": "http://material-ui.com/",
+  "peerDependencies": {
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0",
+    "react-tap-event-plugin": "^2.0.1"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "inline-style-prefixer": "^3.0.2",
+    "keycode": "^2.1.8",
+    "lodash.merge": "^4.6.0",
+    "lodash.throttle": "^4.1.1",
+    "prop-types": "^15.5.7",
+    "react-transition-group": "^1.1.2",
+    "react-event-listener": "^0.4.5",
+    "recompose": "0.24.0",
+    "simple-assign": "^0.1.0",
+    "warning": "^3.0.0"
+  }
+}
