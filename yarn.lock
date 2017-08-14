@@ -3,8 +3,8 @@
 
 
 "@types/node@^7.0.18":
-  version "7.0.39"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.39.tgz#8aced4196387038113f6f9aa4014ab4c51edab3c"
+  version "7.0.40"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.40.tgz#861ca7b58c14e353d5060dbf4bb75fc90d394eb7"
 
 abbrev@1:
   version "1.1.0"
