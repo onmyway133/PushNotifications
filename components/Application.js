@@ -43,7 +43,9 @@ class Application extends React.Component {
   // action
 
   send(input) {
-    console.log(input)
+    this.setState({
+      output: 'Sending ...'
+    })
 
     // options
     let options

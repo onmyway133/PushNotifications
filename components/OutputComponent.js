@@ -18,16 +18,19 @@ class OutputComponent extends React.Component {
       }
     }
 
-    let textAreaStyle = {
-      width: 'calc(100% - 7px)',
-      height: '95%',
-      borderWidth: '0px'
+    let textAreaOptions = {
+      style: {
+        width: 'calc(100% - 7px)',
+        height: '95%',
+        borderWidth: '0px',
+      },
+      value: this.props.output
     }
 
     return React.createElement('div', divOptions,
       React.createElement('fieldset', fieldSetOptions,
         React.createElement('legend', {}, 'Console'),
-        React.createElement('textarea', {style: textAreaStyle}, this.props.output)  
+        React.createElement('textarea', textAreaOptions)  
       )
     )
   }
