@@ -6,6 +6,8 @@ const FlatButton = require('material-ui').FlatButton
 const RadioButton = require('material-ui').RadioButton
 const RadioButtonGroup = require('material-ui').RadioButtonGroup
 const TextField = require('material-ui').TextField
+const Tab = require('material-ui').Tab
+const Tabs = require('material-ui').Tabs
 
 class InputComponent extends React.Component {
   render() {
@@ -44,7 +46,7 @@ class InputComponent extends React.Component {
   // make
 
   makeAuthenticationElement() {
-    const groupOptions = {
+    const tabsOptions = {
       name: 'authentication',
       defaultSelected: 'cert'
     }
@@ -52,39 +54,34 @@ class InputComponent extends React.Component {
     return React.createElement('div', {},
       React.createElement('fieldset', {},
         React.createElement('legend', {}, 'Authentication'),
-        React.createElement(RadioButtonGroup, groupOptions, 
-          // this.makeCertElement(),
-          // this.makeAuthKeyElement()
+        React.createElement(Tabs, tabsOptions, 
+          this.makeCertElement(),
+          this.makeAuthKeyElement()
         )
       )
     )
   }
   
   makeCertElement() {
-    const style = {
-      marginBottom: '10px'
+    const tabOptions = {
+      label: 'Certificate'
     }
 
-    return React.createElement('div', {style},
-      React.createElement(RadioButtonGroup, groupOptions, 
-        React.createElement(RadioButton, {
-          label: 'Certificate'
-        })
-      ),
-      React.createElement(FlatButton, {
-        label: 'Select',
-        onClick: this.selectCert,
-        backgroundColor: '#00BCD4'
-      }),
-      React.createElement('span', {}, 'File')
+    const buttonOptions = {
+      label: 'Select',
+      onClick: this.selectCert,
+      backgroundColor: '#00BCD4'
+    }
+
+    return React.createElement(Tab, tabOptions, 
+      React.createElement('div', {},
+        React.createElement(FlatButton, buttonOptions),
+        React.createElement('span', {}, 'File')
+      )
     )
   }
 
   makeAuthKeyElement() {
-    const groupOptions = {
-      name: 'configuration'
-    }
-
     const textFieldOptions = {
       style: {
         width: '100%'
@@ -92,13 +89,14 @@ class InputComponent extends React.Component {
       hintText: 'Enter device token'
     }
 
-    return React.createElement('div', {},
-      React.createElement(RadioButtonGroup, {groupOptions}, 
-        React.createElement(RadioButton, {
-          label: 'Auth key'
-        })
-      ),
-      React.createElement(TextField, textFieldOptions)
+    const tabOptions = {
+      label: 'Auth Key'
+    }
+
+    return React.createElement(Tab, tabOptions, 
+      React.createElement('div', {},
+        React.createElement(TextField, textFieldOptions)
+      )
     )
   }
 
