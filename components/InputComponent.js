@@ -32,9 +32,9 @@ class InputComponent extends React.Component {
         passphrase: ''
       },
       auth: {
-        bundleId: '',
         key: ''
       },
+      bundleId: '',
       environment: 'sandbox',
       deviceToken: '',
       message: JSON.stringify(defaultMessage)
@@ -54,6 +54,7 @@ class InputComponent extends React.Component {
 
     return React.createElement('div', {style},
       this.makeAuthenticationElement(),
+      this.makeBundleIdElement(),
       this.makeTokenElement(),
       this.makeMessageElement(),
       this.makeEnvironmentElement(),
@@ -187,32 +188,37 @@ class InputComponent extends React.Component {
       onChange: (event, value) => {
         this.setState({
           auth: {
-            key: value,
-            bundleId: this.state.auth.bundleId
+            key: value
           }
         })
       }
     }
 
-    const bundleTextFieldOptions = {
+
+    return React.createElement(Tab, tabOptions, 
+      React.createElement('div', {},
+        React.createElement(TextField, keyTextFieldOptions)
+      )
+    )
+  }
+
+  makeBundleIdElement() {
+    const textFieldOptions = {
       style: {
         width: '100%'
       },
       hintText: 'Enter bundle id',
       onChange: (event, value) => {
         this.setState({
-          auth: {
-            key: this.state.auth.key,
-            bundleId: value
-          }
+          bundleId: value
         })
       }
     }
 
-    return React.createElement(Tab, tabOptions, 
-      React.createElement('div', {},
-        React.createElement(TextField, keyTextFieldOptions),
-        React.createElement(TextField, bundleTextFieldOptions)
+    return React.createElement('div', {},
+      React.createElement('fieldset', {},
+        React.createElement('legend', {}, 'Bundle Id'),
+        React.createElement(TextField, textFieldOptions)
       )
     )
   }
@@ -244,8 +250,8 @@ class InputComponent extends React.Component {
         width: '100%'
       },
       multiLine: true,
-      rows: 6,
-      rowsMax: 6,
+      rows: 5,
+      rowsMax: 5,
       hintText: 'Enter message',
       value: this.state.message,
       onChange: (event, value) => {

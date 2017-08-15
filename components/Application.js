@@ -67,6 +67,7 @@ class Application extends React.Component {
     const notification = new APN.Notification()
     notification.expiry = Math.floor(Date.now() / 1000) + 3600
     notification.rawPayload = JSON.parse(input.message)
+    notification.topic = input.bundleId
 
     // provider
     const provider = new APN.Provider(options)
