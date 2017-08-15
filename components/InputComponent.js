@@ -173,7 +173,7 @@ class InputComponent extends React.Component {
     }
 
     const buttonOptions = {
-      label: 'Select',
+      label: 'Select p12',
       onClick: this.handleSelectCert,
       style: {
         marginRight: '5px'
@@ -219,7 +219,7 @@ class InputComponent extends React.Component {
     }
 
     const buttonOptions = {
-      label: 'Select',
+      label: 'Select p8',
       onClick: this.handleSelectAuthKey,
       style: {
         marginRight: '5px'
