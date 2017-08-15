@@ -116,10 +116,19 @@ class InputComponent extends React.Component {
   }
 
   makeMessageElement() {
+    const textFieldOptions = {
+      style: {
+        width: '100%'
+      },
+      multiLine: true,
+      rows: 10,
+      hintText: 'Enter message'
+    }
+ 
     return React.createElement('div', {},
       React.createElement('fieldset', {},
         React.createElement('legend', {}, 'Message'),
-        React.createElement('textarea', {}, 'Message content')
+        React.createElement(TextField, textFieldOptions)
       )
     )
   }
