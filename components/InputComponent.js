@@ -24,9 +24,9 @@ class InputComponent extends React.Component {
 
     this.state = {
       authentication: {
-        value: 'authenticationCert',
+        value: 'authCert',
       },
-      cert: {
+      authCert: {
         file: '',
         name: '',
         passphrase: ''
@@ -86,10 +86,10 @@ class InputComponent extends React.Component {
       const name = names[names.length-1]
 
       this.setState({
-        cert: {
+        authCert: {
           file: path,
           name: name,
-          passphrase: this.state.cert.passphrase
+          passphrase: this.state.authCert.passphrase
         }
       })
     })
@@ -163,7 +163,7 @@ class InputComponent extends React.Component {
   makeCertElement() {
     const tabOptions = {
       label: 'Certificate',
-      value: 'authenticationCert'
+      value: 'authCert'
     }
 
     const divOptions = {
@@ -185,12 +185,12 @@ class InputComponent extends React.Component {
         width: '100%'
       },
       hintText: 'Enter phassphrase',
-      value: this.state.cert.passphrase,
+      value: this.state.authCert.passphrase,
       onChange: (event, value) => {
         this.setState({
-          cert: {
-            file: this.state.cert.file,
-            name: this.state.cert.name,
+          authCert: {
+            file: this.state.authCert.file,
+            name: this.state.authCert.name,
             passphrase: value
           }
         })
@@ -200,7 +200,7 @@ class InputComponent extends React.Component {
     return React.createElement(Tab, tabOptions, 
       React.createElement('div', divOptions,
         React.createElement(RaisedButton, buttonOptions),
-        React.createElement('span', {}, this.state.cert.name),
+        React.createElement('span', {}, this.state.authCert.name),
         React.createElement(TextField, passTextFieldOptions)
       )
     )
@@ -257,7 +257,7 @@ class InputComponent extends React.Component {
     return React.createElement(Tab, tabOptions, 
       React.createElement('div', divOptions,
         React.createElement(RaisedButton, buttonOptions),
-        React.createElement('span', {}, this.state.cert.name),
+        React.createElement('span', {}, this.state.authCert.name),
         React.createElement(TextField, keyIdTextField),
         React.createElement(TextField, teamIdTextField)
       )
