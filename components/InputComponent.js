@@ -79,6 +79,10 @@ class InputComponent extends React.Component {
     }
 
     Dialog.showOpenDialog(options, (paths) => {
+      const path = paths[0]
+      const names = path.split('/')
+      const name = names[names.length-1]
+      
       const authCert = Object.assign(this.state.authCert, {
         file: path,
         name: name,
