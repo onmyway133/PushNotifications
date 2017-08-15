@@ -21,7 +21,8 @@ class InputComponent extends React.Component {
       },
       cert: {
         file: '',
-        name: ''
+        name: '',
+        passphrase: ''
       },
       auth: {
         bundleId: '',
@@ -75,7 +76,8 @@ class InputComponent extends React.Component {
       this.setState({
         cert: {
           file: path,
-          name: name
+          name: name,
+          passphrase: this.state.cert.passphrase
         }
       })
     })
@@ -138,10 +140,28 @@ class InputComponent extends React.Component {
       }
     }
 
+    const passTextFieldOptions = {
+      style: {
+        width: '100%'
+      },
+      hintText: 'Enter phassphrase',
+      value: this.state.cert.passphrase,
+      onChange: (event, value) => {
+        this.setState({
+          cert: {
+            file: this.state.cert.file,
+            name: this.state.cert.name,
+            passphrase: value
+          }
+        })
+      }
+    }
+
     return React.createElement(Tab, tabOptions, 
       React.createElement('div', divOptions,
         React.createElement(RaisedButton, buttonOptions),
-        React.createElement('span', {}, this.state.cert.name)
+        React.createElement('span', {}, this.state.cert.name),
+        React.createElement(TextField, passTextFieldOptions)
       )
     )
   }
