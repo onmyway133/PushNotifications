@@ -32,7 +32,10 @@ class InputComponent extends React.Component {
         passphrase: ''
       },
       auth: {
-        key: ''
+        file: '',
+        name: '',
+        keyId: '',
+        teamId: ''
       },
       bundleId: '',
       environment: 'sandbox',
@@ -41,6 +44,7 @@ class InputComponent extends React.Component {
     }
 
     this.handleSelectCert = this.handleSelectCert.bind(this)
+    this.handleSelectAuthKey = this.handleSelectAuthKey.bind(this)
     this.handleAuthenticationChange = this.handleAuthenticationChange.bind(this)
     this.handleEnvironmentChange = this.handleEnvironmentChange.bind(this)
     this.handleSend = this.handleSend.bind(this)
@@ -86,6 +90,34 @@ class InputComponent extends React.Component {
           file: path,
           name: name,
           passphrase: this.state.cert.passphrase
+        }
+      })
+    })
+  }
+
+  handleSelectAuthKey() {
+    const options = {
+      title: 'Select Apple Push Authentication Token',
+      properties: ['openFile'],
+      filters: [
+        {
+          name: 'Auth Key',
+          extensions: ['p8']
+        }
+      ]
+    }
+
+    Dialog.showOpenDialog(options, (paths) => {
+      const path = paths[0]
+      const names = path.split('/')
+      const name = names[names.length-1]
+
+      this.setState({
+        auth: {
+          file: path,
+          name: name,
+          keyId: this.state.auth.keyId,
+          teamId: this.state.auth.teamId
         }
       })
     })
@@ -180,19 +212,56 @@ class InputComponent extends React.Component {
       value: 'auth'
     }
 
-    const keyTextFieldOptions = {
+    const divOptions = {
+      style: {
+        marginTop: '10px'
+      }
+    }
+
+    const buttonOptions = {
+      label: 'Select',
+      onClick: this.handleSelectAuthKey,
+      style: {
+        marginRight: '5px'
+      }
+    }
+
+    const keyIdTextField = {
       style: {
         width: '100%'
       },
-      hintText: 'Enter auth key',
+      hintText: 'Enter key id',
       onChange: (event, value) => {
         this.setState({
           auth: {
-            key: value
+            teamId: value
           }
         })
       }
     }
+
+    const teamIdTextField = {
+      style: {
+        width: '100%'
+      },
+      hintText: 'Enter team id',
+      onChange: (event, value) => {
+        this.setState({
+          auth: {
+            keyId: value
+          }
+        })
+      }
+    }
+
+    return React.createElement(Tab, tabOptions, 
+      React.createElement('div', divOptions,
+        React.createElement(RaisedButton, buttonOptions),
+        React.createElement('span', {}, this.state.cert.name),
+        React.createElement(TextField, keyIdTextField),
+        React.createElement(TextField, teamIdTextField)
+      )
+    )
 
 
     return React.createElement(Tab, tabOptions, 
