@@ -9,6 +9,7 @@
 ## Description
 
 - Icon http://emojione.com/
+- APN https://github.com/node-apn/node-apn
 - Download from https://github.com/onmyway133/PushNotifications/releases
 
 ## Author
