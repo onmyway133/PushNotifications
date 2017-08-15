@@ -119,8 +119,6 @@ class InputComponent extends React.Component {
   handleAuthenticationChange(value) {
     this.setState({
       authentication: value
-        value
-      }
     })
   }
 
