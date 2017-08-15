@@ -208,7 +208,7 @@ class InputComponent extends React.Component {
 
   makeAuthKeyElement() {
     const tabOptions = {
-      label: 'Auth Key',
+      label: 'Token',
       value: 'authenticationToken'
     }
 
