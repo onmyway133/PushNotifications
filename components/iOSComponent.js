@@ -55,8 +55,7 @@ class iOSComponent extends React.Component {
       this.makeBundleIdElement(),
       this.makeTokenElement(),
       this.makeMessageElement(),
-      this.makeEnvironmentElement(),
-      this.makeSendElement()
+      this.makeEnvironmentElement()
     )
   }
 
@@ -351,26 +350,6 @@ class iOSComponent extends React.Component {
           })
         )
       )
-    )
-  }
-
-  makeSendElement() {
-    const style = {
-      display: 'flex',
-      justifyContent: 'center',
-      marginTop: '10px'
-    }
-
-    const buttonOptions = {
-      backgroundColor: '#EB394E', 
-      onTouchTap: this.handleSend,
-      style: {
-        width: '80%'
-      }
-    }
-
-    return React.createElement('div', {style}, 
-      React.createElement(RaisedButton, buttonOptions, 'Send')
     )
   }
 }

@@ -1,10 +1,12 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
+const RaisedButton = require('material-ui').RaisedButton
 
 class OutputComponent extends React.Component {
   render() {
     let divOptions = {
       style: {
+        marginLeft: '5px',
         marginTop: '10px',
         marginRight: '7px',
         flex: 1
@@ -13,7 +15,7 @@ class OutputComponent extends React.Component {
 
     let fieldSetOptions = {
       style: {
-        height: '90%',
+        height: '30%',
         padding: '5px'
       }
     }
@@ -21,7 +23,7 @@ class OutputComponent extends React.Component {
     let textAreaOptions = {
       style: {
         width: 'calc(100% - 7px)',
-        height: '95%',
+        height: '88%',
         borderWidth: '0px',
       },
       value: this.props.output
@@ -30,8 +32,29 @@ class OutputComponent extends React.Component {
     return React.createElement('div', divOptions,
       React.createElement('fieldset', fieldSetOptions,
         React.createElement('legend', {}, 'Console'),
-        React.createElement('textarea', textAreaOptions)  
-      )
+        React.createElement('textarea', textAreaOptions),
+      ),
+      this.makeSendElement()
+    )
+  }
+
+  makeSendElement() {
+    const style = {
+      display: 'flex',
+      justifyContent: 'center',
+      marginTop: '10px'
+    }
+
+    const buttonOptions = {
+      backgroundColor: '#EB394E', 
+      onTouchTap: this.handleSend,
+      style: {
+        width: '80%'
+      }
+    }
+
+    return React.createElement('div', {style}, 
+      React.createElement(RaisedButton, buttonOptions, 'Send')
     )
   }
 }
