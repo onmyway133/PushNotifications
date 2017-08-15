@@ -16,6 +16,13 @@ injectTapEventPlugin()
 class InputComponent extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      authentication: {
+        value: 'cert'
+      }
+    }
+
+    this.handleAuthenticationChange = this.handleAuthenticationChange.bind(this)
   }
 
   render() {
@@ -52,14 +59,18 @@ class InputComponent extends React.Component {
   }
 
   handleAuthenticationChange(value) {
-    
+    this.setState({
+      authentication: {
+        value
+      }
+    })
   }
 
   // make
 
   makeAuthenticationElement() {
     const tabsOptions = {
-      value: 'cert',
+      value: this.state.authentication.value,
       onChange: this.handleAuthenticationChange
     }
 
