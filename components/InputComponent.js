@@ -112,21 +112,29 @@ class InputComponent extends React.Component {
   }
 
   makeAuthKeyElement() {
-    const textFieldOptions = {
-      style: {
-        width: '100%'
-      },
-      hintText: 'Enter device token'
-    }
-
     const tabOptions = {
       label: 'Auth Key',
       value: 'auth'
     }
 
+    const keyTextFieldOptions = {
+      style: {
+        width: '100%'
+      },
+      hintText: 'Enter auth key'
+    }
+
+    const bundleTextFieldOptions = {
+      style: {
+        width: '100%'
+      },
+      hintText: 'Enter bundle id'
+    }
+
     return React.createElement(Tab, tabOptions, 
       React.createElement('div', {},
-        React.createElement(TextField, textFieldOptions)
+        React.createElement(TextField, keyTextFieldOptions),
+        React.createElement(TextField, bundleTextFieldOptions)
       )
     )
   }
