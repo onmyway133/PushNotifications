@@ -2,9 +2,10 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const Dialog = require('electron').remote.dialog
 const RaisedButton = require('material-ui').RaisedButton
+const FlatButton = require('material-ui').FlatButton
 const RadioButton = require('material-ui').RadioButton
 const RadioButtonGroup = require('material-ui').RadioButtonGroup
-const TextField = require('material-ui').RadioButtonGroup
+const TextField = require('material-ui').TextField
 
 class InputComponent extends React.Component {
   render() {
@@ -15,7 +16,7 @@ class InputComponent extends React.Component {
     }
 
     return React.createElement('div', {style},
-      this.makeConfigurationElement(),
+      this.makeAuthenticationElement(),
       this.makeTokenElement(),
       this.makeMessageElement(),
       this.makeEnvironmentElement(),
@@ -42,69 +43,74 @@ class InputComponent extends React.Component {
 
   // make
 
-  makeConfigurationElement() {
+  makeAuthenticationElement() {
     return React.createElement('div', {},
       React.createElement('fieldset', {},
-        React.createElement('legend', {}, 'Message'),
-        this.makeCertElement()
+        React.createElement('legend', {}, 'Authentication'),
+        this.makeCertElement(),
+        this.makeAuthKeyElement()
       )
     )
   }
   
   makeCertElement() {
-    let style = {
+    const style = {
       marginBottom: '10px'
     }
 
-    let buttonStyle = {
-      marginLeft: '5px',
-      marginRight: '5px'
-    }
-
-    let radioStyle = {
-      marginRight: '5px'
+    const groupOptions = {
+      name: 'configuration'
     }
 
     return React.createElement('div', {style},
-      React.createElement(RadioButtonGroup, {}, 
+      React.createElement(RadioButtonGroup, groupOptions, 
         React.createElement(RadioButton, {
-          style: radioStyle,
-          label: 'Certificate',
+          label: 'Certificate'
         })
       ),
-      React.createElement('button', {
-        style: buttonStyle,
-        onClick: this.selectCert
-      }, 'Select'),
+      React.createElement(FlatButton, {
+        label: 'Select',
+        onClick: this.selectCert,
+        backgroundColor: '#00BCD4'
+      }),
       React.createElement('span', {}, 'File')
     )
   }
 
   makeAuthKeyElement() {
-    let radioStyle = {
-      marginRight: '5px'
+    const groupOptions = {
+      name: 'configuration'
+    }
+
+    const textFieldOptions = {
+      style: {
+        width: '100%'
+      },
+      hintText: 'Enter device token'
     }
 
     return React.createElement('div', {},
-      React.createElement(RadioButtonGroup, {}, 
+      React.createElement(RadioButtonGroup, {groupOptions}, 
         React.createElement(RadioButton, {
-          style: radioStyle,
-          label: 'Auth key',
+          label: 'Auth key'
         })
       ),
-      React.createElement('input', {
-        type: 'text'
-      })
+      React.createElement(TextField, textFieldOptions)
     )
   }
 
   makeTokenElement() {
+    const textFieldOptions = {
+      style: {
+        width: '100%'
+      },
+      hintText: 'Enter device token'
+    }
+
     return React.createElement('div', {},
       React.createElement('fieldset', {},
         React.createElement('legend', {}, 'Device token'),
-        React.createElement('input', {
-          type: 'text'
-        })
+        React.createElement(TextField, textFieldOptions)
       )
     )
   }
@@ -119,14 +125,21 @@ class InputComponent extends React.Component {
   }
 
   makeEnvironmentElement() {
+    const groupOptions = {
+      name: 'environment',
+      defaultSelected: 'sandbox'
+    }
+
     return React.createElement('div', {},
       React.createElement('fieldset', {},
         React.createElement('legend', {}, 'Environment'),
-        React.createElement(RadioButtonGroup, {}, 
+        React.createElement(RadioButtonGroup, groupOptions, 
           React.createElement(RadioButton, {
+            value: 'sandbox',
             label: 'Sandbox'
           }),
           React.createElement(RadioButton, {
+            value: 'production',
             label: 'Production'
           })
         )
