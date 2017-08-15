@@ -17,8 +17,19 @@ class InputComponent extends React.Component {
     super(props)
     this.state = {
       authentication: {
-        value: 'cert'
-      }
+        value: 'cert',
+      },
+      cert: {
+        file: null,
+        name: ''
+      },
+      auth: {
+        bundleId: '',
+        key: ''
+      },
+      environment: 'sandbox',
+      deviceToken: '',
+      message: ''
     }
 
     this.handleAuthenticationChange = this.handleAuthenticationChange.bind(this)
@@ -66,7 +77,7 @@ class InputComponent extends React.Component {
   }
 
   handleSend(event) {
-    console.log('send')
+    this.props.send(this.state)
   }
 
   // make
