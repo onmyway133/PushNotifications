@@ -24,7 +24,7 @@ class InputComponent extends React.Component {
 
     this.state = {
       authentication: {
-        value: 'cert',
+        value: 'authenticationCert',
       },
       cert: {
         file: '',
@@ -163,7 +163,7 @@ class InputComponent extends React.Component {
   makeCertElement() {
     const tabOptions = {
       label: 'Certificate',
-      value: 'cert'
+      value: 'authenticationCert'
     }
 
     const divOptions = {
@@ -209,7 +209,7 @@ class InputComponent extends React.Component {
   makeAuthKeyElement() {
     const tabOptions = {
       label: 'Auth Key',
-      value: 'auth'
+      value: 'authenticationToken'
     }
 
     const divOptions = {

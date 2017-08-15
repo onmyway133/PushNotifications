@@ -50,7 +50,7 @@ class Application extends React.Component {
     // options
     let options
 
-    if (input.authentication.value == 'cert') {
+    if (input.authentication.value == 'authenticationCert') {
       options = {
         pfx: input.cert.file,
         passphrase: input.cert.passphrase
