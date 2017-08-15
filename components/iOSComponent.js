@@ -375,4 +375,4 @@ class iOSComponent extends React.Component {
   }
 }
 
-module.exports = InputComponent
+module.exports = iOSComponent

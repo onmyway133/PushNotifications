@@ -23,10 +23,24 @@ class InputComponent extends React.Component {
       value: this.state.platform.value
     }
 
+    const iosOptions = {
+      value: 'ios',
+      label: 'iOS'
+    }
+
+    const androidOptions = {
+      value: 'android',
+      label: 'Android'
+    }
+
     return React.createElement('div', {},
       React.createElement(Tabs, tabsOptions, 
-        React.createElement(iOSComponent, {}),
-        React.createElement(AndroidComponent, {})
+        React.createElement(Tab, iosOptions,
+          React.createElement(iOSComponent, {})
+        ),
+        React.createElement(Tab, androidOptions,
+          React.createElement(AndroidComponent, {})
+        )
       )
     )
   }
