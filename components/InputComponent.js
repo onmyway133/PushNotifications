@@ -2,7 +2,6 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const Dialog = require('electron').remote.dialog
 const RaisedButton = require('material-ui').RaisedButton
-const FlatButton = require('material-ui').FlatButton
 const RadioButton = require('material-ui').RadioButton
 const RadioButtonGroup = require('material-ui').RadioButtonGroup
 const TextField = require('material-ui').TextField
@@ -28,7 +27,6 @@ class InputComponent extends React.Component {
   render() {
     let style = {
       flex: 1,
-      backgroundColor: 'yellow',
       padding: '10px'
     }
 
@@ -100,7 +98,6 @@ class InputComponent extends React.Component {
     const buttonOptions = {
       label: 'Select',
       onClick: this.selectCert,
-      backgroundColor: '#00BCD4',
       style: {
         marginRight: '5px'
       }
@@ -108,7 +105,7 @@ class InputComponent extends React.Component {
 
     return React.createElement(Tab, tabOptions, 
       React.createElement('div', divOptions,
-        React.createElement(FlatButton, buttonOptions),
+        React.createElement(RaisedButton, buttonOptions),
         React.createElement('span', {}, 'File')
       )
     )
@@ -199,12 +196,15 @@ class InputComponent extends React.Component {
       marginTop: '10px'
     }
 
-    const buttonStyle = {
-      width: '80%'
+    const buttonOptions = {
+      backgroundColor: '#EB394E', 
+      style: {
+        width: '80%'
+      }
     }
 
     return React.createElement('div', {style}, 
-      React.createElement(RaisedButton, {style: buttonStyle}, 'Send')
+      React.createElement(RaisedButton, buttonOptions, 'Send')
     )
   }
 }

@@ -9,7 +9,8 @@ class Application extends React.Component {
     let style = {
       display: 'flex',
       width: '100%',
-      alignSelf: 'stretch'
+      alignSelf: 'stretch',
+      backgroundColor: '#F8F8F0'
     }
 
     return React.createElement(MuiThemeProvider, {},
