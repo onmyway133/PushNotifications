@@ -44,11 +44,18 @@ class InputComponent extends React.Component {
   // make
 
   makeAuthenticationElement() {
+    const groupOptions = {
+      name: 'authentication',
+      defaultSelected: 'cert'
+    }
+
     return React.createElement('div', {},
       React.createElement('fieldset', {},
         React.createElement('legend', {}, 'Authentication'),
-        this.makeCertElement(),
-        this.makeAuthKeyElement()
+        React.createElement(RadioButtonGroup, groupOptions, 
+          // this.makeCertElement(),
+          // this.makeAuthKeyElement()
+        )
       )
     )
   }
@@ -56,10 +63,6 @@ class InputComponent extends React.Component {
   makeCertElement() {
     const style = {
       marginBottom: '10px'
-    }
-
-    const groupOptions = {
-      name: 'configuration'
     }
 
     return React.createElement('div', {style},
