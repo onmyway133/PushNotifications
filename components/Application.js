@@ -10,7 +10,9 @@ class Application extends React.Component {
     super(props)
 
     this.state = {
-      output: ''
+      output: {
+        text: ''
+      }
     }
   }
 
@@ -41,18 +43,22 @@ class Application extends React.Component {
   // action
 
   send(input) {
+    console.log(input)
+
     // options
     let options
 
     if (input.authentication.value == 'cert') {
       options = {
-
+        pfx: input.cert.file
       }
     } else {
       options = {
 
       }
     }
+
+    options.production = (input.environment == 'production') ? true : false
 
     // notification
     const notification = new APN.Notification()

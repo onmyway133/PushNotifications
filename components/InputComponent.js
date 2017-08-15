@@ -20,7 +20,7 @@ class InputComponent extends React.Component {
         value: 'cert',
       },
       cert: {
-        file: null,
+        file: '',
         name: ''
       },
       auth: {
@@ -32,7 +32,9 @@ class InputComponent extends React.Component {
       message: ''
     }
 
+    this.handleSelectCert = this.handleSelectCert.bind(this)
     this.handleAuthenticationChange = this.handleAuthenticationChange.bind(this)
+    this.handleEnvironmentChange = this.handleEnvironmentChange.bind(this)
     this.handleSend = this.handleSend.bind(this)
   }
 
@@ -53,7 +55,7 @@ class InputComponent extends React.Component {
 
   // action
 
-  selectCert() {
+  handleSelectCert() {
     const options = {
       title: 'Select Apple Push Certificate',
       properties: ['openFile'],
@@ -65,7 +67,18 @@ class InputComponent extends React.Component {
       ]
     }
 
-    Dialog.showOpenDialog(options)
+    Dialog.showOpenDialog(options, (paths) => {
+      const path = paths[0]
+      const names = path.split('/')
+      const name = names[names.length-1]
+
+      this.setState({
+        cert: {
+          file: path,
+          name: name
+        }
+      })
+    })
   }
 
   handleAuthenticationChange(value) {
@@ -73,6 +86,12 @@ class InputComponent extends React.Component {
       authentication: {
         value
       }
+    })
+  }
+
+  handleEnvironmentChange(value) {
+    this.setState({
+      environment: value
     })
   }
 
@@ -113,7 +132,7 @@ class InputComponent extends React.Component {
 
     const buttonOptions = {
       label: 'Select',
-      onClick: this.selectCert,
+      onClick: this.handleSelectCert,
       style: {
         marginRight: '5px'
       }
@@ -122,7 +141,7 @@ class InputComponent extends React.Component {
     return React.createElement(Tab, tabOptions, 
       React.createElement('div', divOptions,
         React.createElement(RaisedButton, buttonOptions),
-        React.createElement('span', {}, 'File')
+        React.createElement('span', {}, this.state.cert.name)
       )
     )
   }
@@ -137,14 +156,30 @@ class InputComponent extends React.Component {
       style: {
         width: '100%'
       },
-      hintText: 'Enter auth key'
+      hintText: 'Enter auth key',
+      onChange: (event, value) => {
+        this.setState({
+          auth: {
+            key: value,
+            bundleId: this.state.auth.bundleId
+          }
+        })
+      }
     }
 
     const bundleTextFieldOptions = {
       style: {
         width: '100%'
       },
-      hintText: 'Enter bundle id'
+      hintText: 'Enter bundle id',
+      onChange: (event, value) => {
+        this.setState({
+          auth: {
+            key: this.state.auth.key,
+            bundleId: value
+          }
+        })
+      }
     }
 
     return React.createElement(Tab, tabOptions, 
@@ -160,7 +195,12 @@ class InputComponent extends React.Component {
       style: {
         width: '100%'
       },
-      hintText: 'Enter device token'
+      hintText: 'Enter device token',
+      onChange: (event, value) => {
+        this.setState({
+          deviceToken: value
+        })
+      }
     }
 
     return React.createElement('div', {},
@@ -179,7 +219,12 @@ class InputComponent extends React.Component {
       multiLine: true,
       rows: 6,
       rowsMax: 6,
-      hintText: 'Enter message'
+      hintText: 'Enter message',
+      onChange: (event, value) => {
+        this.setState({
+          message: value
+        })
+      }
     }
  
     return React.createElement('div', {},
@@ -193,7 +238,8 @@ class InputComponent extends React.Component {
   makeEnvironmentElement() {
     const groupOptions = {
       name: 'environment',
-      defaultSelected: 'sandbox'
+      defaultSelected: this.state.environment,
+      onChange: this.handleEnvironmentChange
     }
 
     return React.createElement('div', {},

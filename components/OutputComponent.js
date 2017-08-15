@@ -27,7 +27,7 @@ class OutputComponent extends React.Component {
     return React.createElement('div', divOptions,
       React.createElement('fieldset', fieldSetOptions,
         React.createElement('legend', {}, 'Console'),
-        React.createElement('textarea', {style: textAreaStyle})  
+        React.createElement('textarea', {style: textAreaStyle}, this.props.text)  
       )
     )
   }
