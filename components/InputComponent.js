@@ -31,7 +31,7 @@ class InputComponent extends React.Component {
         name: '',
         passphrase: ''
       },
-      auth: {
+      authToken: {
         file: '',
         name: '',
         keyId: '',
@@ -113,11 +113,11 @@ class InputComponent extends React.Component {
       const name = names[names.length-1]
 
       this.setState({
-        auth: {
+        authToken: {
           file: path,
           name: name,
-          keyId: this.state.auth.keyId,
-          teamId: this.state.auth.teamId
+          keyId: this.state.authToken.keyId,
+          teamId: this.state.authToken.teamId
         }
       })
     })
@@ -233,7 +233,7 @@ class InputComponent extends React.Component {
       hintText: 'Enter key id',
       onChange: (event, value) => {
         this.setState({
-          auth: {
+          authToken: {
             teamId: value
           }
         })
@@ -247,7 +247,7 @@ class InputComponent extends React.Component {
       hintText: 'Enter team id',
       onChange: (event, value) => {
         this.setState({
-          auth: {
+          authToken: {
             keyId: value
           }
         })
