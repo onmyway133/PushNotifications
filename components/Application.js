@@ -58,9 +58,11 @@ class Application extends React.Component {
       }
     } else {
       options = {
-        key: input.authToken.file,
-        keyId: input.authToken.keyId,
-        teamId: input.authToken.teamId
+        token: {
+          key: input.authToken.file,
+          keyId: input.authToken.keyId,
+          teamId: input.authToken.teamId
+        }
       }
     }
 
