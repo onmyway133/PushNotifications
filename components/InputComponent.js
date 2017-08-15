@@ -8,8 +8,16 @@ const RadioButtonGroup = require('material-ui').RadioButtonGroup
 const TextField = require('material-ui').TextField
 const Tab = require('material-ui').Tab
 const Tabs = require('material-ui').Tabs
+const injectTapEventPlugin = require('react-tap-event-plugin')
+
+// http://www.material-ui.com/#/get-started/installation
+injectTapEventPlugin()
 
 class InputComponent extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     let style = {
       flex: 1,
@@ -43,12 +51,16 @@ class InputComponent extends React.Component {
     Dialog.showOpenDialog(options)
   }
 
+  handleAuthenticationChange(value) {
+    
+  }
+
   // make
 
   makeAuthenticationElement() {
     const tabsOptions = {
-      name: 'authentication',
-      defaultSelected: 'cert'
+      value: 'cert',
+      onChange: this.handleAuthenticationChange
     }
 
     return React.createElement('div', {},
@@ -64,17 +76,27 @@ class InputComponent extends React.Component {
   
   makeCertElement() {
     const tabOptions = {
-      label: 'Certificate'
+      label: 'Certificate',
+      value: 'cert'
+    }
+
+    const divOptions = {
+      style: {
+        marginTop: '10px'
+      }
     }
 
     const buttonOptions = {
       label: 'Select',
       onClick: this.selectCert,
-      backgroundColor: '#00BCD4'
+      backgroundColor: '#00BCD4',
+      style: {
+        marginRight: '5px'
+      }
     }
 
     return React.createElement(Tab, tabOptions, 
-      React.createElement('div', {},
+      React.createElement('div', divOptions,
         React.createElement(FlatButton, buttonOptions),
         React.createElement('span', {}, 'File')
       )
@@ -90,7 +112,8 @@ class InputComponent extends React.Component {
     }
 
     const tabOptions = {
-      label: 'Auth Key'
+      label: 'Auth Key',
+      value: 'auth'
     }
 
     return React.createElement(Tab, tabOptions, 
@@ -122,7 +145,8 @@ class InputComponent extends React.Component {
         width: '100%'
       },
       multiLine: true,
-      rows: 10,
+      rows: 6,
+      rowsMax: 6,
       hintText: 'Enter message'
     }
  

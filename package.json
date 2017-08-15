@@ -15,7 +15,8 @@
     "electron": "^1.7.5",
     "material-ui": "^0.18.7",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-tap-event-plugin": "^2.0.1"
   },
   "devDependencies": {
     "electron-packager": "^8.7.2"
