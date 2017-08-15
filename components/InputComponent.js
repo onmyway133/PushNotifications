@@ -15,6 +15,13 @@ injectTapEventPlugin()
 class InputComponent extends React.Component {
   constructor(props) {
     super(props)
+    const defaultMessage = {
+      aps: {
+        alert: "Hello"
+      },
+      yourCustomKey: '1'
+    }
+
     this.state = {
       authentication: {
         value: 'cert',
@@ -30,7 +37,7 @@ class InputComponent extends React.Component {
       },
       environment: 'sandbox',
       deviceToken: '',
-      message: ''
+      message: JSON.stringify(defaultMessage)
     }
 
     this.handleSelectCert = this.handleSelectCert.bind(this)
@@ -240,6 +247,7 @@ class InputComponent extends React.Component {
       rows: 6,
       rowsMax: 6,
       hintText: 'Enter message',
+      value: this.state.message,
       onChange: (event, value) => {
         this.setState({
           message: value

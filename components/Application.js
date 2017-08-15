@@ -10,10 +10,10 @@ class Application extends React.Component {
     super(props)
 
     this.state = {
-      output: {
-        text: ''
-      }
+      output: ''
     }
+
+    this.send = this.send.bind(this)
   }
 
   render() {
@@ -64,16 +64,21 @@ class Application extends React.Component {
     // notification
     const notification = new APN.Notification()
     notification.expiry = Math.floor(Date.now() / 1000) + 3600
-    // notification.badge = 1;
-    // notification.sound = "ping.aiff";
-    // notification.alert = "You have a new message";
-    notification.payload = input.message
+    notification.rawPayload = JSON.parse(input.message)
 
     // provider
     const provider = new APN.Provider(options)
 
     provider.send(notification, input.deviceToken).then( (result) => {
-      console.log(result)
+      if (result.failed.length > 0) {
+        this.setState({
+          output: 'Failed: ' + result.failed[0].response.reason
+        })
+      } else {
+        this.setState({
+          output: 'Sent to ' + input.deviceToken
+        })
+      }
     })
   }
 }
