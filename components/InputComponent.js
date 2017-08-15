@@ -22,6 +22,7 @@ class InputComponent extends React.Component {
     }
 
     this.handleAuthenticationChange = this.handleAuthenticationChange.bind(this)
+    this.handleSend = this.handleSend.bind(this)
   }
 
   render() {
@@ -62,6 +63,10 @@ class InputComponent extends React.Component {
         value
       }
     })
+  }
+
+  handleSend(event) {
+    console.log('send')
   }
 
   // make
@@ -206,6 +211,7 @@ class InputComponent extends React.Component {
 
     const buttonOptions = {
       backgroundColor: '#EB394E', 
+      onTouchTap: this.handleSend,
       style: {
         width: '80%'
       }
