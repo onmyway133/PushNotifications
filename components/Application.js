@@ -43,6 +43,7 @@ class Application extends React.Component {
   // action
 
   send(input) {
+
     this.setState({
       output: 'Sending ...'
     })
@@ -50,14 +51,16 @@ class Application extends React.Component {
     // options
     let options
 
-    if (input.authentication.value == 'authCert') {
+    if (input.authentication == 'authCert') {
       options = {
         pfx: input.authCert.file,
         passphrase: input.authCert.passphrase
       }
     } else {
       options = {
-
+        key: input.authToken.file,
+        keyId: input.authToken.keyId,
+        teamId: input.authToken.teamId
       }
     }
 

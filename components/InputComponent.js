@@ -23,9 +23,7 @@ class InputComponent extends React.Component {
     }
 
     this.state = {
-      authentication: {
-        value: 'authCert',
-      },
+      authentication: 'authCert',
       authCert: {
         file: '',
         name: '',
@@ -81,16 +79,12 @@ class InputComponent extends React.Component {
     }
 
     Dialog.showOpenDialog(options, (paths) => {
-      const path = paths[0]
-      const names = path.split('/')
-      const name = names[names.length-1]
-
+      const authCert = Object.assign(this.state.authCert, {
+        file: path,
+        name: name,
+      })
       this.setState({
-        authCert: {
-          file: path,
-          name: name,
-          passphrase: this.state.authCert.passphrase
-        }
+        authCert
       })
     })
   }
@@ -112,20 +106,19 @@ class InputComponent extends React.Component {
       const names = path.split('/')
       const name = names[names.length-1]
 
+      const authToken = Object.assign(this.state.authToken, {
+        file: path,
+        name: name,
+      })
       this.setState({
-        authToken: {
-          file: path,
-          name: name,
-          keyId: this.state.authToken.keyId,
-          teamId: this.state.authToken.teamId
-        }
+        authToken
       })
     })
   }
 
   handleAuthenticationChange(value) {
     this.setState({
-      authentication: {
+      authentication: value
         value
       }
     })
@@ -187,12 +180,11 @@ class InputComponent extends React.Component {
       hintText: 'Enter phassphrase',
       value: this.state.authCert.passphrase,
       onChange: (event, value) => {
+        const authCert = Object.assign(this.state.authCert, {
+          passphrase: value
+        })
         this.setState({
-          authCert: {
-            file: this.state.authCert.file,
-            name: this.state.authCert.name,
-            passphrase: value
-          }
+          authCert
         })
       }
     }
@@ -232,10 +224,11 @@ class InputComponent extends React.Component {
       },
       hintText: 'Enter key id',
       onChange: (event, value) => {
+        const authToken = Object.assign(this.state.authToken, {
+          keyId: value
+        })
         this.setState({
-          authToken: {
-            teamId: value
-          }
+          authToken
         })
       }
     }
@@ -246,10 +239,11 @@ class InputComponent extends React.Component {
       },
       hintText: 'Enter team id',
       onChange: (event, value) => {
+        const authToken = Object.assign(this.state.authToken, {
+          teamId: value
+        })
         this.setState({
-          authToken: {
-            keyId: value
-          }
+          authToken
         })
       }
     }
@@ -257,7 +251,7 @@ class InputComponent extends React.Component {
     return React.createElement(Tab, tabOptions, 
       React.createElement('div', divOptions,
         React.createElement(RaisedButton, buttonOptions),
-        React.createElement('span', {}, this.state.authCert.name),
+        React.createElement('span', {}, this.state.authToken.name),
         React.createElement(TextField, keyIdTextField),
         React.createElement(TextField, teamIdTextField)
       )
