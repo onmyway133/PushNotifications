@@ -43,8 +43,8 @@ class InputComponent extends React.Component {
       message: JSON.stringify(defaultMessage)
     }
 
-    this.handleSelectCert = this.handleSelectCert.bind(this)
-    this.handleSelectAuthKey = this.handleSelectAuthKey.bind(this)
+    this.handleSelectAuthCert = this.handleSelectAuthCert.bind(this)
+    this.handleSelectAuthToken = this.handleSelectAuthToken.bind(this)
     this.handleAuthenticationChange = this.handleAuthenticationChange.bind(this)
     this.handleEnvironmentChange = this.handleEnvironmentChange.bind(this)
     this.handleSend = this.handleSend.bind(this)
@@ -68,7 +68,7 @@ class InputComponent extends React.Component {
 
   // action
 
-  handleSelectCert() {
+  handleSelectAuthCert() {
     const options = {
       title: 'Select Apple Push Certificate',
       properties: ['openFile'],
@@ -95,7 +95,7 @@ class InputComponent extends React.Component {
     })
   }
 
-  handleSelectAuthKey() {
+  handleSelectAuthToken() {
     const options = {
       title: 'Select Apple Push Authentication Token',
       properties: ['openFile'],
@@ -174,7 +174,7 @@ class InputComponent extends React.Component {
 
     const buttonOptions = {
       label: 'Select p12',
-      onClick: this.handleSelectCert,
+      onClick: this.handleSelectAuthCert,
       style: {
         marginRight: '5px'
       }
@@ -220,7 +220,7 @@ class InputComponent extends React.Component {
 
     const buttonOptions = {
       label: 'Select p8',
-      onClick: this.handleSelectAuthKey,
+      onClick: this.handleSelectAuthToken,
       style: {
         marginRight: '5px'
       }
