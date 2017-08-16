@@ -3,6 +3,10 @@ const ReactDOM = require('react-dom')
 const RaisedButton = require('material-ui').RaisedButton
 
 class OutputComponent extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     let divOptions = {
       style: {
@@ -47,7 +51,7 @@ class OutputComponent extends React.Component {
 
     const buttonOptions = {
       backgroundColor: '#EB394E', 
-      onTouchTap: this.handleSend,
+      onTouchTap: this.props.send,
       style: {
         width: '80%'
       }

@@ -25,11 +25,12 @@ class Application extends React.Component {
     }
 
     const inputOptions = {
-      send: this.send
+      
     }
 
     const outputOptions = {
-      output: this.state.output
+      output: this.state.output,
+      send: this.send
     }
 
     return React.createElement(MuiThemeProvider, {},
