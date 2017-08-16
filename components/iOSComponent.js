@@ -41,7 +41,6 @@ class iOSComponent extends React.Component {
     this.handleSelectAuthToken = this.handleSelectAuthToken.bind(this)
     this.handleAuthenticationChange = this.handleAuthenticationChange.bind(this)
     this.handleEnvironmentChange = this.handleEnvironmentChange.bind(this)
-    this.handleSend = this.handleSend.bind(this)
   }
 
   render() {
@@ -125,10 +124,6 @@ class iOSComponent extends React.Component {
     this.setState({
       environment: value
     })
-  }
-
-  handleSend(event) {
-    this.props.send(this.state)
   }
 
   // make

@@ -1,9 +1,97 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
+const TextField = require('material-ui').TextField
 
 class AndroidComponent extends React.Component {
+  constructor(props) {
+    super(props)
+    const defaultMessage = {
+      key1: 'value1',
+      key2: 'value2'
+    }
+
+    this.state = {
+      apiKey: '',
+      deviceToken: '',
+      message: JSON.stringify(defaultMessage)
+    }
+
+  }
+
   render() {
-    return React.createElement('div', {})
+    let style = {
+      flex: 1,
+      padding: '10px'
+    }
+
+    return React.createElement('div', {style},
+      React.createElement('fieldset', {},
+        React.createElement('legend', {}, 'Configuration'),
+        this.makeAPIKeyElement(),
+        this.makeDeviceTokenElement(),
+        this.makeMessageElement()
+      )
+    )
+  }
+
+  // make
+
+  makeAPIKeyElement() {
+    const textFieldOptions = {
+      style: {
+        width: '100%'
+      },
+      hintText: 'Enter API key',
+      onChange: (event, value) => {
+        this.setState({
+          bundleId: value
+        })
+      }
+    }
+
+    return React.createElement('div', {},
+      React.createElement(TextField, textFieldOptions)
+    )
+  }
+
+  makeDeviceTokenElement() {
+    const textFieldOptions = {
+      style: {
+        width: '100%'
+      },
+      hintText: 'Enter device token',
+      onChange: (event, value) => {
+        this.setState({
+          bundleId: value
+        })
+      }
+    }
+
+    return React.createElement('div', {},
+      React.createElement(TextField, textFieldOptions)
+    )
+  }
+
+  makeMessageElement() {
+    const textFieldOptions = {
+      style: {
+        width: '100%'
+      },
+      multiLine: true,
+      rows: 5,
+      rowsMax: 5,
+      hintText: 'Enter message',
+      value: this.state.message,
+      onChange: (event, value) => {
+        this.setState({
+          message: value
+        })
+      }
+    }
+ 
+    return React.createElement('div', {},
+      React.createElement(TextField, textFieldOptions)
+    )
   }
 }
 
