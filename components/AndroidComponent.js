@@ -11,7 +11,7 @@ class AndroidComponent extends React.Component {
     }
 
     this.state = {
-      apiKey: null,
+      serverKey: null,
       deviceToken: '',
       message: JSON.stringify(defaultMessage)
     }
@@ -35,20 +35,20 @@ class AndroidComponent extends React.Component {
     return React.createElement('div', {},
       React.createElement('fieldset', {},
         React.createElement('legend', {}, 'Authentication'),
-        this.makeAPIKeyElement(),
+        this.makeServerKeyElement(),
       )
     )
   }
 
-  makeAPIKeyElement() {
+  makeServerKeyElement() {
     const textFieldOptions = {
       style: {
         width: '100%'
       },
-      hintText: 'Enter API key',
+      hintText: 'Enter server key',
       onChange: (event, value) => {
         this.setState({
-          apiKey: value
+          serverKey: value
         })
       }
     }

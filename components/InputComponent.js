@@ -7,7 +7,7 @@ const Tab = require('material-ui').Tab
 const Tabs = require('material-ui').Tabs
 const Paper = require('material-ui').Paper
 const APN = require('apn')
-const GCM = require('node-gcm')
+const FCM = require('fcm-push')
 
 // http://www.material-ui.com/#/get-started/installation
 injectTapEventPlugin()
@@ -156,7 +156,7 @@ class InputComponent extends React.Component {
     const input = this.refs.android.state
     
     // check
-    if (input.apiKey == null) {
+    if (input.serverKey == null) {
       this.props.updateOutput({
         loading: false,
         text: 'Failed: Authentication missing'
@@ -165,22 +165,17 @@ class InputComponent extends React.Component {
       return
     }
 
-    // sender
-    const sender = new GCM.Sender(input.apiKey)
-    
     // message
-    const message = new GCM.Message({
+    const message = {
+      to: input.deviceToken,
       data: JSON.stringify(input.message)
-    })
-    
-    // device token
-    const regTokens = [input.deviceToken]
-    const options = {
-      registrationTokens: regTokens
     }
     
-    // send
-    sender.send(message, options, (error, response) => {
+    // fcm
+    const fcm = new FCM(input.serverKey)
+  
+    //callback style
+    fcm.send(message, (error, response) => {
       if (error) {
         this.props.updateOutput({
           loading: false,
