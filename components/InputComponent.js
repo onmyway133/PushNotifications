@@ -91,11 +91,31 @@ class InputComponent extends React.Component {
     let options
 
     if (input.authentication == 'authCert') {
+      // check
+      if (input.authCert.file == null) {
+        this.props.updateOutput({
+          loading: false,
+          text: 'Failed: Authentication missing'
+        })
+
+        return
+      }
+
       options = {
         pfx: input.authCert.file,
         passphrase: input.authCert.passphrase
       }
     } else {
+      // check
+      if (input.authToken.file == null || input.authToken.keyId == null || input.authToken.teamId == null) {
+        this.props.updateOutput({
+          loading: false,
+          text: 'Failed: Authentication missing'
+        })
+
+        return
+      }
+
       options = {
         token: {
           key: input.authToken.file,
@@ -125,7 +145,7 @@ class InputComponent extends React.Component {
       } else {
         this.props.updateOutput({
           loading: false,
-          text: 'Sent to ' + input.deviceToken
+          text: 'Succeeded: ' + input.deviceToken
         })
       }
     })
