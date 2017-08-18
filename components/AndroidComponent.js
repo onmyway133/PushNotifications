@@ -11,7 +11,7 @@ class AndroidComponent extends React.Component {
     }
 
     this.state = {
-      apiKey: '',
+      apiKey: null,
       deviceToken: '',
       message: JSON.stringify(defaultMessage)
     }

@@ -15,6 +15,7 @@
     "apn": "^2.1.5",
     "electron": "^1.7.5",
     "material-ui": "^0.18.7",
+    "node-gcm": "^0.14.6",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-tap-event-plugin": "^2.0.1"
