@@ -25,16 +25,21 @@ class AndroidComponent extends React.Component {
     }
 
     return React.createElement('div', {style},
-      React.createElement('fieldset', {},
-        React.createElement('legend', {}, 'Configuration'),
-        this.makeAPIKeyElement(),
-        this.makeDeviceTokenElement(),
-        this.makeMessageElement()
-      )
+      this.makeAuthenticationElement(),
+      this.makeBodyElement()
     )
   }
 
   // make
+
+  makeAuthenticationElement() {
+    return React.createElement('div', {},
+      React.createElement('fieldset', {},
+        React.createElement('legend', {}, 'Authentication'),
+        this.makeAPIKeyElement(),
+      )
+    )
+  }
 
   makeAPIKeyElement() {
     const textFieldOptions = {
@@ -51,6 +56,16 @@ class AndroidComponent extends React.Component {
 
     return React.createElement('div', {},
       React.createElement(TextField, textFieldOptions)
+    )
+  }
+
+  makeBodyElement() {
+    return React.createElement('div', {},
+      React.createElement('fieldset', {},
+        React.createElement('legend', {}, 'Body'),
+        this.makeDeviceTokenElement(),
+        this.makeMessageElement()
+      )
     )
   }
 

@@ -51,9 +51,7 @@ class iOSComponent extends React.Component {
 
     return React.createElement('div', {style},
       this.makeAuthenticationElement(),
-      this.makeBundleIdElement(),
-      this.makeTokenElement(),
-      this.makeMessageElement(),
+      this.makeBodyElement(),
       this.makeEnvironmentElement()
     )
   }
@@ -257,6 +255,17 @@ class iOSComponent extends React.Component {
     )
   }
 
+  makeBodyElement() {
+    return React.createElement('div', {},
+      React.createElement('fieldset', {},
+        React.createElement('legend', {}, 'Body'),
+        this.makeBundleIdElement(),
+        this.makeDeviceTokenElement(),
+        this.makeMessageElement()
+      )
+    )
+  }
+
   makeBundleIdElement() {
     const textFieldOptions = {
       style: {
@@ -271,14 +280,11 @@ class iOSComponent extends React.Component {
     }
 
     return React.createElement('div', {},
-      React.createElement('fieldset', {},
-        React.createElement('legend', {}, 'Bundle Id'),
-        React.createElement(TextField, textFieldOptions)
-      )
+      React.createElement(TextField, textFieldOptions)
     )
   }
 
-  makeTokenElement() {
+  makeDeviceTokenElement() {
     const textFieldOptions = {
       style: {
         width: '100%'
@@ -292,10 +298,7 @@ class iOSComponent extends React.Component {
     }
 
     return React.createElement('div', {},
-      React.createElement('fieldset', {},
-        React.createElement('legend', {}, 'Device token'),
-        React.createElement(TextField, textFieldOptions)
-      )
+      React.createElement(TextField, textFieldOptions)
     )
   }
 
@@ -317,10 +320,7 @@ class iOSComponent extends React.Component {
     }
  
     return React.createElement('div', {},
-      React.createElement('fieldset', {},
-        React.createElement('legend', {}, 'Message'),
-        React.createElement(TextField, textFieldOptions)
-      )
+      React.createElement(TextField, textFieldOptions)
     )
   }
 
