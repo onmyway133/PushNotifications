@@ -15,7 +15,6 @@ class AndroidComponent extends React.Component {
       deviceToken: '',
       message: JSON.stringify(defaultMessage)
     }
-
   }
 
   render() {

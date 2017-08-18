@@ -28,8 +28,8 @@ class iOSComponent extends React.Component {
       authToken: {
         file: null,
         name: '',
-        keyId: '',
-        teamId: ''
+        keyId: null,
+        teamId: null
       },
       bundleId: '',
       environment: 'sandbox',
