@@ -5,6 +5,7 @@ const AndroidComponent = require('./AndroidComponent.js')
 const injectTapEventPlugin = require('react-tap-event-plugin')
 const Tab = require('material-ui').Tab
 const Tabs = require('material-ui').Tabs
+const APN = require('apn')
 
 // http://www.material-ui.com/#/get-started/installation
 injectTapEventPlugin()
@@ -28,23 +29,21 @@ class InputComponent extends React.Component {
 
     const iosOptions = {
       value: 'ios',
-      label: 'iOS',
-      ref: 'ios'
+      label: 'iOS'
     }
 
     const androidOptions = {
       value: 'android',
-      label: 'Android',
-      ref: 'android'
+      label: 'Android'
     }
 
     return React.createElement('div', {},
       React.createElement(Tabs, tabsOptions, 
         React.createElement(Tab, iosOptions,
-          React.createElement(iOSComponent, {})
+          React.createElement(iOSComponent, {ref: 'ios'})
         ),
         React.createElement(Tab, androidOptions,
-          React.createElement(AndroidComponent, {})
+          React.createElement(AndroidComponent, {ref: 'android'})
         )
       )
     )

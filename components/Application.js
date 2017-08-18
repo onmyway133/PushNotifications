@@ -3,7 +3,6 @@ const ReactDOM = require('react-dom')
 const InputComponent = require('./InputComponent.js')
 const OutputComponent = require('./OutputComponent.js')
 const MuiThemeProvider = require('material-ui/styles/').MuiThemeProvider
-const APN = require('apn')
 
 class Application extends React.Component {
   constructor(props) {
