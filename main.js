@@ -9,7 +9,7 @@ function createWindow () {
    win = new BrowserWindow({
     title: 'Push Notifications Tester',
     width: 800, 
-    height: 720,
+    height: 700,
     icon: __dirname + '/Icon/Icon.icns'
   })
 

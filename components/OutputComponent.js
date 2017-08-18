@@ -1,6 +1,10 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 const RaisedButton = require('material-ui').RaisedButton
+const Paper = require('material-ui').Paper
+const CircularProgress = require('material-ui').CircularProgress
+const CardText = require('material-ui').CardText
+
 
 class OutputComponent extends React.Component {
   constructor(props) {
@@ -10,35 +14,43 @@ class OutputComponent extends React.Component {
   render() {
     let divOptions = {
       style: {
-        marginLeft: '5px',
-        marginTop: '10px',
-        marginRight: '7px',
-        flex: 1
+        flex: 1,
+        padding: '10px'
       }
     }
 
-    let fieldSetOptions = {
-      style: {
-        height: '30%',
-        padding: '5px'
-      }
-    }
-
-    let textAreaOptions = {
-      style: {
-        width: 'calc(100% - 7px)',
-        height: '88%',
-        borderWidth: '0px',
-      },
-      value: this.props.output
+    const paperOptions = {
+      
     }
 
     return React.createElement('div', divOptions,
-      React.createElement('fieldset', fieldSetOptions,
-        React.createElement('legend', {}, 'Console'),
-        React.createElement('textarea', textAreaOptions),
-      ),
-      this.makeSendElement()
+      React.createElement(Paper, paperOptions,
+        this.makeProgressElement(),
+        this.makeTextElement(),
+        this.makeSendElement()
+      )
+    )
+  }
+
+  makeProgressElement() {
+    const style = {
+      display: 'flex',
+      justifyContent: 'center'
+    }
+
+    const progressOptions = {
+      size: 60,
+      thickness: 5
+    }
+    
+    return React.createElement('div', {style: style}, 
+      React.createElement(CircularProgress, progressOptions)
+    )
+  }
+
+  makeTextElement() {
+    return React.createElement('div', {}, 
+      React.createElement(CardText, {}, this.props.output)
     )
   }
 
@@ -46,7 +58,8 @@ class OutputComponent extends React.Component {
     const style = {
       display: 'flex',
       justifyContent: 'center',
-      marginTop: '10px'
+      marginTop: '10px',
+      marginBottom: '100px'
     }
 
     const buttonOptions = {
