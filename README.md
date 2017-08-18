@@ -1,16 +1,15 @@
 # PushNotifications
 
 <div align = "center">
-<img src="Screenshots/Icon.png" width="130" height="130" />
-<br />
-<img src="Screenshots/Banner.png" height="400"/>
+<img src="Screenshots/ios.png" height="400"/>
 </div>
 
 ## Description
 
 - Icon http://emojione.com/
-- APN https://github.com/node-apn/node-apn
 - Download from https://github.com/onmyway133/PushNotifications/releases
+- Use [node-apn](https://github.com/node-apn/node-apn) and [node-gcm](https://github.com/ToothlessGear/node-gcm)
+
 
 ## Author
 

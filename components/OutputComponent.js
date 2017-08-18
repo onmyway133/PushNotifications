@@ -55,7 +55,13 @@ class OutputComponent extends React.Component {
   }
 
   makeTextElement() {
-    return React.createElement('div', {}, 
+    const style = {
+      display: 'flex',
+      justifyContent: 'center',
+      marginTop: '10px'
+    }
+
+    return React.createElement('div', {style: style}, 
       React.createElement(CardText, {}, this.props.output.text)
     )
   }
