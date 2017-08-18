@@ -169,7 +169,7 @@ class InputComponent extends React.Component {
     const sender = new GCM.Sender(input.apiKey)
     
     // message
-    const message = new gcm.Message({
+    const message = new GCM.Message({
       data: JSON.stringify(input.message)
     })
     
@@ -179,7 +179,7 @@ class InputComponent extends React.Component {
       registrationTokens: regTokens
     }
     
-    // Actually send the message
+    // send
     sender.send(message, options, (error, response) => {
       if (error) {
         this.props.updateOutput({

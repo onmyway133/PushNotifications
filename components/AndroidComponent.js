@@ -48,7 +48,7 @@ class AndroidComponent extends React.Component {
       hintText: 'Enter API key',
       onChange: (event, value) => {
         this.setState({
-          bundleId: value
+          apiKey: value
         })
       }
     }
@@ -76,7 +76,7 @@ class AndroidComponent extends React.Component {
       hintText: 'Enter device token',
       onChange: (event, value) => {
         this.setState({
-          bundleId: value
+          deviceToken: value
         })
       }
     }
