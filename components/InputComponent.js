@@ -22,6 +22,12 @@ class InputComponent extends React.Component {
   }
 
   render() {
+    const divOptions = {
+      style: {
+        flex: 1
+      }
+    }
+
     const tabsOptions = {
       value: this.state.platform.value,
       onChange: this.handlePlatformChange
@@ -37,7 +43,7 @@ class InputComponent extends React.Component {
       label: 'Android'
     }
 
-    return React.createElement('div', {},
+    return React.createElement('div', divOptions,
       React.createElement(Tabs, tabsOptions, 
         React.createElement(Tab, iosOptions,
           React.createElement(iOSComponent, {ref: 'ios'})
@@ -58,6 +64,8 @@ class InputComponent extends React.Component {
   }
 
   send() {
+    this.props.updateOutput('Sending ...')
+
     if (this.state.platform == 'ios') {
       this.sendiOS()
     } else {
@@ -68,7 +76,12 @@ class InputComponent extends React.Component {
   sendiOS() {
     const input = this.refs.ios.state
 
-    this.props.updateOutput('Sending ...')
+    // check
+
+    if (input.authCert.file == null &&  input.authToken.file == null) {
+      this.props.updateOutput('Failed: Missing file')
+      return
+    }
 
     // options
     let options

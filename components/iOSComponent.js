@@ -21,12 +21,12 @@ class iOSComponent extends React.Component {
     this.state = {
       authentication: 'authCert',
       authCert: {
-        file: '',
+        file: null,
         name: '',
         passphrase: ''
       },
       authToken: {
-        file: '',
+        file: null,
         name: '',
         keyId: '',
         teamId: ''
@@ -45,7 +45,6 @@ class iOSComponent extends React.Component {
 
   render() {
     let style = {
-      flex: 1,
       padding: '10px'
     }
 
