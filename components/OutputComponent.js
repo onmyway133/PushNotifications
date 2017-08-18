@@ -20,7 +20,10 @@ class OutputComponent extends React.Component {
     }
 
     const paperOptions = {
-      
+      style: {
+        paddingTop: '10px',
+        paddingBottom: '10px'
+      }
     }
 
     return React.createElement('div', divOptions,
@@ -61,8 +64,7 @@ class OutputComponent extends React.Component {
     const style = {
       display: 'flex',
       justifyContent: 'center',
-      marginTop: '10px',
-      marginBottom: '100px'
+      marginTop: '10px'
     }
 
     const buttonOptions = {
