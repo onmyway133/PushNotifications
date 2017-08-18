@@ -13,7 +13,8 @@ class Application extends React.Component {
       output: ''
     }
 
-    this.send = this.send.bind(this)
+    this.triggerSend = this.triggerSend.bind(this)
+    this.updateOutput = this.updateOutput.bind(this)
   }
 
   render() {
@@ -25,12 +26,13 @@ class Application extends React.Component {
     }
 
     const inputOptions = {
-      
+      ref: 'input',
+      updateOutput: this.updateOutput
     }
 
     const outputOptions = {
       output: this.state.output,
-      send: this.send
+      triggerSend: this.triggerSend
     }
 
     return React.createElement(MuiThemeProvider, {},
@@ -43,51 +45,13 @@ class Application extends React.Component {
 
   // action
 
-  send(input) {
+  triggerSend() {
+    this.refs.input.send()
+  }
 
+  updateOutput(value) {
     this.setState({
-      output: 'Sending ...'
-    })
-
-    // options
-    let options
-
-    if (input.authentication == 'authCert') {
-      options = {
-        pfx: input.authCert.file,
-        passphrase: input.authCert.passphrase
-      }
-    } else {
-      options = {
-        token: {
-          key: input.authToken.file,
-          keyId: input.authToken.keyId,
-          teamId: input.authToken.teamId
-        }
-      }
-    }
-
-    options.production = (input.environment == 'production') ? true : false
-
-    // notification
-    const notification = new APN.Notification()
-    notification.expiry = Math.floor(Date.now() / 1000) + 3600
-    notification.rawPayload = JSON.parse(input.message)
-    notification.topic = input.bundleId
-
-    // provider
-    const provider = new APN.Provider(options)
-
-    provider.send(notification, input.deviceToken).then( (result) => {
-      if (result.failed.length > 0) {
-        this.setState({
-          output: 'Failed: ' + result.failed[0].response.reason
-        })
-      } else {
-        this.setState({
-          output: 'Sent to ' + input.deviceToken
-        })
-      }
+      output: value
     })
   }
 }

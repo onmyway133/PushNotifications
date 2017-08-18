@@ -16,21 +16,26 @@ class InputComponent extends React.Component {
     this.state = {
       platform: 'ios'
     }
+
+    this.handlePlatformChange = this.handlePlatformChange.bind(this)
   }
 
   render() {
     const tabsOptions = {
-      value: this.state.platform.value
+      value: this.state.platform.value,
+      onChange: this.handlePlatformChange
     }
 
     const iosOptions = {
       value: 'ios',
-      label: 'iOS'
+      label: 'iOS',
+      ref: 'ios'
     }
 
     const androidOptions = {
       value: 'android',
-      label: 'Android'
+      label: 'Android',
+      ref: 'android'
     }
 
     return React.createElement('div', {},
@@ -43,6 +48,69 @@ class InputComponent extends React.Component {
         )
       )
     )
+  }
+
+  // action
+
+  handlePlatformChange(value) {
+    this.setState({
+      platform: value
+    })
+  }
+
+  send() {
+    if (this.state.platform == 'ios') {
+      this.sendiOS()
+    } else {
+      this.sendAndroid()
+    }
+  }
+
+  sendiOS() {
+    const input = this.refs.ios.state
+
+    this.props.updateOutput('Sending ...')
+
+    // options
+    let options
+
+    if (input.authentication == 'authCert') {
+      options = {
+        pfx: input.authCert.file,
+        passphrase: input.authCert.passphrase
+      }
+    } else {
+      options = {
+        token: {
+          key: input.authToken.file,
+          keyId: input.authToken.keyId,
+          teamId: input.authToken.teamId
+        }
+      }
+    }
+
+    options.production = (input.environment == 'production') ? true : false
+
+    // notification
+    const notification = new APN.Notification()
+    notification.expiry = Math.floor(Date.now() / 1000) + 3600
+    notification.rawPayload = JSON.parse(input.message)
+    notification.topic = input.bundleId
+
+    // provider
+    const provider = new APN.Provider(options)
+
+    provider.send(notification, input.deviceToken).then( (result) => {
+      if (result.failed.length > 0) {
+        this.props.updateOutput('Failed: ' + result.failed[0].response.reason)
+      } else {
+        this.props.updateOutput('Sent to ' + input.deviceToken)
+      }
+    })
+  }
+
+  sendAndroid() {
+    const input = this.refs.android.state
   }
 }
 
