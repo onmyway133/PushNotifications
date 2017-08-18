@@ -72,7 +72,10 @@ class InputComponent extends React.Component {
   }
 
   send() {
-    this.props.updateOutput('Sending ...')
+    this.props.updateOutput({
+      loading: true,
+      text: 'Loading ...'
+    })
 
     if (this.state.platform == 'ios') {
       this.sendiOS()
@@ -83,13 +86,6 @@ class InputComponent extends React.Component {
 
   sendiOS() {
     const input = this.refs.ios.state
-
-    // check
-
-    if (input.authCert.file == null &&  input.authToken.file == null) {
-      this.props.updateOutput('Failed: Missing file')
-      return
-    }
 
     // options
     let options
@@ -122,9 +118,15 @@ class InputComponent extends React.Component {
 
     provider.send(notification, input.deviceToken).then( (result) => {
       if (result.failed.length > 0) {
-        this.props.updateOutput('Failed: ' + result.failed[0].response.reason)
+        this.props.updateOutput({
+          loading: false,
+          text: 'Failed: ' + result.failed[0].response.reason
+        })
       } else {
-        this.props.updateOutput('Sent to ' + input.deviceToken)
+        this.props.updateOutput({
+          loading: false,
+          text: 'Sent to ' + input.deviceToken
+        })
       }
     })
   }

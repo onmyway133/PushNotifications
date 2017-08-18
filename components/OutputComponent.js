@@ -33,9 +33,12 @@ class OutputComponent extends React.Component {
   }
 
   makeProgressElement() {
-    const style = {
-      display: 'flex',
-      justifyContent: 'center'
+    const divOptions = {
+      style: {
+        display: 'flex',
+        justifyContent: 'center',
+        visibility: this.props.output.loading ? 'visible' : 'hidden'
+      }
     }
 
     const progressOptions = {
@@ -43,14 +46,14 @@ class OutputComponent extends React.Component {
       thickness: 5
     }
     
-    return React.createElement('div', {style: style}, 
+    return React.createElement('div', divOptions, 
       React.createElement(CircularProgress, progressOptions)
     )
   }
 
   makeTextElement() {
     return React.createElement('div', {}, 
-      React.createElement(CardText, {}, this.props.output)
+      React.createElement(CardText, {}, this.props.output.text)
     )
   }
 

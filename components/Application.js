@@ -9,7 +9,10 @@ class Application extends React.Component {
     super(props)
 
     this.state = {
-      output: ''
+      output: {
+        loading: false,
+        text: ''
+      }
     }
 
     this.triggerSend = this.triggerSend.bind(this)
@@ -48,9 +51,9 @@ class Application extends React.Component {
     this.refs.input.send()
   }
 
-  updateOutput(value) {
+  updateOutput(output) {
     this.setState({
-      output: value
+      output
     })
   }
 }
