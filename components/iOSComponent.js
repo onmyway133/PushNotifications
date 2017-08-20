@@ -166,7 +166,7 @@ class iOSComponent extends React.Component {
       style: {
         width: '100%'
       },
-      hintText: 'Enter phassphrase',
+      hintText: 'Enter passphrase',
       value: this.state.authCert.passphrase,
       onChange: (event, value) => {
         const authCert = Object.assign(this.state.authCert, {
