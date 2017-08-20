@@ -8,7 +8,7 @@
 
 - Icon http://emojione.com/
 - Download from https://github.com/onmyway133/PushNotifications/releases
-- Use [node-apn](https://github.com/node-apn/node-apn) and [node-gcm](https://github.com/ToothlessGear/node-gcm)
+- Use [node-apn](https://github.com/node-apn/node-apn) and [fcm-push](https://github.com/nandarustam/fcm-push)
 
 
 ## Author
