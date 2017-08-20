@@ -7,8 +7,16 @@
 ## Description
 
 - Icon http://emojione.com/
+- Use [node-apn](https://github.com/node-apn/node-apn) and [fcm-push](https://github.com/nandarustam/fcm-push) under the hood
 - Download from https://github.com/onmyway133/PushNotifications/releases
-- Use [node-apn](https://github.com/node-apn/node-apn) and [fcm-push](https://github.com/nandarustam/fcm-push)
+
+## Features
+
+- iOS 
+  - [Provider Certificates](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/CommunicatingwithAPNs.html#//apple_ref/doc/uid/TP40008194-CH11-SW1): need .p12 file 
+  - [Authentication Tokens](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/CommunicatingwithAPNs.html#//apple_ref/doc/uid/TP40008194-CH11-SW1): need .p8 file, key id, team id
+- Android 
+  - [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging/): need server key
 
 
 ## Author
