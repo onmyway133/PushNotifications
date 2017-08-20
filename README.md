@@ -17,4 +17,4 @@ Khoa Pham, onmyway133@gmail.com
 
 ## License
 
-**Lyrics** is available under the MIT license. See the [LICENSE](https://github.com/onmyway133/Lyrics/blob/master/LICENSE.md) file for more info.
+**PushNotifications** is available under the MIT license. See the [LICENSE](https://github.com/onmyway133/PushNotifications/blob/master/LICENSE.md) file for more info.

@@ -176,7 +176,7 @@ class InputComponent extends React.Component {
   
     //callback style
     fcm.send(message, (error, response) => {
-      if (error) {
+      if (response) {
         this.props.updateOutput({
           loading: false,
           text: 'Succeeded: ' + error
