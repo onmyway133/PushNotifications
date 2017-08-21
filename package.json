@@ -1,7 +1,7 @@
 {
   "name": "PushNotifications",
   "productName": "PushNotifications",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A macOS app to test push notifications",
   "main": "main.js",
   "repository": "https://github.com/onmyway133/PushNotifications",
