@@ -2,6 +2,7 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const Dialog = require('electron').remote.dialog
 const RaisedButton = require('material-ui').RaisedButton
+const FlatButton = require('material-ui').FlatButton
 const RadioButton = require('material-ui').RadioButton
 const RadioButtonGroup = require('material-ui').RadioButtonGroup
 const TextField = require('material-ui').TextField
@@ -159,7 +160,8 @@ class iOSComponent extends React.Component {
       onClick: this.handleSelectAuthCert,
       style: {
         marginRight: '5px'
-      }
+      },
+      secondary: true
     }
 
     const passTextFieldOptions = {
@@ -180,7 +182,7 @@ class iOSComponent extends React.Component {
 
     return React.createElement(Tab, tabOptions, 
       React.createElement('div', divOptions,
-        React.createElement(RaisedButton, buttonOptions),
+        React.createElement(FlatButton, buttonOptions),
         React.createElement('span', {}, this.state.authCert.name),
         React.createElement(TextField, passTextFieldOptions)
       )
@@ -204,7 +206,8 @@ class iOSComponent extends React.Component {
       onClick: this.handleSelectAuthToken,
       style: {
         marginRight: '5px'
-      }
+      },
+      secondary: true
     }
 
     const keyIdTextField = {
@@ -239,7 +242,7 @@ class iOSComponent extends React.Component {
 
     return React.createElement(Tab, tabOptions, 
       React.createElement('div', divOptions,
-        React.createElement(RaisedButton, buttonOptions),
+        React.createElement(FlatButton, buttonOptions),
         React.createElement('span', {}, this.state.authToken.name),
         React.createElement(TextField, keyIdTextField),
         React.createElement(TextField, teamIdTextField)
