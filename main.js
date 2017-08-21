@@ -43,7 +43,6 @@ app.on('activate', () => {
 
 // https://pracucci.com/atom-electron-enable-copy-and-paste.html
 function createMenu() {
-
   const application = {
     label: "Application",
     submenu: [
