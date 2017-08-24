@@ -8,6 +8,7 @@ const Tabs = require('material-ui').Tabs
 const Paper = require('material-ui').Paper
 const APN = require('apn')
 const FCM = require('fcm-push')
+const Fetch = require('node-fetch')
 
 // http://www.material-ui.com/#/get-started/installation
 injectTapEventPlugin()
@@ -168,25 +169,37 @@ class InputComponent extends React.Component {
     // message
     const message = {
       to: input.deviceToken,
-      data: JSON.stringify(input.message)
+      data: JSON.parse(input.message)
     }
-    
-    // fcm
-    const fcm = new FCM(input.serverKey)
-  
-    //callback style
-    fcm.send(message, (error, response) => {
-      if (response) {
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'key=' + input.serverKey
+      },
+      body: message
+    }
+
+    Fetch('https://fcm.googleapis.com/fcm/send', options)
+    .then((res)=> {
+      return JSON.stringify(res)
+    }).then((string) => {
+      return JSON.parse(string)
+    })
+    .then((json) => {
+      if (json.status >= 200 && json.status < 300 ) {
         this.props.updateOutput({
           loading: false,
-          text: 'Succeeded: ' + error
+          text: 'Succeeded'
         })
       } else {
         this.props.updateOutput({
           loading: false,
-          text: 'Succeeded: ' + response
+          text: 'Failed: ' + json.statusText
         })
       }
+      console.log(json)
     })
   }
 }
