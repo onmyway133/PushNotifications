@@ -7,7 +7,7 @@
 ## Description
 
 - Icon http://emojione.com/
-- Use [node-apn](https://github.com/node-apn/node-apn) and [fcm-push](https://github.com/nandarustam/fcm-push) under the hood
+- Use [node-apn](https://github.com/node-apn/node-apn) under the hood
 - Download from https://github.com/onmyway133/PushNotifications/releases
 
 ## Features
