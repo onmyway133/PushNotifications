@@ -7,7 +7,6 @@ const Tab = require('material-ui').Tab
 const Tabs = require('material-ui').Tabs
 const Paper = require('material-ui').Paper
 const APN = require('apn')
-const FCM = require('fcm-push')
 const Fetch = require('node-fetch')
 
 // http://www.material-ui.com/#/get-started/installation
