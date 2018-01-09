@@ -118,7 +118,7 @@ class iOSComponent extends React.Component {
     })
   }
 
-  handleEnvironmentChange(value) {
+  handleEnvironmentChange(event, value) {
     this.setState({
       environment: value
     })
