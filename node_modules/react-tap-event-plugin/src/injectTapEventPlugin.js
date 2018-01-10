@@ -3,7 +3,7 @@ var defaultClickRejectionStrategy = require('./defaultClickRejectionStrategy');
 
 var alreadyInjected = false;
 
-module.exports = function injectTapEventPlugin (strategyOverrides) {
+module.exports = function injectTapEventPlugin(strategyOverrides) {
   strategyOverrides = strategyOverrides || {}
   var shouldRejectClick = strategyOverrides.shouldRejectClick || defaultClickRejectionStrategy;
 
@@ -20,7 +20,8 @@ should be injected by the application.'
 
   alreadyInjected = true;
 
-  require('react-dom/lib/EventPluginHub').injection.injectEventPluginsByName({
-    'TapEventPlugin':       require('./TapEventPlugin.js')(shouldRejectClick)
+  require('react-dom').__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.EventPluginHub.injection.injectEventPluginsByName({
+    'TapEventPlugin': require('./TapEventPlugin.js')(shouldRejectClick)
   });
 };
+

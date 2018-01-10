@@ -95,7 +95,9 @@ var TableBody = function (_Component) {
 
       if (_this.props.selectable) {
         // Prevent text selection while selecting rows.
-        window.getSelection().removeAllRanges();
+        if (window.getSelection().rangeCount > 0 && window.getSelection().getRangeAt(0).getClientRects.length > 0) {
+          window.getSelection().removeAllRanges();
+        }
         _this.processRowSelection(event, rowNumber);
       }
     }, _this.onCellClick = function (event, rowNumber, columnNumber) {

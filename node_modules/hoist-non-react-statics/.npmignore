@@ -1,2 +1,6 @@
+.idea
+.coveralls.yml
+.eslintrc
+.travis.yml
 /artifacts/
 /tests/
