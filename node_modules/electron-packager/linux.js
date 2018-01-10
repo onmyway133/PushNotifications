@@ -1,16 +1,25 @@
 'use strict'
 
+const App = require('./platform')
 const common = require('./common')
-const path = require('path')
+
+class LinuxApp extends App {
+  get originalElectronName () {
+    return 'electron'
+  }
+
+  get newElectronName () {
+    return common.sanitizeAppName(this.executableName)
+  }
+
+  create () {
+    return this.initialize()
+      .then(() => this.renameElectron())
+      .then(() => this.copyExtraResources(this.opts.extraResource))
+      .then(() => this.move())
+  }
+}
 
 module.exports = {
-  createApp: function createApp (opts, templatePath, callback) {
-    common.initializeApp(opts, templatePath, path.join('resources', 'app'), function buildLinuxApp (err, tempPath) {
-      if (err) return callback(err)
-      common.rename(tempPath, 'electron', common.sanitizeAppName(opts.name), function (err) {
-        if (err) return callback(err)
-        common.moveApp(opts, tempPath, callback)
-      })
-    })
-  }
+  App: LinuxApp
 }

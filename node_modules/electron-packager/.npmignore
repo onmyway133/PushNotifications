@@ -3,6 +3,7 @@
 *.key
 *.pem
 node_modules
+test/fixtures/basic/main-link.js
 test/work
 .DS_Store
 .nyc_output

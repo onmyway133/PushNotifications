@@ -2,7 +2,9 @@
 
 const debug = require('debug')('electron-packager')
 const getPackageInfo = require('get-package-info')
+const parseAuthor = require('parse-author')
 const path = require('path')
+const pify = require('pify')
 const resolve = require('resolve')
 
 function isMissingRequiredProperty (props) {
@@ -33,7 +35,7 @@ function errorMessageForProperty (prop) {
     `https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#${hash}\n`
 }
 
-function getVersion (opts, electronProp, cb) {
+function getVersion (opts, electronProp) {
   // Destructured assignments are added in Node 6
   const splitProp = electronProp.prop.split('.')
   const depType = splitProp[0]
@@ -44,24 +46,56 @@ function getVersion (opts, electronProp, cb) {
     // to a valid JS file.
     const electronVersion = electronProp.pkg[depType][packageName]
     if (!/^\d+\.\d+\.\d+/.test(electronVersion)) {
-      return cb(new Error('Using electron-prebuilt-compile with Electron Packager requires specifying an exact Electron version'))
+      throw new Error('Using electron-prebuilt-compile with Electron Packager requires specifying an exact Electron version')
     }
 
     opts.electronVersion = electronVersion
-    return cb(null)
+    return Promise.resolve()
   } else {
-    resolve(packageName, {
-      basedir: path.dirname(src)
-    }, (err, res, pkg) => {
-      if (err) return cb(err)
-      debug(`Inferring target Electron version from ${packageName} in ${src}`)
-      opts.electronVersion = pkg.version
-      return cb(null)
-    })
+    return pify(resolve, { multiArgs: true })(packageName, { basedir: path.dirname(src) })
+      .then(res => {
+        debug(`Inferring target Electron version from ${packageName} in ${src}`)
+        const pkg = res[1]
+        opts.electronVersion = pkg.version
+        return null
+      })
   }
 }
 
-module.exports = function getMetadataFromPackageJSON (opts, dir, cb) {
+function handleMetadata (opts, result) {
+  if (result.values.productName) {
+    debug(`Inferring application name from ${result.source.productName.prop} in ${result.source.productName.src}`)
+    opts.name = result.values.productName
+  }
+
+  if (result.values.version) {
+    debug(`Inferring appVersion from version in ${result.source.version.src}`)
+    opts.appVersion = result.values.version
+  }
+
+  if (result.values.author && !opts.win32metadata) {
+    opts.win32metadata = {}
+  }
+
+  if (result.values.author) {
+    debug(`Inferring win32metadata.CompanyName from author in ${result.source.author.src}`)
+    if (typeof result.values.author === 'string') {
+      opts.win32metadata.CompanyName = parseAuthor(result.values.author).name
+    } else if (result.values.author.name) {
+      opts.win32metadata.CompanyName = result.values.author.name
+    } else {
+      debug('Cannot infer win32metadata.CompanyName from author, no name found')
+    }
+  }
+
+  if (result.values['dependencies.electron']) {
+    return getVersion(opts, result.source['dependencies.electron'])
+  } else {
+    return Promise.resolve()
+  }
+}
+
+module.exports = function getMetadataFromPackageJSON (platforms, opts, dir) {
   let props = []
   if (!opts.name) props.push(['productName', 'name'])
   if (!opts.appVersion) props.push('version')
@@ -76,44 +110,34 @@ module.exports = function getMetadataFromPackageJSON (opts, dir, cb) {
     ])
   }
 
+  if (platforms.indexOf('win32') !== -1 && !(opts.win32metadata && opts.win32metadata.CompanyName)) {
+    props.push('author')
+  }
+
   // Name and version provided, no need to infer
-  if (props.length === 0) return cb(null)
+  if (props.length === 0) return Promise.resolve()
 
   // Search package.json files to infer name and version from
-  getPackageInfo(props, dir, (err, result) => {
-    if (err && err.missingProps) {
-      let missingProps = err.missingProps.map(prop => {
-        return Array.isArray(prop) ? prop[0] : prop
-      })
+  return pify(getPackageInfo)(props, dir)
+    .then(result => handleMetadata(opts, result))
+    .catch(err => {
+      if (err.missingProps) {
+        const missingProps = err.missingProps.map(prop => {
+          return Array.isArray(prop) ? prop[0] : prop
+        })
 
-      if (isMissingRequiredProperty(missingProps)) {
-        let messages = missingProps.map(errorMessageForProperty)
+        if (isMissingRequiredProperty(missingProps)) {
+          const messages = missingProps.map(errorMessageForProperty)
 
-        debug(err.message)
-        err.message = messages.join('\n') + '\n'
-        return cb(err)
-      } else {
-        // Missing props not required, can continue w/ partial result
-        result = err.result
+          debug(err.message)
+          err.message = messages.join('\n') + '\n'
+          throw err
+        } else {
+          // Missing props not required, can continue w/ partial result
+          return handleMetadata(opts, err.result)
+        }
       }
-    } else if (err) {
-      return cb(err)
-    }
 
-    if (result.values.productName) {
-      debug(`Inferring application name from ${result.source.productName.prop} in ${result.source.productName.src}`)
-      opts.name = result.values.productName
-    }
-
-    if (result.values.version) {
-      debug(`Inferring appVersion from version in ${result.source.version.src}`)
-      opts.appVersion = result.values.version
-    }
-
-    if (result.values['dependencies.electron']) {
-      return getVersion(opts, result.source['dependencies.electron'], cb)
-    } else {
-      return cb(null)
-    }
-  })
+      throw err
+    })
 }

@@ -1,0 +1,29 @@
+{
+  "name": "nodeify",
+  "version": "1.0.1",
+  "description": "Convert promised code to use node style callbacks",
+  "scripts": {
+    "test": "mocha -R spec",
+    "prepublish": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/then/nodeify.git"
+  },
+  "keywords": [
+    "promise",
+    "then",
+    "nodeify",
+    "callback"
+  ],
+  "author": "ForbesLindesay",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "~1.8.1",
+    "mocha-as-promised": "~1.2.1"
+  },
+  "dependencies": {
+    "promise": "~1.3.0",
+    "is-promise": "~1.0.0"
+  }
+}

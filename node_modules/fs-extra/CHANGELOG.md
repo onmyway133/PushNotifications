@@ -1,3 +1,54 @@
+5.0.0 / 2017-12-11
+------------------
+
+Significant refactor of `copy()` & `copySync()`, including breaking changes. No changes to other functions in this release.
+
+Huge thanks to **[@manidlou](https://github.com/manidlou)** for doing most of the work on this release.
+
+- The `filter` option can no longer be a RegExp (must be a function). This was deprecated since fs-extra v1.0.0. [#512](https://github.com/jprichardson/node-fs-extra/pull/512)
+- `copy()`'s `filter` option can now be a function that returns a Promise. [#518](https://github.com/jprichardson/node-fs-extra/pull/518)
+- `copy()` & `copySync()` now use `fs.copyFile()`/`fs.copyFileSync()` in environments that support it (currently Node 8.5.0+). Older Node versions still get the old implementation. [#505](https://github.com/jprichardson/node-fs-extra/pull/505)
+- Don't allow copying a directory into itself. [#83](https://github.com/jprichardson/node-fs-extra/issues/83)
+- Handle copying between identical files. [#198](https://github.com/jprichardson/node-fs-extra/issues/198)
+- Error out when copying an empty folder to a path that already exists. [#464](https://github.com/jprichardson/node-fs-extra/issues/464)
+- Don't create `dest`'s parent if the `filter` function aborts the `copy()` operation. [#517](https://github.com/jprichardson/node-fs-extra/pull/517)
+- Fix `writeStream` not being closed if there was an error in `copy()`. [#516](https://github.com/jprichardson/node-fs-extra/pull/516)
+
+4.0.3 / 2017-12-05
+------------------
+
+- Fix wrong `chmod` values in `fs.remove()` [#501](https://github.com/jprichardson/node-fs-extra/pull/501)
+- Fix `TypeError` on systems that don't have some `fs` operations like `lchown` [#520](https://github.com/jprichardson/node-fs-extra/pull/520)
+
+4.0.2 / 2017-09-12
+------------------
+
+- Added `EOL` option to `writeJson*` & `outputJson*` (via upgrade to jsonfile v4)
+- Added promise support to [`fs.copyFile()`](https://nodejs.org/api/fs.html#fs_fs_copyfile_src_dest_flags_callback) in Node 8.5+
+- Added `.js` extension to `main` field in `package.json` for better tooling compatibility. [#485](https://github.com/jprichardson/node-fs-extra/pull/485)
+
+4.0.1 / 2017-07-31
+------------------
+
+### Fixed
+
+- Previously, `ensureFile()` & `ensureFileSync()` would do nothing if the path was a directory. Now, they error out for consistency with `ensureDir()`. [#465](https://github.com/jprichardson/node-fs-extra/issues/465), [#466](https://github.com/jprichardson/node-fs-extra/pull/466), [#470](https://github.com/jprichardson/node-fs-extra/issues/470)
+
+4.0.0 / 2017-07-14
+------------------
+
+### Changed
+
+- **BREAKING:** The promisified versions of `fs.read()` & `fs.write()` now return objects. See [the docs](docs/fs-read-write.md) for details. [#436](https://github.com/jprichardson/node-fs-extra/issues/436), [#449](https://github.com/jprichardson/node-fs-extra/pull/449)
+- `fs.move()` now errors out when destination is a subdirectory of source. [#458](https://github.com/jprichardson/node-fs-extra/pull/458)
+- Applied upstream fixes from `rimraf` to `fs.remove()` & `fs.removeSync()`. [#459](https://github.com/jprichardson/node-fs-extra/pull/459)
+
+### Fixed
+
+- Got `fs.outputJSONSync()` working again; it was broken due to refactoring. [#428](https://github.com/jprichardson/node-fs-extra/pull/428)
+
+Also clarified the docs in a few places.
+
 3.0.1 / 2017-05-04
 ------------------
 

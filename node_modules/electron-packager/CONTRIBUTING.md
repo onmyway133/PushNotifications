@@ -4,7 +4,7 @@ Electron Packager is a community-driven project. As such, we welcome and encoura
 contributions. They include, but are not limited to:
 
 - Constructive feedback
-- [Questions about usage](#questions-about-usage)
+- [Questions about usage](https://github.com/electron-userland/electron-packager/blob/master/SUPPORT.md)
 - [Bug reports / technical issues](#before-opening-bug-reportstechnical-issues)
 - Documentation changes
 - Feature requests
@@ -16,11 +16,6 @@ if it has already been filed by someone else.
 This project is a part of the Electron ecosystem. As such, all contributions to this project follow
 [Electron's code of conduct](https://github.com/electron/electron/blob/master/CODE_OF_CONDUCT.md)
 where appropriate.
-
-## Questions about usage
-
-If you have questions about usage, we encourage you to visit one of the several [community-driven
-sites](https://github.com/electron/electron#community).
 
 ## Before opening bug reports/technical issues
 
@@ -59,8 +54,8 @@ Here are some things to keep in mind as you file pull requests to fix bugs, add 
 * If your PR changes the behavior of an existing feature, or adds a new feature, please add/edit
   the package's documentation. Files that will likely need to be updated include `readme.md`,
   `docs/api.md`, and `usage.txt`.
-* This project uses the [JavaScript Standard Style](https://www.npmjs.com/package/standard) as a
-  coding convention. CI will fail if the PR does not conform to this standard.
+* This project uses the [JavaScript Standard Style](https://standardjs.com/) as a coding convention.
+  CI will fail if the PR does not conform to this standard.
 * One of the philosophies of the project is to keep the code base as small as possible. If you are
   adding a new feature, think about whether it is appropriate to go into a separate Node module,
   and then be integrated into this project.
