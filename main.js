@@ -24,8 +24,6 @@ function createWindow () {
     win = null
   })
 
-  win.toggleDevTools()
-
   createMenu()
 }
 
