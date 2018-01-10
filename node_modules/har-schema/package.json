@@ -1,5 +1,5 @@
 {
-  "version": "1.0.5",
+  "version": "2.0.0",
   "name": "har-schema",
   "description": "JSON Schema for HTTP Archive (HAR)",
   "author": "Ahmad Nassri <ahmad@ahmadnassri.com> (https://www.ahmadnassri.com/)",
@@ -43,7 +43,7 @@
     }
   },
   "devDependencies": {
-    "ajv": "^4.9.1",
+    "ajv": "^5.0.0",
     "codeclimate-test-reporter": "^0.4.0",
     "cz-conventional-changelog": "^1.2.0",
     "echint": "^2.1.0",

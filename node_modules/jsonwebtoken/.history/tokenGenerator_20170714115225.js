@@ -1,1 +1,0 @@
-function tokenGenerator (secretOrPrivateKey, secretOrPublicKey)

@@ -1,1 +1,0 @@
-TokenGen = require('./tokenGenerator')

@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2012, Joyent, Inc. All rights reserved.
+# Copyright (c) 2017, Joyent, Inc. All rights reserved.
 #
 # Makefile: top-level Makefile
 #
@@ -11,6 +11,7 @@
 #
 # Files
 #
+CATEST		 = deps/catest/catest
 JSL		 = jsl
 JSSTYLE		 = jsstyle
 JS_FILES	:= $(shell find examples lib -name '*.js')
@@ -20,5 +21,10 @@ JSL_CONF_NODE	 = jsl.node.conf
 
 # Default target is "check"
 check:
+
+test: | $(CATEST)
+	$(CATEST) -a
+
+CATEST: deps/catest/.git
 
 include ./Makefile.targ

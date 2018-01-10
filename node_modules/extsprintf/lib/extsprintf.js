@@ -30,7 +30,7 @@ exports.fprintf = jsFprintf;
  * Everything else is currently unsupported, most notably precision, unsigned
  * numbers, non-decimal numbers, and characters.
  */
-function jsSprintf(fmt)
+function jsSprintf(ofmt)
 {
 	var regex = [
 	    '([^%]*)',				/* normal text */
@@ -43,17 +43,42 @@ function jsSprintf(fmt)
 	].join('');
 
 	var re = new RegExp(regex);
+
+	/* variadic arguments used to fill in conversion specifiers */
 	var args = Array.prototype.slice.call(arguments, 1);
+	/* remaining format string */
+	var fmt = ofmt;
+
+	/* components of the current conversion specifier */
 	var flags, width, precision, conversion;
 	var left, pad, sign, arg, match;
-	var ret = '';
-	var argn = 1;
 
-	mod_assert.equal('string', typeof (fmt));
+	/* return value */
+	var ret = '';
+
+	/* current variadic argument (1-based) */
+	var argn = 1;
+	/* 0-based position in the format string that we've read */
+	var posn = 0;
+	/* 1-based position in the format string of the current conversion */
+	var convposn;
+	/* current conversion specifier */
+	var curconv;
+
+	mod_assert.equal('string', typeof (fmt),
+	    'first argument must be a format string');
 
 	while ((match = re.exec(fmt)) !== null) {
 		ret += match[1];
 		fmt = fmt.substring(match[0].length);
+
+		/*
+		 * Update flags related to the current conversion specifier's
+		 * position so that we can report clear error messages.
+		 */
+		curconv = match[0].substring(match[1].length);
+		convposn = posn + match[1].length + 1;
+		posn += match[0].length;
 
 		flags = match[2] || '';
 		width = match[3] || 0;
@@ -68,19 +93,24 @@ function jsSprintf(fmt)
 			continue;
 		}
 
-		if (args.length === 0)
-			throw (new Error('too few args to sprintf'));
+		if (args.length === 0) {
+			throw (jsError(ofmt, convposn, curconv,
+			    'has no matching argument ' +
+			    '(too few arguments passed)'));
+		}
 
 		arg = args.shift();
 		argn++;
 
-		if (flags.match(/[\' #]/))
-			throw (new Error(
-			    'unsupported flags: ' + flags));
+		if (flags.match(/[\' #]/)) {
+			throw (jsError(ofmt, convposn, curconv,
+			    'uses unsupported flags'));
+		}
 
-		if (precision.length > 0)
-			throw (new Error(
-			    'non-zero precision not supported'));
+		if (precision.length > 0) {
+			throw (jsError(ofmt, convposn, curconv,
+			    'uses non-zero precision (not supported)'));
+		}
 
 		if (flags.match(/-/))
 			left = true;
@@ -93,10 +123,12 @@ function jsSprintf(fmt)
 
 		switch (conversion) {
 		case 's':
-			if (arg === undefined || arg === null)
-				throw (new Error('argument ' + argn +
-				    ': attempted to print undefined or null ' +
-				    'as a string'));
+			if (arg === undefined || arg === null) {
+				throw (jsError(ofmt, convposn, curconv,
+				    'attempted to print undefined or null ' +
+				    'as a string (argument ' + argn + ' to ' +
+				    'sprintf)'));
+			}
 			ret += doPad(pad, width, left, arg.toString());
 			break;
 
@@ -124,13 +156,23 @@ function jsSprintf(fmt)
 			break;
 
 		default:
-			throw (new Error('unsupported conversion: ' +
-			    conversion));
+			throw (jsError(ofmt, convposn, curconv,
+			    'is not supported'));
 		}
 	}
 
 	ret += fmt;
 	return (ret);
+}
+
+function jsError(fmtstr, convposn, curconv, reason) {
+	mod_assert.equal(typeof (fmtstr), 'string');
+	mod_assert.equal(typeof (curconv), 'string');
+	mod_assert.equal(typeof (convposn), 'number');
+	mod_assert.equal(typeof (reason), 'string');
+	return (new Error('format string "' + fmtstr +
+	    '": conversion specifier "' + curconv + '" at character ' +
+	    convposn + ' ' + reason));
 }
 
 function jsPrintf() {

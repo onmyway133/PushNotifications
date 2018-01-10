@@ -1,5 +1,0 @@
-describe('custom verifiers', function(){
-
-
-
-});

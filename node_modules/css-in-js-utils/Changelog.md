@@ -1,5 +1,8 @@
 # Changelog
 
+### 2.0.0
+* improve `assignStyle` to replace arrays
+
 ### 1.0.3
 * performance improvements
 

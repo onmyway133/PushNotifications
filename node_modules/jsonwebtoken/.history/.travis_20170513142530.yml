@@ -1,9 +1,0 @@
-language: node_js
-sudo: false
-before_install: npm i -g npm
-after_success: npm run coverage
-node_js:
-  - "7"
-  - "6"
-  - "5"
-  - "4"
