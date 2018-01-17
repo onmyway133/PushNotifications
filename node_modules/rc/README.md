@@ -59,7 +59,7 @@ so that sources **earlier** in this list override later ones.
 
 ## Configuration File Formats
 
-Configuration files (e.g. `.appnamerc`) may be in either [json](http://json.org/example) or [ini](http://en.wikipedia.org/wiki/INI_file) format. The example configurations below are equivalent:
+Configuration files (e.g. `.appnamerc`) may be in either [json](http://json.org/example) or [ini](http://en.wikipedia.org/wiki/INI_file) format. **No** file extension (`.json` or `.ini`) should be used. The example configurations below are equivalent:
 
 
 #### Formatted as `ini`
@@ -114,6 +114,82 @@ Comments are stripped from JSON config via [strip-json-comments](https://github.
 
 > Since ini, and env variables do not have a standard for types, your application needs be prepared for strings.
 
+
+## Simple example demonstrating precedence
+Assume you have an application like this (notice the hard-coded defaults passed to rc):
+```
+const conf = require('rc')('myapp', {
+    port: 12345,
+    mode: 'test'
+});
+
+console.log(JSON.stringify(conf, null, 2));
+```
+You also have a file `config.json`, with these contents:
+```
+{
+  "port": 9000,
+  "foo": "from config json",
+  "something": "else"
+}
+```
+And a file `.myapprc` in the same folder, with these contents:
+```
+{
+  "port": "3001",
+  "foo": "bar"
+}
+```
+Here is the expected output from various commands:
+
+`node .`
+```
+{
+  "port": "3001",
+  "mode": "test",
+  "foo": "bar",
+  "_": [],
+  "configs": [
+    "/Users/stephen/repos/conftest/.myapprc"
+  ],
+  "config": "/Users/stephen/repos/conftest/.myapprc"
+}
+```
+*Default `mode` from hard-coded object is retained, but port is overridden by `.myapprc` file (automatically found based on appname match), and `foo` is added.*
+
+
+`node . --foo baz`
+```
+{
+  "port": "3001",
+  "mode": "test",
+  "foo": "baz",
+  "_": [],
+  "configs": [
+    "/Users/stephen/repos/conftest/.myapprc"
+  ],
+  "config": "/Users/stephen/repos/conftest/.myapprc"
+}
+```
+*Same result as above but `foo` is overridden because command-line arguments take precedence over `.myapprc` file.*
+
+`node . --foo barbar --config config.json`
+```
+{
+  "port": 9000,
+  "mode": "test",
+  "foo": "barbar",
+  "something": "else",
+  "_": [],
+  "config": "config.json",
+  "configs": [
+    "/Users/stephen/repos/conftest/.myapprc",
+    "config.json"
+  ]
+}
+```
+*Now the `port` comes from the `config.json` file specified (overriding the value from `.myapprc`), and `foo` value is overriden by command-line despite also being specified in the `config.json` file.*
+ 
 
 
 ## Advanced Usage
