@@ -1,6 +1,6 @@
-var $export = require('./$.export')
-  , $task   = require('./$.task');
+var $export = require('./_export');
+var $task = require('./_task');
 $export($export.G + $export.B, {
-  setImmediate:   $task.set,
+  setImmediate: $task.set,
   clearImmediate: $task.clear
 });

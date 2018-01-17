@@ -22,9 +22,9 @@ $ npm install --save read-pkg-up
 ## Usage
 
 ```js
-const readPkgUp = require('read-pkg-up');
+var readPkgUp = require('read-pkg-up');
 
-readPkgUp().then(result => {
+readPkgUp().then(function (result) {
 	console.log(result);
 	/*
 	{
@@ -33,7 +33,7 @@ readPkgUp().then(result => {
 			version: '1.0.0',
 			...
 		},
-		path: '/Users/sindresorhus/dev/awesome-package/package.json'
+		path: '/Users/sindresorhus/dev/awesome-package'
 	}
 	*/
 });
@@ -44,24 +44,24 @@ readPkgUp().then(result => {
 
 ### readPkgUp([options])
 
-Returns a `Promise` for the result object.
+Returns a promise that resolves to a result object.
 
 ### readPkgUp.sync([options])
 
-Returns the result object.
+Returns a result object.
 
 #### options
 
 ##### cwd
 
-Type: `string`<br>
+Type: `string`  
 Default: `.`
 
 Directory to start looking for a package.json file.
 
 ##### normalize
 
-Type: `boolean`<br>
+Type: `boolean`  
 Default: `true`
 
 [Normalize](https://github.com/npm/normalize-package-data#what-normalization-currently-entails) the package data.
@@ -70,11 +70,10 @@ Default: `true`
 ## Related
 
 - [read-pkg](https://github.com/sindresorhus/read-pkg) - Read a package.json file
-- [pkg-up](https://github.com/sindresorhus/pkg-up) - Find the closest package.json file
 - [find-up](https://github.com/sindresorhus/find-up) - Find a file by walking up parent directories
 - [pkg-conf](https://github.com/sindresorhus/pkg-conf) - Get namespaced config from the closest package.json
 
 
 ## License
 
-MIT © [Sindre Sorhus](https://sindresorhus.com)
+MIT © [Sindre Sorhus](http://sindresorhus.com)
