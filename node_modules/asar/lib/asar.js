@@ -37,9 +37,15 @@ module.exports.createPackage = function (src, dest, callback) {
 }
 
 module.exports.createPackageWithOptions = function (src, dest, options, callback) {
-  const dot = typeof options.dot === 'undefined' ? true : options.dot
+  const globOptions = options.globOptions ? options.globOptions : {}
+  globOptions.dot = options.dot === undefined ? true : options.dot
 
-  return crawlFilesystem(src, { dot: dot }, function (error, filenames, metadata) {
+  let pattern = src + '/**/*'
+  if (options.pattern) {
+    pattern = src + options.pattern
+  }
+
+  return crawlFilesystem(pattern, globOptions, function (error, filenames, metadata) {
     if (error) { return callback(error) }
     module.exports.createPackageFromFiles(src, dest, filenames, metadata, options, callback)
   })

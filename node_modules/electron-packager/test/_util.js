@@ -44,7 +44,7 @@ function testSinglePlatform (name, testFunction, testFunctionArgs, parallel) {
 }
 
 module.exports = {
-  allPlatformArchCombosCount: 8,
+  allPlatformArchCombosCount: 9,
   areFilesEqual: function areFilesEqual (file1, file2) {
     let buffer1, buffer2
 

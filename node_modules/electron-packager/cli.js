@@ -2,8 +2,8 @@
 
 'use strict'
 
-var nodeVersionInfo = process.versions.node.split('.').map(function (n) { return Number(n) })
-if (nodeVersionInfo < [4, 0, 0]) {
+var semver = require('semver')
+if (semver.lt(process.versions.node, '4.0.0')) {
   console.error('CANNOT RUN WITH NODE ' + process.versions.node)
   console.error('Electron Packager requires Node 4.0 or above.')
   process.exit(1)
@@ -18,22 +18,39 @@ var usage = fs.readFileSync(path.join(__dirname, 'usage.txt')).toString()
 
 var args = common.parseCLIArgs(process.argv.slice(2))
 
-if (!args.dir) {
-  // temporary fix for https://github.com/nodejs/node/issues/6456
-  if (process.stderr._handle && process.stderr._handle.setBlocking) {
-    process.stderr._handle.setBlocking(true)
+// temporary fix for https://github.com/nodejs/node/issues/6456
+var stdioWriters = [process.stdout, process.stderr]
+stdioWriters.forEach(function (stdioWriter) {
+  if (stdioWriter._handle && stdioWriter._handle.setBlocking) {
+    stdioWriter._handle.setBlocking(true)
   }
-  console.error(usage)
-  process.exit(1)
+})
+
+function printUsageAndExit (isError) {
+  var print = isError ? console.error : console.log
+  print(usage)
+  process.exit(isError ? 1 : 0)
 }
 
-packager(args, function done (err, appPaths) {
-  if (err) {
+if (args.help) {
+  printUsageAndExit(false)
+} else if (args.version) {
+  if (typeof args.version !== 'boolean') {
+    console.error('--version does not take an argument. Perhaps you meant --app-version or --electron-version?\n')
+  }
+  console.log(common.hostInfo())
+  process.exit(0)
+} else if (!args.dir) {
+  printUsageAndExit(true)
+}
+
+packager(args)
+  .then(function done (appPaths) {
+    if (appPaths.length > 1) console.error('Wrote new apps to:\n' + appPaths.join('\n'))
+    else if (appPaths.length === 1) console.error('Wrote new app to', appPaths[0])
+    return true
+  }).catch(function error (err) {
     if (err.message) console.error(err.message)
     else console.error(err, err.stack)
     process.exit(1)
-  }
-
-  if (appPaths.length > 1) console.error('Wrote new apps to:\n' + appPaths.join('\n'))
-  else if (appPaths.length === 1) console.error('Wrote new app to', appPaths[0])
-})
+  })

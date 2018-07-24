@@ -3,6 +3,7 @@
   "version": "4.99.101",
   "productName": "MainJS",
   "dependencies": {
+    "@types/node": "^8.0.0",
     "run-series": "^1.1.1"
   },
   "//": "ncp used to test https://github.com/electron-userland/electron-packager/pull/186",

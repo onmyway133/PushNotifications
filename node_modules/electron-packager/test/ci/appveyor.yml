@@ -29,5 +29,6 @@ test_script:
 - npm --version
 - node test/ci/_before_script.js
 - npm test
+- npm run codecov
 
 build: off

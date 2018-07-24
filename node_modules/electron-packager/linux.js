@@ -15,7 +15,7 @@ class LinuxApp extends App {
   create () {
     return this.initialize()
       .then(() => this.renameElectron())
-      .then(() => this.copyExtraResources(this.opts.extraResource))
+      .then(() => this.copyExtraResources())
       .then(() => this.move())
   }
 }

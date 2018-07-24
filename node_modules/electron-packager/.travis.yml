@@ -23,15 +23,13 @@ install:
 - npm install
 - npm update
 before_script: test/ci/_before_script.js
-after_success: npm run coveralls
+after_success: npm run codecov
 branches:
   only:
   - master
   - /^v\d+\.\d+\.\d+/
 env:
   global:
-    # coveralls token
-    - secure: hG3cs8/tOGTa8IPewVuahcp1f8gwsk/rX7ReUBPag6cdZdJpkbjzxp8R97mhhCrFOP/fvX8zAbCelXvvhME/mjZTFgzSNHLBL/SJreHP5m2B1yxXkroiQFu1qwewvzzKmfcs5W1CD8J8WbJuBk9zozDQG9c1OxTaK87tBGh1xik=
     # prevent wine popup dialogs about installing additional packages
     - WINEDLLOVERRIDES="mscoree,mshtml="
     - WINEDEBUG="-all"

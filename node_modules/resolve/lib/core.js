@@ -1,10 +1,9 @@
 var current = (process.versions && process.versions.node && process.versions.node.split('.')) || [];
 
-function versionIncluded(specifier) {
-    if (specifier === true) { return true; }
+function specifierIncluded(specifier) {
     var parts = specifier.split(' ');
-    var op = parts[0];
-    var versionParts = parts[1].split('.');
+    var op = parts.length > 1 ? parts[0] : '=';
+    var versionParts = (parts.length > 1 ? parts[1] : parts[0]).split('.');
 
     for (var i = 0; i < 3; ++i) {
         var cur = Number(current[i] || 0);
@@ -20,7 +19,27 @@ function versionIncluded(specifier) {
             return false;
         }
     }
-    return false;
+    return op === '>=';
+}
+
+function matchesRange(range) {
+    var specifiers = range.split(/ ?&& ?/);
+    if (specifiers.length === 0) { return false; }
+    for (var i = 0; i < specifiers.length; ++i) {
+        if (!specifierIncluded(specifiers[i])) { return false; }
+    }
+    return true;
+}
+
+function versionIncluded(specifierValue) {
+    if (typeof specifierValue === 'boolean') { return specifierValue; }
+    if (specifierValue && typeof specifierValue === 'object') {
+        for (var i = 0; i < specifierValue.length; ++i) {
+            if (matchesRange(specifierValue[i])) { return true; }
+        }
+        return false;
+    }
+    return matchesRange(specifierValue);
 }
 
 var data = require('./core.json');
