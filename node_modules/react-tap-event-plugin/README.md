@@ -1,3 +1,11 @@
+# DEPRECATED
+
+React 16.4 removes a lot of internals (#121) this plugin depends on and will break the plugin.
+
+Since the problem it solves [has been fixed](https://developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away) in most browsers by now you should migrate away from this plugin.
+
+---
+
 # Introduction
 You've probably heard of [iOS's dreaded 300ms tap delay](http://updates.html5rocks.com/2013/12/300ms-tap-delay-gone-away).  React's `onClick` attribute falls prey to it.  ~~Facebook's working on a solution in the form of `TapEventPlugin`, but it [won't be made available](https://github.com/facebook/react/issues/436) [until 1.0](https://github.com/facebook/react/pull/1170).~~
 
@@ -11,7 +19,7 @@ Verify if you need this plugin for the browsers you need to support.
 
 ## Installation
 
-Latest:
+Compatible with React >= 16.0 && < 16.4:
 ```sh
 $ npm i --save react-tap-event-plugin
 ```

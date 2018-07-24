@@ -16,9 +16,9 @@
     "electron": "^2.0.5",
     "material-ui": "^0.20.1",
     "node-fetch": "^1.7.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-tap-event-plugin": "^3.0.2"
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-tap-event-plugin": "^3.0.3"
   },
   "devDependencies": {
     "electron-packager": "^12.1.0"
