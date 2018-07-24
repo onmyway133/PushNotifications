@@ -1,0 +1,12 @@
+import { PlatformPackager } from "app-builder-lib";
+import { AsyncTaskManager } from "builder-util/out/asyncTaskManager";
+import { TmpDir } from "temp-file";
+export { DmgTarget } from "./dmg";
+export declare function getDmgTemplatePath(): string;
+export declare function getDmgVendorPath(): string;
+export declare function attachAndExecute(dmgPath: string, readWrite: boolean, task: () => Promise<any>): Promise<any>;
+export declare function detach(name: string): Promise<void>;
+export declare function computeBackgroundColor(rawValue: string): any;
+export declare function computeBackground(packager: PlatformPackager<any>): Promise<string>;
+export declare function applyProperties(entries: any, env: any, asyncTaskManager: AsyncTaskManager, packager: PlatformPackager<any>): Promise<void>;
+export declare function transformBackgroundFileIfNeed(file: string, tmpDir: TmpDir): Promise<string>;

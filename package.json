@@ -1,7 +1,7 @@
 {
   "name": "PushNotifications",
   "productName": "PushNotifications",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A macOS app to test push notifications",
   "main": "main.js",
   "repository": "https://github.com/onmyway133/PushNotifications",
@@ -9,11 +9,26 @@
   "license": "MIT",
   "scripts": {
     "start": "electron main.js",
-    "release": "electron-packager . --icon=Icon/Icon.icns"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.onmyway133.pushnotifications",
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
   },
   "dependencies": {
     "apn": "^2.2.0",
-    "electron": "^2.0.5",
     "material-ui": "^0.20.1",
     "node-fetch": "^1.7.2",
     "react": "^16.4.1",
@@ -21,6 +36,7 @@
     "react-tap-event-plugin": "^3.0.3"
   },
   "devDependencies": {
-    "electron-packager": "^12.1.0"
+    "electron": "^2.0.5",
+    "electron-builder": "20.25.0"
   }
 }
