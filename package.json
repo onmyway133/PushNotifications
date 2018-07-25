@@ -5,7 +5,7 @@
   "description": "A macOS app to test push notifications",
   "main": "main.js",
   "repository": "https://github.com/onmyway133/PushNotifications",
-  "author": "Khoa Pham",
+  "author": "Khoa Pham <onmyway133@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "electron main.js",
