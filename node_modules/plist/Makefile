@@ -38,8 +38,7 @@ dist/plist-parse.js: node_modules lib/parse.js dist
 dist/plist.js: node_modules lib/*.js dist
 	@$(BROWSERIFY) \
 		--standalone plist \
-		--ignore lib/node.js \
-		lib/plist.js > $@
+		index.js > $@
 
 node_modules: package.json
 	@NODE_ENV= $(NPM) install

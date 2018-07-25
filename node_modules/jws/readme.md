@@ -116,9 +116,9 @@ jws.createSign({
 });
 
 // is equivilant to this:
-const signer = jws.createSign(
+const signer = jws.createSign({
   header: { alg: 'RS256' },
-);
+});
 privateKeyStream.pipe(signer.privateKey);
 payloadStream.pipe(signer.payload);
 signer.on('done', function(signature) {

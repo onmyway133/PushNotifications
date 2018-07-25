@@ -190,14 +190,14 @@ function parsePlistXML (node) {
   } else if (node.nodeName === 'data') {
     res = '';
     if (isEmptyNode(node)) {
-      return new Buffer(res, 'base64');
+      return Buffer.from(res, 'base64');
     }
     for (i=0; i < node.childNodes.length; i++) {
       if (node.childNodes[i].nodeType === TEXT_NODE) {
         res += node.childNodes[i].nodeValue.replace(/\s+/g, '');
       }
     }
-    return new Buffer(res, 'base64');
+    return Buffer.from(res, 'base64');
 
   } else if (node.nodeName === 'date') {
     invariant(

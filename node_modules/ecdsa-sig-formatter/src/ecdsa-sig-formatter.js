@@ -1,6 +1,5 @@
 'use strict';
 
-var base64Url = require('base64url').fromBase64;
 var Buffer = require('safe-buffer').Buffer;
 
 var getParamBytesForAlg = require('./param-bytes-for-alg');
@@ -12,6 +11,13 @@ var MAX_OCTET = 0x80,
 	TAG_INT = 0x02,
 	ENCODED_TAG_SEQ = (TAG_SEQ | PRIMITIVE_BIT) | (CLASS_UNIVERSAL << 6),
 	ENCODED_TAG_INT = TAG_INT | (CLASS_UNIVERSAL << 6);
+
+function base64Url(base64) {
+	return base64
+		.replace(/=/g, '')
+		.replace(/\+/g, '-')
+		.replace(/\//g, '_');
+}
 
 function signatureAsBuffer(signature) {
 	if (Buffer.isBuffer(signature)) {

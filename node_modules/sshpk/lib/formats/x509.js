@@ -10,6 +10,7 @@ module.exports = {
 
 var assert = require('assert-plus');
 var asn1 = require('asn1');
+var Buffer = require('safer-buffer').Buffer;
 var algs = require('../algs');
 var utils = require('../utils');
 var Key = require('../key');
@@ -70,7 +71,8 @@ var SIGN_ALGS = {
 	'ecdsa-sha1': '1.2.840.10045.4.1',
 	'ecdsa-sha256': '1.2.840.10045.4.3.2',
 	'ecdsa-sha384': '1.2.840.10045.4.3.3',
-	'ecdsa-sha512': '1.2.840.10045.4.3.4'
+	'ecdsa-sha512': '1.2.840.10045.4.3.4',
+	'ed25519-sha512': '1.3.101.112'
 };
 Object.keys(SIGN_ALGS).forEach(function (k) {
 	SIGN_ALGS[SIGN_ALGS[k]] = k;
@@ -88,7 +90,7 @@ var EXTS = {
 
 function read(buf, options) {
 	if (typeof (buf) === 'string') {
-		buf = new Buffer(buf, 'binary');
+		buf = Buffer.from(buf, 'binary');
 	}
 	assert.buffer(buf, 'buf');
 
@@ -499,7 +501,7 @@ function write(cert, options) {
 	der.endSequence();
 
 	var sigData = sig.signature.toBuffer('asn1');
-	var data = new Buffer(sigData.length + 1);
+	var data = Buffer.alloc(sigData.length + 1);
 	data[0] = 0;
 	sigData.copy(data, 1);
 	der.writeBuffer(data, asn1.Ber.BitString);
@@ -522,6 +524,8 @@ function writeTBSCert(cert, der) {
 
 	der.startSequence();
 	der.writeOID(SIGN_ALGS[sig.algo]);
+	if (sig.algo.match(/^rsa-/))
+		der.writeNull();
 	der.endSequence();
 
 	cert.issuer.toAsn1(der);
@@ -707,8 +711,7 @@ function writeBitField(setBits, bitIndex) {
 	var bitLen = bitIndex.length;
 	var blen = Math.ceil(bitLen / 8);
 	var unused = blen * 8 - bitLen;
-	var bits = new Buffer(1 + blen);
-	bits.fill(0);
+	var bits = Buffer.alloc(1 + blen); // zero-filled
 	bits[0] = unused;
 	for (var i = 0; i < bitLen; ++i) {
 		var byteN = 1 + Math.floor(i / 8);

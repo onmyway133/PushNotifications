@@ -20,15 +20,31 @@ import PropTypes from 'prop-types'; // ES6
 var PropTypes = require('prop-types'); // ES5 with npm
 ```
 
-If you prefer a `<script>` tag, you can get it from `window.PropTypes` global:
+### CDN
 
+If you prefer to exclude `prop-types` from your application and use it
+globally via `window.PropTypes`, the `prop-types` package provides
+single-file distributions, which are hosted on the following CDNs:
+
+* [**unpkg**](https://unpkg.com/prop-types/)
 ```html
 <!-- development version -->
-<script src="https://unpkg.com/prop-types/prop-types.js"></script>
+<script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
 
 <!-- production version -->
-<script src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.6/prop-types.min.js"></script>
 ```
+
+* [**cdnjs**](https://cdnjs.com/libraries/prop-types)
+```html
+<!-- development version -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.js"></script>
+
+<!-- production version -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.0/prop-types.min.js"></script>
+```
+
+To load a specific version of `prop-types` replace `15.6.0` with the version number.
 
 ## Usage
 
@@ -86,14 +102,21 @@ MyComponent.propTypes = {
   // An object with property values of a certain type
   optionalObjectOf: PropTypes.objectOf(PropTypes.number),
 
-  // An object taking on a particular shape
-  optionalObjectWithShape: PropTypes.shape({
-    color: PropTypes.string,
-    fontSize: PropTypes.number
-  }),
-
   // You can chain any of the above with `isRequired` to make sure a warning
   // is shown if the prop isn't provided.
+
+  // An object taking on a particular shape
+  optionalObjectWithShape: PropTypes.shape({
+    optionalProperty: PropTypes.string,
+    requiredProperty: PropTypes.number.isRequired
+  }),
+
+  // An object with warnings on extra properties
+  optionalObjectWithStrictShape: PropTypes.exact({
+    optionalProperty: PropTypes.string,
+    requiredProperty: PropTypes.number.isRequired
+  }),
+
   requiredFunc: PropTypes.func.isRequired,
 
   // A value of any data type
@@ -144,7 +167,7 @@ For example:
 
 ```js
   "dependencies": {
-    "prop-types": "^15.5.7" 
+    "prop-types": "^15.5.7"
   }
 ```
 
@@ -152,10 +175,10 @@ For libraries, we *also* recommend leaving it in `dependencies`:
 
 ```js
   "dependencies": {
-    "prop-types": "^15.5.7" 
+    "prop-types": "^15.5.7"
   },
   "peerDependencies": {
-    "react": "^15.5.0" 
+    "react": "^15.5.0"
   }
 ```
 
@@ -232,7 +255,7 @@ See below for more info.
 
 **You might also see this error** if you’re calling a `PropTypes` validator from your own custom `PropTypes` validator. In this case, the fix is to make sure that you are passing *all* of the arguments to the inner function. There is a more in-depth explanation of how to fix it [on this page](https://facebook.github.io/react/warnings/dont-call-proptypes.html#fixing-the-false-positive-in-third-party-proptypes). Alternatively, you can temporarily keep using `React.PropTypes` until React 16, as it would still only warn in this case.
 
-If you use a bundler like Browserify or Webpack, don’t forget to [follow these instructions](https://facebook.github.io/react/docs/installation.html#development-and-production-versions) to correctly bundle your application in development or production mode. Otherwise you’ll ship unnecessary code to your users.
+If you use a bundler like Browserify or Webpack, don’t forget to [follow these instructions](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build) to correctly bundle your application in development or production mode. Otherwise you’ll ship unnecessary code to your users.
 
 ## PropTypes.checkPropTypes
 

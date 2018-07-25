@@ -1,5 +1,5 @@
 /*global module*/
-var base64url = require('base64url');
+var Buffer = require('safe-buffer').Buffer;
 var DataStream = require('./data-stream');
 var jwa = require('jwa');
 var Stream = require('stream');
@@ -20,7 +20,7 @@ function safeJsonParse(thing) {
 
 function headerFromJWS(jwsSig) {
   var encodedHeader = jwsSig.split('.', 1)[0];
-  return safeJsonParse(base64url.decode(encodedHeader, 'binary'));
+  return safeJsonParse(Buffer.from(encodedHeader, 'base64').toString('binary'));
 }
 
 function securedInputFromJWS(jwsSig) {
@@ -34,7 +34,7 @@ function signatureFromJWS(jwsSig) {
 function payloadFromJWS(jwsSig, encoding) {
   encoding = encoding || 'utf8';
   var payload = jwsSig.split('.')[1];
-  return base64url.decode(payload, encoding);
+  return Buffer.from(payload, 'base64').toString(encoding);
 }
 
 function isValidJws(string) {

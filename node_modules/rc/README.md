@@ -40,7 +40,7 @@ appCfg.config // same as appCfg.configs[appCfg.configs.length - 1]
 
 Given your application name (`appname`), rc will look in all the obvious places for configuration.
 
-  * command line arguments (parsed by minimist)
+  * command line arguments, parsed by minimist _(e.g. `--foo baz`, also nested: `--foo.bar=baz`)_
   * environment variables prefixed with `${appname}_`
     * or use "\_\_" to indicate nested properties <br/> _(e.g. `appname_foo__bar__baz` => `foo.bar.baz`)_
   * if you passed an option `--config file` then from that file
@@ -113,6 +113,8 @@ dependsOn=0.10.0
 Comments are stripped from JSON config via [strip-json-comments](https://github.com/sindresorhus/strip-json-comments).
 
 > Since ini, and env variables do not have a standard for types, your application needs be prepared for strings.
+
+To ensure that string representations of booleans and numbers are always converted into their proper types (especially useful if you intend to do strict `===` comparisons), consider using a module such as [parse-strings-in-object](https://github.com/anselanza/parse-strings-in-object) to wrap the config object returned from rc.
 
 
 ## Simple example demonstrating precedence
