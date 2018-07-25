@@ -18,7 +18,7 @@
       "category": "public.app-category.productivity"
     },
     "win": {
-      "target": "nsis"
+      "target": "msi"
     },
     "linux": {
       "target": [
