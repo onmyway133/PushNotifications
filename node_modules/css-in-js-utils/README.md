@@ -26,7 +26,7 @@ By now I have authored and collaborated on many different libraries and found I 
 * [`resolveArrayValue(property, value)`](#resolvearrayvalueproperty-value)
 * [`unprefixProperty(property)`](#unprefixpropertyproperty)
 * [`unprefixValue(value)`](#unprefixvaluevalue)
-*
+
 ------
 
 ### `assignStyle(base, ...extend)`

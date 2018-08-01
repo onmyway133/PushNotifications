@@ -10,7 +10,7 @@ const defaultEventOptions = {
 };
 
 function mergeDefaultEventOptions(options) {
-  return Object.assign({}, defaultEventOptions, options);
+  return { ...defaultEventOptions, ...options };
 }
 
 function getEventListenerArgs(eventName, callback, options) {

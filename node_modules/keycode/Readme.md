@@ -81,6 +81,21 @@ del delete
 spc space
 ```
 
+## keycode.isEventKey(event: Event, nameOrCode: String | Number)
+
+Tests if an keyboard event against a given name or keycode.
+Will return `true` if the event matches the given name or keycode, `false` otherwise.
+
+```js
+// assume event is an keydown event with key 'enter'
+keycode.isEventKey(event, 'enter') // => true
+keycode.isEventKey(event, 'down') // => false
+
+keycode.isEventKey(event, 13) // => true
+keycode.isEventKey(event, 40) // => false
+```
+
+
 ## Maps
 
 Key code/name maps are available directly as `keycode.codes` and `keycode.names` respectively.

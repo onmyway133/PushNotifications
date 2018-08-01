@@ -122,6 +122,7 @@ declare interface AliasesMap {
   'return': number;
   'escape': number;
   'spc': number;
+  'spacebar': number;
   'pgup': number;
   'pgdn': number;
   'ins': number;
@@ -140,4 +141,5 @@ declare interface Keycode {
   codes: CodesMap;
   aliases: AliasesMap;
   names: InverseCodesMap;
+  isEventKey: (event: Event, nameOrCode: number | string) => boolean;
 }

@@ -2,7 +2,7 @@
   "name": "keycode",
   "repo": "timoxley/keycode",
   "description": "Map of keyboard codes",
-  "version": "2.1.9",
+  "version": "2.2.0",
   "development": {
     "timoxley/assert": "*"
   },

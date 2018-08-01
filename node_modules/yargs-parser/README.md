@@ -298,6 +298,27 @@ node example.js a -b -- x y
 { _: [ 'a' ], '--': [ 'x', 'y' ], b: true }
 ```
 
+### set placeholder key
+
+* default: `false`.
+* key: `set-placeholder-key`.
+
+Should a placeholder be added for keys not set via the corresponding CLI argument?
+
+_If disabled:_
+
+```sh
+node example.js -a 1 -c 2
+{ _: [], a: 1, c: 2 }
+```
+
+_If enabled:_
+
+```sh
+node example.js -a 1 -c 2
+{ _: [], a: 1, b: undefined, c: 2 }
+```
+
 ## Special Thanks
 
 The yargs project evolves from optimist and minimist. It owes its

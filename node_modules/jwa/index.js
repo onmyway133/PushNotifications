@@ -1,5 +1,4 @@
 var bufferEqual = require('buffer-equal-constant-time');
-var base64url = require('base64url');
 var Buffer = require('safe-buffer').Buffer;
 var crypto = require('crypto');
 var formatEcdsa = require('ecdsa-sig-formatter');
@@ -9,6 +8,28 @@ var MSG_INVALID_ALGORITHM = '"%s" is not a valid algorithm.\n  Supported algorit
 var MSG_INVALID_SECRET = 'secret must be a string or buffer';
 var MSG_INVALID_VERIFIER_KEY = 'key must be a string or a buffer';
 var MSG_INVALID_SIGNER_KEY = 'key must be a string, a buffer or an object';
+
+function fromBase64(base64) {
+  return base64
+    .replace(/=/g, '')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_');
+}
+
+function toBase64(base64url) {
+  base64url = base64url.toString();
+
+  var padding = 4 - base64url.length % 4;
+  if (padding !== 4) {
+    for (var i = 0; i < padding; ++i) {
+      base64url += '=';
+    }
+  }
+
+  return base64url
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+}
 
 function typeError(template) {
   var args = [].slice.call(arguments, 1);
@@ -33,7 +54,7 @@ function createHmacSigner(bits) {
     thing = normalizeInput(thing);
     var hmac = crypto.createHmac('sha' + bits, secret);
     var sig = (hmac.update(thing), hmac.digest('base64'))
-    return base64url.fromBase64(sig);
+    return fromBase64(sig);
   }
 }
 
@@ -53,7 +74,7 @@ function createKeySigner(bits) {
     // keys as well.
     var signer = crypto.createSign('RSA-SHA' + bits);
     var sig = (signer.update(thing), signer.sign(privateKey, 'base64'));
-    return base64url.fromBase64(sig);
+    return fromBase64(sig);
   }
 }
 
@@ -62,7 +83,7 @@ function createKeyVerifier(bits) {
     if (!bufferOrString(publicKey))
       throw typeError(MSG_INVALID_VERIFIER_KEY);
     thing = normalizeInput(thing);
-    signature = base64url.toBase64(signature);
+    signature = toBase64(signature);
     var verifier = crypto.createVerify('RSA-SHA' + bits);
     verifier.update(thing);
     return verifier.verify(publicKey, signature, 'base64');

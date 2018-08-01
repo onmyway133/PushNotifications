@@ -1,7 +1,7 @@
 .DS_Store
 .tags*
 /.idea/
-/build/
+#/build/
 /dist/
 /external_binaries/
 /out/

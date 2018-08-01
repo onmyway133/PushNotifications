@@ -34,6 +34,7 @@ it('is case insensitive', function() {
   assert.strictEqual(keycode('enter'), 13);
   assert.strictEqual(keycode('ENTER'), 13);
   assert.strictEqual(keycode('enTeR'), 13);
+  assert.strictEqual(keycode('Spacebar'), 32);
 })
 
 it('returns char code for strange chars', function() {
@@ -96,3 +97,38 @@ it('should return shift, ctrl, and alt for 16, 17, and 18', function() {
   assert.strictEqual(keycode(17), 'ctrl')
   assert.strictEqual(keycode(18), 'alt')
 })
+
+describe('isEventKey', function() {
+  
+  it('should allow to compare events to their names', function() {
+    var event = { which: 13, keyCode: 13, charCode: 13 };
+    assert.strictEqual(keycode.isEventKey(event, 'enter'), true);
+    assert.strictEqual(keycode.isEventKey(event, 'down'), false);
+  });
+  
+  it('should allow to compare events to their names (case insensitive)', function() {
+    var event = { which: 13, keyCode: 13, charCode: 13 };
+    assert.strictEqual(keycode.isEventKey(event, 'eNtER'), true);
+    assert.strictEqual(keycode.isEventKey(event, 'dOWN'), false);
+  });
+  
+  it('should return false if a ', function() {
+    var event = { which: 13, keyCode: 13, charCode: 13 };
+    assert.strictEqual(keycode.isEventKey(event, 'eNtER'), true);
+    assert.strictEqual(keycode.isEventKey(event, 'dOWN'), false);
+  });
+  
+  it('should allow to compare events to their keyCodes)', function() {
+    var event = { which: 13, keyCode: 13, charCode: 13 };
+    assert.strictEqual(keycode.isEventKey(event, 13), true);
+    assert.strictEqual(keycode.isEventKey(event, 14), false);
+  });
+
+  it('should not break when invalid key codes are entered, instead false should be returned', function() {
+    var event = { which: -1, keyCode: -1, charCode: -1 };
+    assert.strictEqual(keycode.isEventKey(event, 'enter'), false);
+    assert.strictEqual(keycode.isEventKey(event, 'down'), false);
+  });
+
+});
+

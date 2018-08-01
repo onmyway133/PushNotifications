@@ -1,10 +1,19 @@
 /*global module*/
-var base64url = require('base64url');
+var Buffer = require('safe-buffer').Buffer;
 var DataStream = require('./data-stream');
 var jwa = require('jwa');
 var Stream = require('stream');
 var toString = require('./tostring');
 var util = require('util');
+
+function base64url(string, encoding) {
+  return Buffer
+    .from(string, encoding)
+    .toString('base64')
+    .replace(/=/g, '')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_');
+}
 
 function jwsSecuredInput(header, payload, encoding) {
   encoding = encoding || 'utf8';
