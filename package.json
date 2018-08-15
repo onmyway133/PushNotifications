@@ -36,7 +36,8 @@
     "react-tap-event-plugin": "3.0.2"
   },
   "devDependencies": {
-    "electron": "^2.0.5",
-    "electron-builder": "20.25.0"
+    "electron": "^2.0.7",
+    "electron-builder": "20.25.0",
+    "electron-packager": "^12.1.0"
   }
 }
