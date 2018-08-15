@@ -220,6 +220,7 @@ class iOSComponent extends React.Component {
         width: '100%'
       },
       hintText: 'Enter key id',
+      value: this.state.keyId,
       onChange: (event, value) => {
         const authToken = Object.assign(this.state.authToken, {
           keyId: value
@@ -235,6 +236,7 @@ class iOSComponent extends React.Component {
         width: '100%'
       },
       hintText: 'Enter team id',
+      value: this.state.teamId,
       onChange: (event, value) => {
         const authToken = Object.assign(this.state.authToken, {
           teamId: value
@@ -279,6 +281,7 @@ class iOSComponent extends React.Component {
         width: '100%'
       },
       hintText: 'Enter bundle id',
+      value: this.state.bundleId,
       onChange: (event, value) => {
         this.setState({
           bundleId: value
@@ -297,6 +300,7 @@ class iOSComponent extends React.Component {
         width: '100%'
       },
       hintText: 'Enter device token',
+      value: this.state.deviceToken,
       onChange: (event, value) => {
         this.setState({
           deviceToken: value
