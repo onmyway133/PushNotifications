@@ -8,6 +8,8 @@ const Tabs = require('material-ui').Tabs
 const Paper = require('material-ui').Paper
 const APN = require('apn')
 const Fetch = require('node-fetch')
+const Store = require('electron-store')
+const store = new Store()
 
 // http://www.material-ui.com/#/get-started/installation
 injectTapEventPlugin()
@@ -54,10 +56,10 @@ class InputComponent extends React.Component {
       React.createElement(Paper, {},
         React.createElement(Tabs, tabsOptions, 
           React.createElement(Tab, iosOptions,
-            React.createElement(iOSComponent, {ref: 'ios'})
+            React.createElement(iOSComponent, {lastState: store.get('ios'), ref: 'ios'})
           ),
           React.createElement(Tab, androidOptions,
-            React.createElement(AndroidComponent, {ref: 'android'})
+            React.createElement(AndroidComponent, {lastState: store.get('android'), ref: 'android'})
           )
         )
       )
@@ -87,6 +89,7 @@ class InputComponent extends React.Component {
 
   sendiOS() {
     const input = this.refs.ios.state
+    store.set('ios', input)
 
     // options
     let options
@@ -154,6 +157,7 @@ class InputComponent extends React.Component {
 
   sendAndroid() {
     const input = this.refs.android.state
+    store.set('android', input)
     
     // check
     if (input.serverKey == null) {

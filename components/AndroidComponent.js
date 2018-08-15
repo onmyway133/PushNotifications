@@ -5,16 +5,8 @@ const TextField = require('material-ui').TextField
 class AndroidComponent extends React.Component {
   constructor(props) {
     super(props)
-    const defaultMessage = {
-      key1: 'value1',
-      key2: 'value2'
-    }
-
-    this.state = {
-      serverKey: null,
-      deviceToken: '',
-      message: JSON.stringify(defaultMessage)
-    }
+ 
+    this.state = props.lastState || this.makeDefaultState()
   }
 
   render() {
@@ -27,6 +19,19 @@ class AndroidComponent extends React.Component {
       this.makeAuthenticationElement(),
       this.makeBodyElement()
     )
+  }
+
+  makeDefaultState() {
+    const defaultMessage = {
+      key1: 'value1',
+      key2: 'value2'
+    }
+
+    return {
+      serverKey: null,
+      deviceToken: '',
+      message: JSON.stringify(defaultMessage)
+    }
   }
 
   // make

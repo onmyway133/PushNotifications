@@ -12,6 +12,16 @@ const Tabs = require('material-ui').Tabs
 class iOSComponent extends React.Component {
   constructor(props) {
     super(props)
+  
+    this.state = props.lastState || this.makeDefaultState()
+
+    this.handleSelectAuthCert = this.handleSelectAuthCert.bind(this)
+    this.handleSelectAuthToken = this.handleSelectAuthToken.bind(this)
+    this.handleAuthenticationChange = this.handleAuthenticationChange.bind(this)
+    this.handleEnvironmentChange = this.handleEnvironmentChange.bind(this)
+  }
+
+  makeDefaultState() {
     const defaultMessage = {
       aps: {
         alert: "Hello"
@@ -19,7 +29,7 @@ class iOSComponent extends React.Component {
       yourCustomKey: '1'
     }
 
-    this.state = {
+    return {
       authentication: 'authCert',
       authCert: {
         file: null,
@@ -37,11 +47,6 @@ class iOSComponent extends React.Component {
       deviceToken: '',
       message: JSON.stringify(defaultMessage)
     }
-
-    this.handleSelectAuthCert = this.handleSelectAuthCert.bind(this)
-    this.handleSelectAuthToken = this.handleSelectAuthToken.bind(this)
-    this.handleAuthenticationChange = this.handleAuthenticationChange.bind(this)
-    this.handleEnvironmentChange = this.handleEnvironmentChange.bind(this)
   }
 
   render() {
