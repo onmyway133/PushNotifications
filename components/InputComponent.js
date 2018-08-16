@@ -151,7 +151,7 @@ class InputComponent extends React.Component {
       if (result.failed.length > 0) {
         this.props.updateOutput({
           loading: false,
-          text: 'Failed: ' + result.failed[0].response.reason
+          text: 'Failed: ' + result.failed[0].response.reason || "Unknown"
         })
       } else {
         this.props.updateOutput({
