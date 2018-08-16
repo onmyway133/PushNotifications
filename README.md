@@ -9,6 +9,7 @@
 - `PushNotitication` is an app used for testing push notifications on iOS and Android
 - Support macOS, Windows, Linux
 - Support using `certificate` and `token` for authentication with APNS
+- Auto save settings
 
 ## How to install
 
