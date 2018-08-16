@@ -25,6 +25,11 @@ class InputComponent extends React.Component {
     this.handlePlatformChange = this.handlePlatformChange.bind(this)
   }
 
+  componentWillMount() {
+    this.lastState.ios = store.get('ios')
+    this.lastState.android = store.get('android')
+  }
+
   render() {
     const divOptions = {
       style: {
@@ -56,10 +61,10 @@ class InputComponent extends React.Component {
       React.createElement(Paper, {},
         React.createElement(Tabs, tabsOptions, 
           React.createElement(Tab, iosOptions,
-            React.createElement(iOSComponent, {lastState: store.get('ios'), ref: 'ios'})
+            React.createElement(iOSComponent, {lastState: this.lastState.ios, ref: 'ios'})
           ),
           React.createElement(Tab, androidOptions,
-            React.createElement(AndroidComponent, {lastState: store.get('android'), ref: 'android'})
+            React.createElement(AndroidComponent, {lastState: this.lastState.android, ref: 'android'})
           )
         )
       )
