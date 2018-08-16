@@ -26,8 +26,10 @@ class InputComponent extends React.Component {
   }
 
   componentWillMount() {
-    this.lastState.ios = store.get('ios')
-    this.lastState.android = store.get('android')
+    this.lastState = {
+      ios: store.get('ios'),
+      android: store.get('android')
+    }
   }
 
   render() {

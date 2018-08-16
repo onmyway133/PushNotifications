@@ -220,7 +220,7 @@ class iOSComponent extends React.Component {
         width: '100%'
       },
       hintText: 'Enter key id',
-      value: this.state.keyId,
+      value: this.state.authToken.keyId,
       onChange: (event, value) => {
         const authToken = Object.assign(this.state.authToken, {
           keyId: value
@@ -236,7 +236,7 @@ class iOSComponent extends React.Component {
         width: '100%'
       },
       hintText: 'Enter team id',
-      value: this.state.teamId,
+      value: this.state.authToken.teamId,
       onChange: (event, value) => {
         const authToken = Object.assign(this.state.authToken, {
           teamId: value
