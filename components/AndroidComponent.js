@@ -51,6 +51,7 @@ class AndroidComponent extends React.Component {
         width: '100%'
       },
       hintText: 'Enter server key',
+      value: this.state.serverKey,
       onChange: (event, value) => {
         this.setState({
           serverKey: value
@@ -79,6 +80,7 @@ class AndroidComponent extends React.Component {
         width: '100%'
       },
       hintText: 'Enter device token',
+      value: this.state.deviceToken,
       onChange: (event, value) => {
         this.setState({
           deviceToken: value
