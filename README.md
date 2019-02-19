@@ -1,5 +1,7 @@
 # ℙ𝕦𝕤𝕙 ℕ𝕠𝕥𝕚𝕗𝕚𝕔𝕒𝕥𝕚𝕠𝕟𝕤
 
+❤️ Support my work https://gum.co/rsjU ❤️
+
 <div align = "center">
 <img src="Screenshots/ios.png" height="400"/>
 </div>
