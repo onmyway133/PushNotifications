@@ -188,7 +188,7 @@ class InputComponent extends React.Component {
         'Content-Type': 'application/json',
         'Authorization': 'key=' + input.serverKey
       },
-      body: message
+      body: JSON.stringify(message)
     }
 
     Fetch('https://fcm.googleapis.com/fcm/send', options)
