@@ -141,7 +141,16 @@ class InputComponent extends React.Component {
     // notification
     const notification = new APN.Notification()
     notification.expiry = Math.floor(Date.now() / 1000) + 3600
-    notification.rawPayload = JSON.parse(input.message)
+
+    try {
+      notification.rawPayload = JSON.parse(input.message)
+    } catch(e) {
+      this.props.updateOutput({
+        loading: false,
+        text: 'Failed: ' + e
+      })
+    }
+    
     notification.topic = input.bundleId
 
     // provider

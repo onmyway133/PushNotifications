@@ -6,12 +6,17 @@ const Menu = require('electron').Menu
 // global
 let win
 
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+
 function createWindow () {
    win = new BrowserWindow({
     title: 'Push Notifications Tester',
     width: 800, 
     height: 700,
-    icon: __dirname + '/Icon/Icon.icns'
+    icon: __dirname + '/Icon/Icon.icns',
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
 
   win.loadURL(url.format({
