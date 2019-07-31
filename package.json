@@ -8,7 +8,7 @@
   "author": "Khoa Pham <onmyway133@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "electron main.js",
+    "start": "npx electron main.js",
     "release": "electron-packager . --icon=Icon/Icon.icns",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
@@ -32,6 +32,7 @@
     "apn": "^2.2.0",
     "electron": "^6.0.0",
     "electron-store": "^2.0.0",
+    "fs-extra": "^8.1.0",
     "material-ui": "0.20.1",
     "node-fetch": "^1.7.2",
     "react": "16.2.0",
@@ -40,6 +41,6 @@
   },
   "devDependencies": {
     "electron-builder": "20.25.0",
-    "electron-packager": "^12.1.0"
+    "electron-packager": "^14.0.4"
   }
 }
