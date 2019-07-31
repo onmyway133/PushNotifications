@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "apn": "^2.2.0",
+    "electron": "^6.0.0",
     "electron-store": "^2.0.0",
     "material-ui": "0.20.1",
     "node-fetch": "^1.7.2",
@@ -38,7 +39,6 @@
     "react-tap-event-plugin": "3.0.2"
   },
   "devDependencies": {
-    "electron": "^2.0.7",
     "electron-builder": "20.25.0",
     "electron-packager": "^12.1.0"
   }
