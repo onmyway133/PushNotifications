@@ -49,10 +49,10 @@ app.on('activate', () => {
 // https://pracucci.com/atom-electron-enable-copy-and-paste.html
 function createMenu() {
   const application = {
-    label: "Application",
+    label: "Push Notification Tester",
     submenu: [
       {
-        label: "About Application",
+        label: "About Push Notification Test",
         selector: "orderFrontStandardAboutPanel:"
       },
       {
