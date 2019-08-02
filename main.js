@@ -52,8 +52,13 @@ function createMenu() {
     label: "Push Notification Tester",
     submenu: [
       {
-        label: "About Push Notification Test",
-        selector: "orderFrontStandardAboutPanel:"
+        label: "New",
+        accelerator: "Command+N",
+        click: () => {
+          if (win === null) {
+            createWindow()
+          }
+        }
       },
       {
         type: "separator"
