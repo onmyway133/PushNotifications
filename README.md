@@ -87,6 +87,29 @@ Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging/)
 <img src="Screenshots/Android.png" width="600"/>
 </div>
 
+## Manual building
+
+In case of issues with running the app on your version of OS, it's possible to easily build it yourself.
+
+Steps:
+1) Download or clone the repository
+2) Install `node` on your computer (https://nodejs.org/en/)
+3) Run `npm install` in the root of downloaded/cloned project
+4) Verify that the app can be launched with the command `npm start` (optional)
+5) Build the project to generate installable files (2 options):
+
+- For building with `electron-builder` you need to run `npm run dist`. Generated files end up in the folder `dist` in the root of your project.
+- For building with `electron-packager` you need to run `npm run release`. Generated files end up in the folder `PushNotifications-darwin-x64` in the root of your project (macOS only).
+
+To build for Windows & Linux you need to use `electron-builder`. Also, this way is preferable because it creates installable files.
+
+`electron-builder` will generate:
+- For macOS: `.zip`, `.dmg` (if you build using macOS)
+- For Windows: `.msi` (if you build using Windows)
+- For Linux: `.deb`, `.AppImage` (if you build using Linux)
+
+Keep in mind: you cannot build for Windows or Linux, if you are using macOS, or vise versa. It creates installable files only for your current OS.
+
 ## Credit
 
 - Icon http://emojione.com/
