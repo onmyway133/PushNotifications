@@ -134,7 +134,7 @@ class iOSComponent extends React.Component {
 
   makeAuthenticationElement() {
     const tabsOptions = {
-      value: this.state.authentication.value,
+      value: this.state.authentication,
       onChange: this.handleAuthenticationChange
     }
 
