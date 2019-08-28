@@ -154,6 +154,7 @@ class InputComponent extends React.Component {
         loading: false,
         text: 'Failed: ' + e
       })
+      return
     }
     
     notification.topic = input.bundleId
