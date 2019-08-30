@@ -24,7 +24,9 @@
 * Android (FCM):
   - [Android Server Key](#android-server-key)
 
-Keep in mind: To connect to APNs you can use either `Provider certificate` or `Authentication Token`. Essentially, `Provider certificate` expires every year and needs to be regenerated (and reuploaded to your server as `.p12`). `Authentication Token` is unlimited and you don't have to recreate and reupload it.
+Keep in mind: To connect to APNs you can use either `Provider certificate` or `Authentication Token`. They are **different ways** and `Authentication Token` is a new one.
+
+**Main difference:** `Provider certificate` expires every year and needs to be regenerated (and reuploaded to your server as `.p12`). `Authentication Token` is unlimited and you don't have to recreate and reupload it.
 
 ### iOS Provider Certificate
 
