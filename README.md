@@ -18,10 +18,13 @@
 - Download latest release from https://github.com/onmyway133/PushNotifications/releases
 
 ## How to use
+* iOS (APNs):
+  - [iOS Provider Certificate](#ios-provider-certificates)
+  - [iOS Authentication Token](#ios-authentication-token)
+* Android (FCM):
+  - [Android Server Key](#android-server-key)
 
-- [iOS Provider Certificate](#ios-provider-certificates)
-- [iOS Authentication Token](#ios-authentication-token)
-- [Android Server Key](#android-server-key)
+Keep in mind: To connect to APNs you can use either `Provider certificate` or `Authentication Token`. Essentially, `Provider certificate` expires every year and needs to be regenerated (and reuploaded to your server as `.p12`). `Authentication Token` is unlimited and you don't have to recreate and reupload it.
 
 ### iOS Provider Certificate
 
