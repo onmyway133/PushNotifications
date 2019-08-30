@@ -45,6 +45,7 @@ class iOSComponent extends React.Component {
       bundleId: '',
       environment: 'sandbox',
       deviceToken: '',
+      collapseId: '',
       message: JSON.stringify(defaultMessage)
     }
   }
@@ -133,7 +134,7 @@ class iOSComponent extends React.Component {
 
   makeAuthenticationElement() {
     const tabsOptions = {
-      value: this.state.authentication.value,
+      value: this.state.authentication,
       onChange: this.handleAuthenticationChange
     }
 
@@ -270,6 +271,7 @@ class iOSComponent extends React.Component {
         React.createElement('legend', {}, 'Body'),
         this.makeBundleIdElement(),
         this.makeDeviceTokenElement(),
+        this.makeCollapseIdElement(),
         this.makeMessageElement()
       )
     )
@@ -304,6 +306,25 @@ class iOSComponent extends React.Component {
       onChange: (event, value) => {
         this.setState({
           deviceToken: value
+        })
+      }
+    }
+
+    return React.createElement('div', {},
+      React.createElement(TextField, textFieldOptions)
+    )
+  }
+
+  makeCollapseIdElement() {
+    const textFieldOptions = {
+      style: {
+        width: '100%'
+      },
+      hintText: 'Enter collapse id (optional)',
+      value: this.state.collapseId,
+      onChange: (event, value) => {
+        this.setState({
+          collapseId: value
         })
       }
     }

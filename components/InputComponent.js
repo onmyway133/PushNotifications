@@ -142,6 +142,11 @@ class InputComponent extends React.Component {
     const notification = new APN.Notification()
     notification.expiry = Math.floor(Date.now() / 1000) + 3600
 
+    const collapseId = input.collapseId
+    if (collapseId && collapseId !== '') {
+      notification.collapseId = collapseId
+    }
+
     try {
       notification.rawPayload = JSON.parse(input.message)
     } catch(e) {
@@ -149,6 +154,7 @@ class InputComponent extends React.Component {
         loading: false,
         text: 'Failed: ' + e
       })
+      return
     }
     
     notification.topic = input.bundleId
