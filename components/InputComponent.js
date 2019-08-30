@@ -143,7 +143,7 @@ class InputComponent extends React.Component {
     notification.expiry = Math.floor(Date.now() / 1000) + 3600
 
     const collapseId = input.collapseId
-    if (collapseId && collapseId != '') {
+    if (collapseId && collapseId !== '') {
       notification.collapseId = collapseId
     }
 
