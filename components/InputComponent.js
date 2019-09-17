@@ -153,14 +153,14 @@ class InputComponent extends React.Component {
     notification.pushType = "alert"
 
     try {
-      let json = JSON.parse(input.message)
+      const json = JSON.parse(input.message)
       notification.rawPayload = json
 
       // If `content-available` equals 1 and `aps` dictionary doesn't contain any other keys, the notification is silent.
       // `apns-push-type` must be set to `background` for iOS 13+.
-      let aps = json["aps"]
+      const aps = json["aps"]
       if (aps["content-available"] === 1) {
-        var size = 0, key
+        let size = 0, key
         for (key in aps) {
           size++
         }
