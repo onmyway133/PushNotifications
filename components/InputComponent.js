@@ -147,8 +147,27 @@ class InputComponent extends React.Component {
       notification.collapseId = collapseId
     }
 
+    // New iOS 13+ mandatory header, `apns-push-type`. Can be either `alert` or `background`.
+    // The value of this header must accurately reflect the contents of the notification's payload.
+    // More here: https://github.com/node-apn/node-apn/pull/656/commits/cd44a3e2604eebdd5db04235daf035cf353f544a
+    notification.pushType = "alert"
+
     try {
-      notification.rawPayload = JSON.parse(input.message)
+      let json = JSON.parse(input.message)
+      notification.rawPayload = json
+
+      // If `content-available` equals 1 and `aps` dictionary doesn't contain any other keys, the notification is silent.
+      // `apns-push-type` must be set to `background` for iOS 13+.
+      let aps = json["aps"]
+      if (aps["content-available"] === 1) {
+        var size = 0, key
+        for (key in aps) {
+          size++
+        }
+        if (size === 1) {
+          notification.pushType = "background"
+        }
+      }
     } catch(e) {
       this.props.updateOutput({
         loading: false,
@@ -161,6 +180,11 @@ class InputComponent extends React.Component {
 
     // provider
     const provider = new APN.Provider(options)
+
+    this.props.updateOutput({
+      loading: true,
+      text: "Sending ".concat(notification.pushType, " notification")
+    })
 
     provider.send(notification, input.deviceToken).then( (result) => {
       if (result.failed.length > 0) {

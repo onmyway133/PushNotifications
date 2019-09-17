@@ -29,7 +29,7 @@
     }
   },
   "dependencies": {
-    "apn": "^2.2.0",
+    "apn": "node-apn/node-apn#master",
     "electron-store": "^2.0.0",
     "fs-extra": "^8.1.0",
     "material-ui": "0.20.1",
