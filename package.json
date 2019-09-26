@@ -9,14 +9,20 @@
   "license": "MIT",
   "scripts": {
     "start": "npx electron main.js",
-    "release": "electron-packager . --icon=Icon/Icon.icns",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
   "build": {
-    "appId": "com.onmyway133.pushnotifications",
+    "appId": "com.onmyway133.PushNotifications",
+    "buildVersion": "4",
+    "productName": "Push Notifications",
+    "icon": "./Icon/Icon.icns",
     "mac": {
-      "category": "public.app-category.productivity"
+      "category": "public.app-category.productivity",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "./entitlements.plist",
+      "entitlementsInherit": "./entitlements.plist"
     },
     "win": {
       "target": "msi"
@@ -26,7 +32,8 @@
         "AppImage",
         "deb"
       ]
-    }
+    },
+    "afterSign": "./afterSignHook.js"
   },
   "dependencies": {
     "apn": "node-apn/node-apn#master",
