@@ -23,8 +23,7 @@ module.exports = function () {
                     case 2:
                         console.log('afterSign hook triggered', params);
 
-                        // Same appId in electron-builder.
-                        appId = 'com.onmyway133.IconGenerator';
+                        appId = 'com.onmyway133.PushNotifications';
                         appPath = path.join(params.appOutDir, params.packager.appInfo.productFilename + '.app');
 
                         if (fs.existsSync(appPath)) {
