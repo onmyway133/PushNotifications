@@ -1,5 +1,5 @@
 {
-  "name": "PushNotifications",
+  "name": "push_notifications",
   "productName": "PushNotifications",
   "version": "1.7.0",
   "description": "A macOS, Linux, Windows app to test push notifications on iOS and Android",
@@ -10,11 +10,11 @@
   "scripts": {
     "start": "npx electron main.js",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder --dir"
   },
   "build": {
     "appId": "com.onmyway133.PushNotifications",
-    "buildVersion": "4",
+    "buildVersion": "5",
     "productName": "Push Notifications",
     "icon": "./Icon/Icon.icns",
     "mac": {
@@ -22,7 +22,11 @@
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "./entitlements.plist",
-      "entitlementsInherit": "./entitlements.plist"
+      "entitlementsInherit": "./entitlements.plist",
+      "target": [
+        "dmg",
+        "zip"
+      ]
     },
     "win": {
       "target": "msi"
