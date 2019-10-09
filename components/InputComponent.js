@@ -166,6 +166,7 @@ class InputComponent extends React.Component {
         }
         if (size === 1) {
           notification.pushType = "background"
+          notification.priority = 5
         }
       }
     } catch(e) {
