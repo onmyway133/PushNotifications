@@ -92,6 +92,20 @@ Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging/)
 <img src="Screenshots/Android.png" width="600"/>
 </div>
 
+## Opening app on macOS Catalina (10.15+)
+
+If you installed the app on macOS Catalina using the `.dmg` file, you will probably see this window when trying to launch the app:
+
+<div align = "center">
+<img src="Screenshots/apple_check.png" width="600"/>
+</div>
+
+Just press `OK` and go to `System Preferences..` -> `Security & Privacy`. There you need to press the button `Open Anyway`.
+
+<div align = "center">
+<img src="Screenshots/apple_security.png" width="600"/>
+</div>
+
 ## Manual building
 
 In case of issues with running the app on your version of OS, it's possible to easily build it yourself.
