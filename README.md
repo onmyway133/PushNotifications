@@ -15,7 +15,8 @@
 
 ## How to install
 
-- Download latest release from https://github.com/onmyway133/PushNotifications/releases
+* Download latest release from https://github.com/onmyway133/PushNotifications/releases 
+  - If using macOS Catalina (10.15+), here is the instruction of [how to open the app](#opening-app-on-macos-catalina-1015))
 
 ## How to use
 * iOS (APNs):
