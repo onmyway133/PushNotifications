@@ -10,7 +10,7 @@
   "scripts": {
     "start": "npx electron main.js",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder --dir"
+    "dist": "electron-builder"
   },
   "build": {
     "appId": "com.onmyway133.PushNotifications",
@@ -19,10 +19,6 @@
     "icon": "./Icon/Icon.icns",
     "mac": {
       "category": "public.app-category.productivity",
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
-      "entitlements": "./entitlements.plist",
-      "entitlementsInherit": "./entitlements.plist",
       "target": [
         "dmg",
         "zip"
@@ -36,8 +32,7 @@
         "AppImage",
         "deb"
       ]
-    },
-    "afterSign": "./afterSignHook.js"
+    }
   },
   "dependencies": {
     "apn": "node-apn/node-apn#master",
@@ -51,7 +46,6 @@
   },
   "devDependencies": {
     "electron": "^6.0.5",
-    "electron-builder": "21.2.0",
-    "electron-packager": "^14.0.4"
+    "electron-builder": "21.2.0"
   }
 }
