@@ -15,7 +15,8 @@
 
 ## How to install
 
-- Download latest release from https://github.com/onmyway133/PushNotifications/releases
+* Download latest release from https://github.com/onmyway133/PushNotifications/releases 
+  - If using macOS Catalina (10.15+), here is the instruction of [how to open the app](#opening-app-on-macos-catalina-1015)
 
 ## How to use
 * iOS (APNs):
@@ -92,6 +93,20 @@ Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging/)
 <img src="Screenshots/Android.png" width="600"/>
 </div>
 
+## Opening app on macOS Catalina (10.15+)
+
+If you installed the app on macOS Catalina using the `.dmg` file, you will probably see this window when trying to launch the app:
+
+<div align = "center">
+<img src="Screenshots/apple_check.png" width="600"/>
+</div>
+
+Just press `OK` and go to `System Preferences..` -> `Security & Privacy` -> `General` tab. There you need to press the button `Open Anyway`.
+
+<div align = "center">
+<img src="Screenshots/apple_security.png" width="600"/>
+</div>
+
 ## Manual building
 
 In case of issues with running the app on your version of OS, it's possible to easily build it yourself.
@@ -101,14 +116,11 @@ Steps:
 2) Install `node` on your computer (https://nodejs.org/en/)
 3) Run `npm install` in the root of downloaded/cloned project
 4) Verify that the app can be launched with the command `npm start` (optional)
-5) Build the project to generate installable files (2 options):
+5) Build the project to generate installable files:
 
 - For building with `electron-builder` you need to run `npm run dist`. Generated files end up in the folder `dist` in the root of your project.
-- For building with `electron-packager` you need to run `npm run release`. Generated files end up in the folder `PushNotifications-darwin-x64` in the root of your project (macOS only).
 
-To build for Windows & Linux you need to use `electron-builder`. Also, this way is preferable because it creates installable files.
-
-`electron-builder` will generate:
+As a result `electron-builder` will generate:
 - For macOS: `.zip`, `.dmg` (if you build using macOS)
 - For Windows: `.msi` (if you build using Windows)
 - For Linux: `.deb`, `.AppImage` (if you build using Linux)
