@@ -101,6 +101,19 @@ class InputComponent extends React.Component {
     // options
     let options
 
+    const iOSDeviceToken = input.deviceToken.toLowerCase()
+    const tokenRegex = /^[A-Za-z0-9 ]+$/
+    const isValid = tokenRegex.test(iOSDeviceToken);
+    if (!isValid) {
+      this.props.updateOutput({
+        loading: false,
+        text: 'Failed: Wrong device token. iOS device token cannot contain special characters. It must be a string with 64 hexadecimal symbols. Example: "03ds25c845d461bcdad7802d2vf6fc1dfde97283bf75cn993eb6dca835ea2e2f"'
+      })
+
+      return
+    }
+
+
     if (input.authentication == 'authCert') {
       // check
       if (input.authCert.file == null) {
@@ -187,7 +200,7 @@ class InputComponent extends React.Component {
       text: "Sending ".concat(notification.pushType, " notification")
     })
 
-    provider.send(notification, input.deviceToken).then( (result) => {
+    provider.send(notification, iOSDeviceToken).then( (result) => {
       if (result.failed.length > 0) {
         this.props.updateOutput({
           loading: false,
@@ -196,7 +209,7 @@ class InputComponent extends React.Component {
       } else {
         this.props.updateOutput({
           loading: false,
-          text: 'Succeeded: ' + input.deviceToken
+          text: 'Succeeded: ' + iOSDeviceToken
         })
       }
     })
