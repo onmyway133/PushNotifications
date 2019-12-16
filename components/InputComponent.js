@@ -101,19 +101,6 @@ class InputComponent extends React.Component {
     // options
     let options
 
-    const iOSDeviceToken = input.deviceToken.toLowerCase()
-    const tokenRegex = /^[A-Za-z0-9 ]+$/
-    const isValid = tokenRegex.test(iOSDeviceToken);
-    if (!isValid) {
-      this.props.updateOutput({
-        loading: false,
-        text: 'Failed: Wrong device token. iOS device token cannot contain special characters. It must be a string with 64 hexadecimal symbols. Example: "03ds25c845d461bcdad7802d2vf6fc1dfde97283bf75cn993eb6dca835ea2e2f"'
-      })
-
-      return
-    }
-
-
     if (input.authentication == 'authCert') {
       // check
       if (input.authCert.file == null) {
@@ -151,7 +138,20 @@ class InputComponent extends React.Component {
 
     options.production = (input.environment == 'production') ? true : false
 
-    // notification
+    // Make iOS device token lowercased and check that it doesn't containt special characters
+    const iOSDeviceToken = input.deviceToken.toLowerCase()
+    const tokenRegex = /^[A-Za-z0-9 ]+$/
+    const isValid = tokenRegex.test(iOSDeviceToken);
+    if (!isValid) {
+      this.props.updateOutput({
+        loading: false,
+        text: 'Failed: Wrong device token. iOS device token cannot contain special characters. It must be a string with 64 hexadecimal symbols. Example: "03ds25c845d461bcdad7802d2vf6fc1dfde97283bf75cn993eb6dca835ea2e2f"'
+      })
+
+      return
+    }
+
+    // Notification
     const notification = new APN.Notification()
     notification.expiry = Math.floor(Date.now() / 1000) + 3600
 
@@ -169,15 +169,19 @@ class InputComponent extends React.Component {
       const json = JSON.parse(input.message)
       notification.rawPayload = json
 
-      // If `content-available` equals 1 and `aps` dictionary doesn't contain any other keys, the notification is silent.
+      // If `content-available` equals 1 and `aps` dictionary doesn't contain any other keys (except `category`), the notification is silent/background.
       // `apns-push-type` must be set to `background` for iOS 13+.
+      // `category` key is an exeption to the rule
       const aps = json["aps"]
       if (aps && aps["content-available"] === 1) {
+        const maxKeysNumber = aps.hasOwnProperty("category") ? 2 : 1
+
         let size = 0, key
         for (key in aps) {
           size++
         }
-        if (size === 1) {
+
+        if (size === maxKeysNumber) {
           notification.pushType = "background"
           notification.priority = 5
         }
