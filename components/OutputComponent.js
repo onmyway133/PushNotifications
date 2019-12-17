@@ -75,7 +75,7 @@ class OutputComponent extends React.Component {
 
     const buttonOptions = {
       backgroundColor: '#EB394E', 
-      onTouchTap: this.props.triggerSend,
+      onClick: this.props.triggerSend,
       style: {
         width: '80%'
       }

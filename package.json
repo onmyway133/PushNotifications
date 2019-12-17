@@ -35,17 +35,18 @@
     }
   },
   "dependencies": {
+    "@parse/node-apn": "^3.1.0",
     "apn": "node-apn/node-apn#master",
     "electron-store": "^2.0.0",
     "fs-extra": "^8.1.0",
-    "material-ui": "0.20.1",
+    "material-ui": "0.20.2",
     "node-fetch": "^1.7.2",
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
-    "react-tap-event-plugin": "3.0.2"
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
   },
   "devDependencies": {
     "electron": "^6.0.5",
-    "electron-builder": "21.2.0"
+    "electron-builder": "21.2.0",
+    "electron-debug": "^3.0.1"
   }
 }
