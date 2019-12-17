@@ -1,7 +1,5 @@
 const React = require('react')
-const ReactDOM = require('react-dom')
 const Dialog = require('electron').remote.dialog
-const RaisedButton = require('material-ui').RaisedButton
 const FlatButton = require('material-ui').FlatButton
 const RadioButton = require('material-ui').RadioButton
 const RadioButtonGroup = require('material-ui').RadioButtonGroup

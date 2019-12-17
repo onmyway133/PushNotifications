@@ -2,12 +2,9 @@ const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
 const Menu = require('electron').Menu
-const debug = require('electron-debug')
 
 // global
 let win
-
-debug();
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
@@ -61,6 +58,13 @@ function createMenu() {
           if (win === null) {
             createWindow()
           }
+        }
+      },
+      {
+        label: "Open dev tools",
+        accelerator: "Command+D",
+        click: () => {
+          win.webContents.openDevTools()
         }
       },
       {

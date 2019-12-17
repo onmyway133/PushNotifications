@@ -1,8 +1,6 @@
 const React = require('react')
-const ReactDOM = require('react-dom')
 const iOSComponent = require('./iOSComponent.js')
 const AndroidComponent = require('./AndroidComponent.js')
-// const injectTapEventPlugin = require('react-tap-event-plugin')
 const Tab = require('material-ui').Tab
 const Tabs = require('material-ui').Tabs
 const Paper = require('material-ui').Paper
@@ -10,9 +8,6 @@ const APN = require('apn')
 const Fetch = require('node-fetch')
 const Store = require('electron-store')
 const store = new Store()
-
-// http://www.material-ui.com/#/get-started/installation
-// injectTapEventPlugin()
 
 class InputComponent extends React.Component {
   constructor(props) {

@@ -1,5 +1,4 @@
 const React = require('react')
-const ReactDOM = require('react-dom')
 const RaisedButton = require('material-ui').RaisedButton
 const Paper = require('material-ui').Paper
 const CircularProgress = require('material-ui').CircularProgress
