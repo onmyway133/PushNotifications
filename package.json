@@ -37,7 +37,7 @@
   "dependencies": {
     "@parse/node-apn": "^3.1.0",
     "apn": "node-apn/node-apn#master",
-    "electron-store": "^2.0.0",
+    "electron-store": "^5.1.0",
     "fs-extra": "^8.1.0",
     "material-ui": "0.20.2",
     "node-fetch": "^1.7.2",
