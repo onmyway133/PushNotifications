@@ -173,7 +173,11 @@ class InputComponent extends React.Component {
       // `apns-push-type` must be set to `background` for iOS 13+.
       // `category` key is an exeption to the rule
       const aps = json["aps"]
-      if (input.bundleId.endsWith(".voip")) {
+      if (input.bundleId.endsWith(".complication")) {
+        notification.pushType = "complication"
+      } else if (input.bundleId.endsWith(".pushkit.fileprovider")) {
+        notification.pushType = "fileprovider"
+      } else if (input.bundleId.endsWith(".voip")) {
         notification.pushType = "voip"
       } else if (aps && aps["content-available"] === 1) {
         const maxKeysNumber = aps.hasOwnProperty("category") ? 2 : 1
