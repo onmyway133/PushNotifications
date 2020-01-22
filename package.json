@@ -1,7 +1,7 @@
 {
   "name": "push_notifications",
   "productName": "PushNotifications",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "A macOS, Linux, Windows app to test push notifications on iOS and Android",
   "main": "main.js",
   "repository": "https://github.com/onmyway133/PushNotifications",
@@ -45,7 +45,7 @@
     "react-dom": "16.12.0"
   },
   "devDependencies": {
-    "electron": "^6.1.7",
-    "electron-builder": "21.2.0"
+    "electron": "^7.1.9",
+    "electron-builder": "22.2.0"
   }
 }
