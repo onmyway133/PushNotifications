@@ -1,6 +1,13 @@
 # ℙ𝕦𝕤𝕙 ℕ𝕠𝕥𝕚𝕗𝕚𝕔𝕒𝕥𝕚𝕠𝕟𝕤
 
-❤️ Support my app [Push Hero - pure Swift native macOS application to test push notifications](https://www.producthunt.com/posts/push-hero-2) ❤️
+❤️ Support my app ❤️ 
+
+- [Push Hero - pure Swift native macOS application to test push notifications](https://www.producthunt.com/posts/push-hero-2)
+- [Quick Access - Organise files in the Mac menu bar](https://www.producthunt.com/posts/quick-access)
+- [Frame recorder - Recorder gif and video with frame](https://www.producthunt.com/posts/frame-recorder)
+- [Other apps](https://onmyway133.github.io/projects/)
+
+❤️❤️😇😍🤘❤️❤️
 
 <div align = "center">
 <img src="Screenshots/ios.png" height="400"/>
