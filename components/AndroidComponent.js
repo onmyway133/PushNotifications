@@ -22,7 +22,12 @@ class AndroidComponent extends React.Component {
   }
 
   makeDefaultState() {
-    const defaultMessage = {
+    const defaultNotification = {
+      title: 'Test Title',
+      body: 'Test body'
+    }
+
+    const defaultData = {
       key1: 'value1',
       key2: 'value2'
     }
@@ -30,7 +35,8 @@ class AndroidComponent extends React.Component {
     return {
       serverKey: null,
       deviceToken: '',
-      message: JSON.stringify(defaultMessage)
+      notification: JSON.stringify(defaultNotification),
+      data: JSON.stringify(defaultData)
     }
   }
 
@@ -69,7 +75,10 @@ class AndroidComponent extends React.Component {
       React.createElement('fieldset', {},
         React.createElement('legend', {}, 'Body'),
         this.makeDeviceTokenElement(),
-        this.makeMessageElement()
+        React.createElement('legend', {}, 'Notification'),
+        this.makeNotificationElement(),
+        React.createElement('legend', {}, 'Data'),
+        this.makeDataElement()
       )
     )
   }
@@ -93,7 +102,7 @@ class AndroidComponent extends React.Component {
     )
   }
 
-  makeMessageElement() {
+  makeNotificationElement() {
     const textFieldOptions = {
       style: {
         width: '100%'
@@ -101,11 +110,33 @@ class AndroidComponent extends React.Component {
       multiLine: true,
       rows: 5,
       rowsMax: 5,
-      hintText: 'Enter message',
-      value: this.state.message,
+      hintText: 'Enter "notification"',
+      value: this.state.notification,
       onChange: (event, value) => {
         this.setState({
-          message: value
+          notification: value
+        })
+      }
+    }
+ 
+    return React.createElement('div', {},
+      React.createElement(TextField, textFieldOptions)
+    )
+  }
+
+  makeDataElement() {
+    const textFieldOptions = {
+      style: {
+        width: '100%'
+      },
+      multiLine: true,
+      rows: 5,
+      rowsMax: 5,
+      hintText: 'Enter "data"',
+      value: this.state.data,
+      onChange: (event, value) => {
+        this.setState({
+          data: value
         })
       }
     }
