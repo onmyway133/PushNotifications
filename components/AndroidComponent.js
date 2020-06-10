@@ -22,12 +22,9 @@ class AndroidComponent extends React.Component {
   }
 
   makeDefaultState() {
-    const defaultNotification = {
-      title: 'Test Title',
-      body: 'Test body'
-    }
-
-    const defaultData = {
+    const defaultMessage = {
+      title: 'Notification title',
+      message: 'Notification message',
       key1: 'value1',
       key2: 'value2'
     }
@@ -35,8 +32,7 @@ class AndroidComponent extends React.Component {
     return {
       serverKey: null,
       deviceToken: '',
-      notification: JSON.stringify(defaultNotification),
-      data: JSON.stringify(defaultData)
+      message: JSON.stringify(defaultMessage)
     }
   }
 
@@ -75,10 +71,7 @@ class AndroidComponent extends React.Component {
       React.createElement('fieldset', {},
         React.createElement('legend', {}, 'Body'),
         this.makeDeviceTokenElement(),
-        React.createElement('legend', {}, 'Notification'),
-        this.makeNotificationElement(),
-        React.createElement('legend', {}, 'Data'),
-        this.makeDataElement()
+        this.makeMessageElement()
       )
     )
   }
@@ -102,7 +95,7 @@ class AndroidComponent extends React.Component {
     )
   }
 
-  makeNotificationElement() {
+  makeMessageElement() {
     const textFieldOptions = {
       style: {
         width: '100%'
@@ -110,33 +103,11 @@ class AndroidComponent extends React.Component {
       multiLine: true,
       rows: 5,
       rowsMax: 5,
-      hintText: 'Enter "notification"',
-      value: this.state.notification,
+      hintText: 'Enter message',
+      value: this.state.message,
       onChange: (event, value) => {
         this.setState({
-          notification: value
-        })
-      }
-    }
- 
-    return React.createElement('div', {},
-      React.createElement(TextField, textFieldOptions)
-    )
-  }
-
-  makeDataElement() {
-    const textFieldOptions = {
-      style: {
-        width: '100%'
-      },
-      multiLine: true,
-      rows: 5,
-      rowsMax: 5,
-      hintText: 'Enter "data"',
-      value: this.state.data,
-      onChange: (event, value) => {
-        this.setState({
-          data: value
+          message: value
         })
       }
     }
