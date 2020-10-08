@@ -9,6 +9,7 @@ const Paper = require('material-ui').Paper
 const APN = require('apn')
 const Fetch = require('node-fetch')
 const Store = require('electron-store')
+const fs = require('fs');
 const store = new Store()
 
 // http://www.material-ui.com/#/get-started/installation
@@ -112,6 +113,15 @@ class InputComponent extends React.Component {
         return
       }
 
+      if (fs.existsSync(input.authToken.file) == false) {
+        this.props.updateOutput({
+          loading: false,
+          text: 'Failed: The selected .p12 file does not exist at the inserted path. Please check if you moved it to another folder, deleted, or renamed it. To solve the issue, select the file again at the new location.'
+        })
+        
+        return
+      }
+
       options = {
         pfx: input.authCert.file,
         passphrase: input.authCert.passphrase
@@ -124,6 +134,15 @@ class InputComponent extends React.Component {
           text: 'Failed: Authentication missing'
         })
 
+        return
+      }
+
+      if (fs.existsSync(input.authToken.file) == false) {
+        this.props.updateOutput({
+          loading: false,
+          text: 'Failed: The selected .p8 file does not exist at the inserted path. Please check if you moved it to another folder, deleted, or renamed it. To solve the issue, select the file again at the new location.'
+        })
+        
         return
       }
 
