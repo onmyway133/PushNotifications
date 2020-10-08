@@ -113,7 +113,7 @@ class InputComponent extends React.Component {
         return
       }
 
-      if (fs.existsSync(input.authToken.file) == false) {
+      if (fs.existsSync(input.authCert.file) == false) {
         this.props.updateOutput({
           loading: false,
           text: 'Failed: The selected .p12 file does not exist at the inserted path. Please check if you moved it to another folder, deleted, or renamed it. To solve the issue, select the file again at the new location.'
