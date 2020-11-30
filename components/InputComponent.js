@@ -10,6 +10,8 @@ const APN = require('apn')
 const Fetch = require('node-fetch')
 const Store = require('electron-store')
 const fs = require('fs');
+const request = require('request');
+
 const store = new Store()
 
 // http://www.material-ui.com/#/get-started/installation
@@ -273,27 +275,30 @@ class InputComponent extends React.Component {
       body: JSON.stringify(message)
     }
 
-    Fetch('https://fcm.googleapis.com/fcm/send', options)
-    .then((res)=> {
-      return JSON.stringify(res)
-    }).then((string) => {
-      return JSON.parse(string)
-    })
-    .then((json) => {
-      if (json.status >= 200 && json.status < 300 ) {
+    request('https://fcm.googleapis.com/fcm/send', options, (err, res, body) => {
+      const bodyJSON = JSON.parse(body);
+
+      console.log(err, res, bodyJSON);
+
+      if (res.statusCode >= 200 && res.statusCode < 300 && bodyJSON.success > 0) {
         this.props.updateOutput({
           loading: false,
           text: 'Succeeded'
         })
       } else {
+        let errText = res.statusText;
+        if (!errText) {
+          errText = (bodyJSON.results || []).map(res => res.error || '').join(',')
+        }
+        console.log(bodyJSON.results);
         this.props.updateOutput({
           loading: false,
-          text: 'Failed: ' + json.statusText
+          text: 'Failed: ' + errText
         })
       }
-      console.log(json)
     })
   }
+
 }
 
 module.exports = InputComponent
