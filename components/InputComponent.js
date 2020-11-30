@@ -261,10 +261,9 @@ class InputComponent extends React.Component {
     }
 
     // message
-    const message = {
-      to: input.deviceToken,
-      data: JSON.parse(input.message)
-    }
+    const message = Object.assign({
+      to: input.deviceToken
+    }, JSON.parse(input.message))
 
     const options = {
       method: 'POST',

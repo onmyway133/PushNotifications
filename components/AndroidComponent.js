@@ -23,10 +23,15 @@ class AndroidComponent extends React.Component {
 
   makeDefaultState() {
     const defaultMessage = {
-      title: 'Notification title',
-      message: 'Notification message',
-      key1: 'value1',
-      key2: 'value2'
+      notification: {
+        title: 'Notification title',
+        body: 'Notification message',
+        sound: 'default'
+      },
+      data: {
+        key1: 'value1',
+        key2: 'value2'
+      }
     }
 
     return {
