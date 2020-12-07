@@ -2,6 +2,11 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const TextField = require('material-ui').TextField
 
+//const {JSONInput} = require('react-json-editor-ajrm')
+const locale    = require('react-json-editor-ajrm/locale/en')
+
+import * as JSONInput from "react-json-editor-ajrm";
+
 class AndroidComponent extends React.Component {
   constructor(props) {
     super(props)
@@ -101,26 +106,27 @@ class AndroidComponent extends React.Component {
   }
 
   makeMessageElement() {
-    const textFieldOptions = {
-      style: {
-        width: '100%'
-      },
-      multiLine: true,
-      rows: 5,
-      rowsMax: 5,
-      hintText: 'Enter message',
-      value: this.state.message,
-      onChange: (event, value) => {
-        this.setState({
-          message: value
-        })
+      const textFieldOptions = {
+          width: '100%',
+          placeholder: 'Enter message',
+          value: this.state.message,
+          onChange: (event, value) => {
+              this.setState({
+                  message: value
+              })
+          }
       }
-    }
  
-    return React.createElement('div', {},
-      React.createElement(TextField, textFieldOptions)
-    )
+    return React.createElement(JSONInput, textFieldOptions, null)
   }
+
 }
+
+class Hello extends React.Component {
+    render() {
+        return React.createElement('div', null, `Bonjour ${this.props.toWhat}`);
+    }
+}
+
 
 module.exports = AndroidComponent
