@@ -283,7 +283,7 @@ class InputComponent extends React.Component {
     request('https://fcm.googleapis.com/fcm/send', options, (err, res, body) => {
       const bodyJSON = JSON.parse(body);
 
-      console.log(err, res, bodyJSON);
+      // console.log(err, res, bodyJSON);
 
       if (res.statusCode >= 200 && res.statusCode < 300 && bodyJSON.success > 0) {
         this.props.updateOutput({
@@ -295,7 +295,7 @@ class InputComponent extends React.Component {
         if (!errText) {
           errText = (bodyJSON.results || []).map(res => res.error || '').join(',')
         }
-        console.log(bodyJSON.results);
+        // console.log(bodyJSON.results);
         this.props.updateOutput({
           loading: false,
           text: 'Failed: ' + errText
