@@ -269,8 +269,14 @@ class InputComponent extends React.Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'key=' + input.serverKey
+        'Authorization': 'key=' + input.serverKey,
+        'User-Agent': 'Push Notifications Tester',
+        'Cache-Control': 'no-cache',
+        'Host': 'fcm.googleapis.com',
+        'Connection': 'keep-alive',
+        'Accept': '*/*',
       },
+      gzip: true,
       body: JSON.stringify(message)
     }
 
