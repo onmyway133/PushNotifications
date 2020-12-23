@@ -2,6 +2,8 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const TextField = require('material-ui').TextField
 
+const JSONInput = require('react-json-editor-ajrm').default
+
 class AndroidComponent extends React.Component {
   constructor(props) {
     super(props)
@@ -23,10 +25,15 @@ class AndroidComponent extends React.Component {
 
   makeDefaultState() {
     const defaultMessage = {
-      title: 'Notification title',
-      message: 'Notification message',
-      key1: 'value1',
-      key2: 'value2'
+      notification: {
+        title: 'Notification title',
+        body: 'Notification message',
+        sound: 'default'
+      },
+      data: {
+        key1: 'value1',
+        key2: 'value2'
+      }
     }
 
     return {
@@ -96,26 +103,27 @@ class AndroidComponent extends React.Component {
   }
 
   makeMessageElement() {
+    let message = {};
+    try {
+      message = JSON.parse(this.state.message);
+    } catch (e) {}
+
     const textFieldOptions = {
-      style: {
-        width: '100%'
-      },
-      multiLine: true,
-      rows: 5,
-      rowsMax: 5,
-      hintText: 'Enter message',
-      value: this.state.message,
-      onChange: (event, value) => {
+      width: '100%',
+      height: '400px',
+      placeholder: message,
+      theme: 'light_mitsuketa_tribute',
+      onChange: (value) => {
         this.setState({
-          message: value
-        })
+          message: value.json
+        });
       }
     }
  
-    return React.createElement('div', {},
-      React.createElement(TextField, textFieldOptions)
-    )
+    return React.createElement(JSONInput, textFieldOptions, null)
   }
+
 }
+
 
 module.exports = AndroidComponent

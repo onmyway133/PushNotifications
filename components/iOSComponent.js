@@ -9,6 +9,8 @@ const TextField = require('material-ui').TextField
 const Tab = require('material-ui').Tab
 const Tabs = require('material-ui').Tabs
 
+const JSONInput = require('react-json-editor-ajrm').default
+
 class iOSComponent extends React.Component {
   constructor(props) {
     super(props)
@@ -335,25 +337,24 @@ class iOSComponent extends React.Component {
   }
 
   makeMessageElement() {
+    let message = {};
+    try {
+      message = JSON.parse(this.state.message);
+    } catch (e) {}
+
     const textFieldOptions = {
-      style: {
-        width: '100%'
-      },
-      multiLine: true,
-      rows: 5,
-      rowsMax: 5,
-      hintText: 'Enter message',
-      value: this.state.message,
-      onChange: (event, value) => {
+      width: '100%',
+      height: '300px',
+      placeholder: message,
+      theme: 'light_mitsuketa_tribute',
+      onChange: (value) => {
         this.setState({
-          message: value
-        })
+          message: value.json
+        });
       }
     }
- 
-    return React.createElement('div', {},
-      React.createElement(TextField, textFieldOptions)
-    )
+
+    return React.createElement(JSONInput, textFieldOptions, null)
   }
 
   makeEnvironmentElement() {
