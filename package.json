@@ -47,7 +47,7 @@
     "request": "^2.88.2"
   },
   "devDependencies": {
-    "electron": "^6.1.12",
+    "electron": "^9.4.0",
     "electron-builder": "22.7.0"
   }
 }
