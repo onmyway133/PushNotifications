@@ -259,9 +259,14 @@ class InputComponent extends React.Component {
     }
 
     // message
+    const payload = JSON.parse(input.message);
     const message = {
       to: input.deviceToken,
-      data: JSON.parse(input.message)
+      data: payload,
+      notification: {
+        title: payload.title,
+        body: payload.body,
+      },
     }
 
     const options = {
