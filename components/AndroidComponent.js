@@ -23,16 +23,16 @@ class AndroidComponent extends React.Component {
 
   makeDefaultState() {
     const defaultMessage = {
-      title: 'Notification title',
-      message: 'Notification message',
-      key1: 'value1',
-      key2: 'value2'
+      title: "The notification's title",
+      body: "The notification's body text",
+      key1: "Custom value1",
+      key2: "Custom value2"
     }
 
     return {
       serverKey: null,
       deviceToken: '',
-      message: JSON.stringify(defaultMessage)
+      message: JSON.stringify(defaultMessage, null, '\n')
     }
   }
 
@@ -101,8 +101,8 @@ class AndroidComponent extends React.Component {
         width: '100%'
       },
       multiLine: true,
-      rows: 5,
-      rowsMax: 5,
+      rows: 12,
+      rowsMax: 12,
       hintText: 'Enter message',
       value: this.state.message,
       onChange: (event, value) => {
