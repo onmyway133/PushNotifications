@@ -268,6 +268,12 @@ class InputComponent extends React.Component {
         body: payload.body,
       },
     }
+    // data-only or custom notification payload
+    if ([payload.data, payload.notification].some(o => o && typeof o === 'object')) {
+      delete message.data
+      delete message.notification
+      Object.assign(message, payload)
+    }
 
     const options = {
       method: 'POST',
