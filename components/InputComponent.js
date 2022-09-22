@@ -198,6 +198,8 @@ class InputComponent extends React.Component {
         notification.pushType = "fileprovider"
       } else if (input.bundleId.endsWith(".voip")) {
         notification.pushType = "voip"
+      } else if (input.bundleId.endsWith(".liveactivity")) {
+        notification.pushType = "liveactivity"
       } else if (aps && aps["content-available"] === 1) {
         const maxKeysNumber = aps.hasOwnProperty("category") ? 2 : 1
 
