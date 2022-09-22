@@ -105,7 +105,7 @@ Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging/)
 <img src="Screenshots/Android.png" width="600"/>
 </div>
 
-## Opening app on macOS Catalina (10.15+)
+## Opening app on macOS Catalina or newer (10.15+)
 
 If you installed the app on macOS Catalina using the `.dmg` file, you will probably see this window when trying to launch the app:
 
