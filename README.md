@@ -113,10 +113,16 @@ If you installed the app on macOS Catalina using the `.dmg` file, you will proba
 <img src="Screenshots/apple_check.png" width="600"/>
 </div>
 
-Just press `OK` and go to `System Preferences..` -> `Security & Privacy` -> `General` tab. There you need to press the button `Open Anyway`.
+Just press `OK` and go to `System Settings...` -> `Security & Privacy` -> `General` tab. There you need to press the button `Open Anyway`.
 
 <div align = "center">
 <img src="Screenshots/apple_security.png" width="600"/>
+</div>
+
+If you have macOS Ventura or later:
+
+<div align = "center">
+<img src="Screenshots/apple_security_ventura.png" width="600"/>
 </div>
 
 ## Manual building
